@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic UI - Embedded AI That Lets Your Users Create Their Perfect Interface</title>
+  <meta name="description" content="Transform your SaaS platform with embedded AI. Let your users generate custom interfaces through conversation, reducing churn and unlocking new revenue.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Phosphor Icons (Thin, elegant icons) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366F1;
+      --primary-dark: #4F46E5;
+      --gray-50: #FAFAFA;
+      --gray-100: #F4F4F5;
+      --gray-200: #E4E4E7;
+      --gray-300: #D4D4D8;
+      --gray-400: #A1A1AA;
+      --gray-500: #71717A;
+      --gray-600: #52525B;
+      --gray-700: #3F3F46;
+      --gray-800: #27272A;
+      --gray-900: #18181B;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FFFFFF;
+      color: var(--gray-900);
+      overflow-x: hidden;
+      font-weight: 400;
+      letter-spacing: -0.011em;
+      line-height: 1.5;
+    }
+
+    /* Elegant gradient for accents */
+    .gradient-elegant {
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Ultra minimal card */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    /* Refined button styles */
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gray-700);
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 15px;
+      border: 1px solid var(--gray-300);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: var(--gray-50);
+      border-color: var(--gray-400);
+      color: var(--gray-900);
+    }
+
+    /* Subtle animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    /* Elegant code block */
+    .code-elegant {
+      background: #F8F9FA;
+      color: var(--gray-800);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    @media (max-width: 768px) {
+      .code-elegant {
+        padding: 12px 16px;
+        font-size: 11px;
+        line-height: 1.4;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      /* Hide long URLs on mobile */
+      .code-string {
+        max-width: 200px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: bottom;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .code-elegant {
+        font-size: 10px;
+        padding: 10px 12px;
+      }
+    }
+
+    .code-keyword { color: #7C3AED; }
+    .code-string { color: #059669; }
+    .code-function { color: #2563EB; }
+    .code-comment { color: var(--gray-500); }
+
+    /* Refined navigation */
+    .nav-link {
+      color: var(--gray-600);
+      font-weight: 500;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      color: var(--gray-900);
+    }
+
+    /* Elegant badge */
+    .badge {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-700);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Minimal section divider */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gray-200), transparent);
+      margin: 80px 0;
+    }
+
+    /* Icon styles */
+    .ph-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 1;
+    }
+
+    .ph-icon-lg {
+      width: 32px;
+      height: 32px;
+      stroke-width: 1;
+    }
+
+    /* Refined heading */
+    h1, h2, h3 {
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+
+    /* Subtle hover effect */
+    .hover-lift {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Chat Animation Classes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% {
+        opacity: 1;
+      }
+      30% {
+        opacity: 0.3;
+      }
+    }
+
+    .chat-animate {
+      opacity: 0;
+    }
+
+    .chat-animate.show {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .form-animate {
+      opacity: 0;
+    }
+
+    .form-animate.show {
+      animation: fadeInScale 0.8s ease forwards;
+    }
+
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .typing-indicator.show {
+      display: flex;
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background: #6366F1;
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      .browser-chrome {
+        display: none;
+      }
+
+      .mobile-chat-container {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .form-container {
+        padding: 1rem !important;
+      }
+
+      .chat-bubble {
+        max-width: 85%;
+      }
+    }
+
+    /* Extra small mobile devices (320px - 480px) */
+    @media (max-width: 480px) {
+      /* Global text adjustments */
+      body {
+        font-size: 14px;
+      }
+
+      /* Hero section */
+      h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+      }
+
+      .badge {
+        font-size: 11px !important;
+        padding: 4px 12px !important;
+      }
+
+      /* Buttons */
+      .btn-primary, .btn-secondary {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      /* Chat bubbles */
+      .chat-bubble {
+        max-width: 95%;
+      }
+
+      .chat-bubble .text-sm {
+        font-size: 12px !important;
+      }
+
+      .chat-bubble div {
+        padding: 0.5rem 0.75rem !important;
+      }
+
+      /* User avatars */
+      .w-10.h-10 {
+        width: 32px !important;
+        height: 32px !important;
+      }
+
+      /* Dashboard metrics */
+      .metric-card .text-3xl {
+        font-size: 1.5rem !important;
+      }
+
+      /* Forms */
+      input, select, button {
+        font-size: 14px !important;
+      }
+
+      /* Transfer form buttons */
+      .form-container button {
+        padding: 0.75rem !important;
+        font-size: 14px !important;
+      }
+
+      /* Hide less critical elements */
+      .typing-indicator {
+        transform: scale(0.85);
+      }
+
+      /* Dashboard cards */
+      .bg-white.rounded-xl {
+        border-radius: 8px !important;
+      }
+
+      /* Reduce padding globally */
+      .p-4 {
+        padding: 0.75rem !important;
+      }
+
+      .px-4 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+
+      /* Navigation */
+      nav .text-lg {
+        font-size: 1rem !important;
+      }
+
+      /* Section spacing */
+      section {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+    }
+
+    /* Mobile-specific animations */
+    @keyframes mobileSlideIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .mobile-chat-animate {
+      opacity: 0;
+      animation: mobileSlideIn 0.4s ease forwards;
+    }
+
+    .mobile-result-animate {
+      opacity: 0;
+      animation: fadeInScale 0.5s ease forwards;
+    }
+
+    /* Ultra small devices (below 360px) */
+    @media (max-width: 360px) {
+      /* Even smaller text */
+      h1 {
+        font-size: 1.5rem !important;
+      }
+
+      h2 {
+        font-size: 1.25rem !important;
+      }
+
+      /* Stack all buttons vertically */
+      .flex.gap-4.justify-center {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      /* Full width buttons */
+      .btn-primary, .btn-secondary {
+        width: 100% !important;
+      }
+
+      /* Minimize chat bubble padding */
+      .chat-bubble div {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 12px !important;
+      }
+
+      /* Hide icons in buttons on very small screens */
+      button i {
+        display: none !important;
+      }
+    }
+
+    /* Clean message bubbles */
+    .message-user {
+      background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+      border: 1px solid #C7D2FE;
+      border-radius: 20px 20px 4px 20px;
+      padding: 12px 20px;
+      color: var(--gray-800);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .message-ai {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px 20px 20px 4px;
+      padding: 12px 20px;
+      color: var(--gray-700);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Elegant metric card */
+    .metric-card {
+      background: linear-gradient(135deg, #FAFAFA 0%, #F4F4F5 100%);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Refined scroll */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--gray-100);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gray-400);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gray-500);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="flex items-center justify-between h-14 md:h-16">
+        <div class="flex items-center gap-3">
+          <div class="w-32px h-32px gradient-elegant rounded-lg flex items-center justify-center">
+            <i class="ph-bold ph-cube text-white" style="font-size: 18px;"></i>
+          </div>
+          <span class="text-lg font-semibold">Agentic UI</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#use-cases" class="nav-link">Use Cases</a>
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <button class="btn-primary">
+            Get Early Access
+            <i class="ph-thin ph-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center px-4 md:px-6 pt-20 md:pt-0">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center pt-16 md:pt-0">
+        <!-- Elegant Badge -->
+        <div class="badge inline-flex mb-6 md:mb-8">
+          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+          Embedded AI Magic
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="text-6xl sm:text-6xl md:text-5xl lg:text-6xl font-light mb-6 md:mb-8 px-2 leading-tight">
+          No more rigid <span class="font-semibold gradient-text">SaaS</span><br>Just <span class="font-semibold gradient-text">intent-driven</span> software
+        </h1>
+
+        <!-- Full Description -->
+        <div class="max-w-4xl mx-auto mb-8 md:mb-12 px-2">
+          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-light leading-relaxed">
+            Your SaaS becomes <span class="font-semibold text-gray-900">fluid</span>, no more static menus or rigid forms.
+            Users simply describe what they need, and our AI builds it instantly.
+            Interfaces, workflows, dashboards, all created through <span class="font-semibold text-gray-900">natural interaction</span>.
+            You build the core, they shape the experience.
+          </p>
+        </div>
+
+        <!-- Transformation -->
+        <div class="max-w-3xl mx-auto my-12 text-center">
+          <div class="inline-flex items-center gap-4 text-lg">
+            <span class="text-gray-500">"Can you build this?"</span>
+            <i class="ph-thin ph-arrow-right text-gray-400"></i>
+            <span class="text-gray-500 line-through">"I'll add it to our backlog..."</span>
+          </div>
+          <div class="text-sm text-gray-400 mt-3 mb-3">With Agentic UI</div>
+          <div class="inline-flex items-center gap-4 text-lg">
+            <span class="text-gray-700 font-medium">"Just describe what you need!"</span>
+            <i class="ph-thin ph-arrow-right text-gray-400"></i>
+            <span class="gradient-text font-semibold">"I built it myself in 30 seconds!"</span>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+          <button class="btn-primary">
+            See It In Your SaaS
+            <i class="ph-thin ph-arrow-right"></i>
+          </button>
+          <button class="btn-secondary">
+            Watch 2-Min Demo
+            <i class="ph-thin ph-play"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo - Full Width Desktop Browser -->
+  <section class="relative px-4 sm:px-6 md:px-8 py-12 md:py-24 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-6 md:mb-12 px-2">
+        <h2 class="text-lg sm:text-xl md:text-3xl font-light mb-2 md:mb-4">See Feature Requests Become Reality</h2>
+        <p class="text-gray-600 text-xs sm:text-sm md:text-base px-2">Watch how your users turn ideas into working interfaces in seconds</p>
+      </div>
+
+      <!-- Mobile Version - Completely Different Layout -->
+      <div class="block md:hidden px-3">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+          <!-- Mobile Header -->
+          <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-3 text-center">
+            <p class="text-white text-xs font-medium">AI Dashboard Generator</p>
+          </div>
+
+          <!-- Simple Mobile Chat -->
+          <div class="p-4 space-y-3 bg-gray-50">
+            <!-- User Message -->
+            <div class="flex justify-end mobile-chat-animate">
+              <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-2 rounded-2xl rounded-br-sm max-w-[80%] shadow-md">
+                <p class="text-xs font-medium">Show Q4 sales data</p>
+              </div>
+            </div>
+
+            <!-- Typing Dots -->
+            <div class="flex justify-start items-center gap-2 mobile-chat-animate" style="animation-delay: 0.6s;">
+              <div class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
+                <i class="ph-thin ph-robot text-purple-600" style="font-size: 12px;"></i>
+              </div>
+              <div class="bg-gray-200 px-3 py-2 rounded-2xl rounded-bl-sm">
+                <div class="flex items-center gap-1">
+                  <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse"></div>
+                  <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                  <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Response -->
+            <div class="flex justify-start items-start gap-2 mobile-chat-animate" style="animation-delay: 1.8s;">
+              <div class="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="ph-thin ph-sparkle text-white" style="font-size: 12px;"></i>
+              </div>
+              <div class="bg-white px-3 py-2 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm border border-gray-200">
+                <p class="text-xs text-gray-700">Here's your Q4 dashboard with $2.4M revenue!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Result Card -->
+          <div class="p-4 mobile-result-animate" style="animation-delay: 2.5s;">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold">Q4 Performance</h3>
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Live</span>
+              </div>
+
+              <!-- Simplified Metrics -->
+              <div class="grid grid-cols-2 gap-2 mb-3">
+                <div class="text-center p-2 bg-purple-50 rounded-lg">
+                  <p class="text-lg font-bold text-purple-600">$2.4M</p>
+                  <p class="text-xs text-gray-600">Revenue</p>
+                </div>
+                <div class="text-center p-2 bg-blue-50 rounded-lg">
+                  <p class="text-lg font-bold text-blue-600">92%</p>
+                  <p class="text-xs text-gray-600">Quota</p>
+                </div>
+              </div>
+
+              <!-- Mini Chart Placeholder -->
+              <div class="h-20 bg-gradient-to-r from-purple-100 to-blue-100 rounded-lg flex items-center justify-center">
+                <p class="text-xs text-gray-500">📊 Interactive Chart</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Browser Frame - Hidden on Mobile -->
+      <div class="hidden md:block relative">
+        <!-- Shadow and Glow Effect -->
+        <div class="absolute -inset-4 bg-gradient-to-r from-purple-200 via-blue-200 to-purple-200 rounded-2xl blur-2xl opacity-30 hidden md:block"></div>
+
+        <!-- Browser Window -->
+        <div class="relative bg-gray-900 md:rounded-t-xl shadow-2xl rounded-xl">
+          <!-- Browser Chrome - Hidden on mobile -->
+          <div class="flex items-center justify-between px-4 py-3 bg-gray-800 rounded-t-xl hidden md:flex browser-chrome">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="flex-1 mx-4">
+              <div class="bg-gray-700 rounded-md px-3 py-1 text-xs text-gray-300 text-center">
+                app.frabrik.ai/dashboard
+              </div>
+            </div>
+            <div class="flex items-center gap-3 text-gray-400">
+              <i class="ph-thin ph-arrow-counter-clockwise text-sm"></i>
+              <i class="ph-thin ph-house text-sm"></i>
+              <i class="ph-thin ph-dots-three text-sm"></i>
+            </div>
+          </div>
+
+          <!-- Browser Content -->
+          <div class="bg-white md:rounded-b-xl" style="min-height: 800px;">
+            <!-- App Header -->
+            <div class="border-b border-gray-200 bg-white px-4 md:px-8 py-4 rounded-t-xl md:rounded-t-none">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="text-xl font-semibold text-gray-900">Agentic UI Dashboard</div>
+                  <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">AI Mode Active</div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <button class="text-sm text-gray-600 hover:text-gray-900">Settings</button>
+                  <button class="text-sm text-gray-600 hover:text-gray-900">Help</button>
+                  <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-r from-purple-400 to-blue-400"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 md:p-8">
+              <!-- Chat Interface -->
+              <div class="mb-8">
+                <!-- User Message Bubble -->
+                <div class="flex justify-end mb-4 chat-animate" data-chat-step="1">
+                  <div class="flex items-end gap-2 md:gap-3 max-w-full md:max-w-2xl chat-bubble">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 md:px-5 py-2 md:py-3 rounded-2xl rounded-br-sm shadow-lg">
+                      <p class="text-sm md:text-base">Show me our Q4 sales performance with pipeline stages and top performers</p>
+                    </div>
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full flex items-center justify-center flex-shrink-0">
+                      <i class="ph-thin ph-user text-white" style="font-size: 16px;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Typing Indicator -->
+              <div class="typing-indicator mb-6" data-chat-step="2">
+                <div class="bg-gray-100 rounded-full px-4 py-2 inline-flex items-center gap-2">
+                  <i class="ph-thin ph-robot text-purple-600" style="font-size: 20px;"></i>
+                  <div class="flex items-center gap-1">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Response Message -->
+              <div class="flex justify-start mb-6 chat-animate" data-chat-step="3">
+                <div class="flex items-end gap-3 max-w-2xl">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="ph-thin ph-robot text-white" style="font-size: 16px;"></i>
+                  </div>
+                  <div class="bg-gray-100 px-3 md:px-5 py-2 md:py-3 rounded-2xl rounded-bl-sm shadow">
+                    <p class="text-gray-800 text-sm">Great news! Q4 is looking strong with $2.4M in revenue (+23% YoY). Sarah Chen is leading the pack at 112% of quota. I've created your dashboard with pipeline stages, top performers, and real-time activity feed. The data shows 92% quota attainment across the team.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Processing Indicator -->
+              <div class="flex items-center gap-3 mb-6 chat-animate" data-chat-step="4">
+                <div class="relative">
+                  <i class="ph-thin ph-sparkle text-purple-600 animate-pulse" style="font-size: 24px;"></i>
+                  <div class="absolute inset-0 bg-purple-400 blur-xl opacity-20"></div>
+                </div>
+                <span class="text-sm text-gray-600 font-medium">AI Generated Dashboard</span>
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full ml-2">Live</span>
+              </div>
+
+              <!-- Dashboard Content -->
+              <div class="bg-gray-50 rounded-2xl p-4 md:p-8 border border-gray-200 form-animate" data-chat-step="5">
+                <div class="flex items-center justify-between mb-8">
+                  <h3 class="text-2xl font-bold text-gray-900">Q4 Sales Performance</h3>
+                  <div class="flex items-center gap-3">
+                    <button class="text-sm px-3 py-1.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                      <i class="ph-thin ph-download-simple mr-1"></i> Export
+                    </button>
+                    <button class="text-sm px-3 py-1.5 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                      <i class="ph-thin ph-share-network mr-1"></i> Share
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Metrics Row -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-8">
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-start justify-between mb-3">
+                      <i class="ph-thin ph-currency-dollar text-purple-600" style="font-size: 28px;"></i>
+                      <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">+23%</span>
+                    </div>
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">$2.4M</p>
+                    <p class="text-gray-600 mt-1 text-sm">Total Revenue</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-start justify-between mb-3">
+                      <i class="ph-thin ph-handshake text-blue-600" style="font-size: 28px;"></i>
+                      <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">+15%</span>
+                    </div>
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">147</p>
+                    <p class="text-gray-600 mt-1 text-sm">Closed Deals</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-start justify-between mb-3">
+                      <i class="ph-thin ph-target text-green-600" style="font-size: 28px;"></i>
+                      <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">On Track</span>
+                    </div>
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">92%</p>
+                    <p class="text-gray-600 mt-1 text-sm">Quota Attainment</p>
+                  </div>
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-start justify-between mb-3">
+                      <i class="ph-thin ph-chart-line text-indigo-600" style="font-size: 28px;"></i>
+                      <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">↑ 8%</span>
+                    </div>
+                    <p class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900">3.2x</p>
+                    <p class="text-gray-600 mt-1 text-sm">Pipeline Coverage</p>
+                  </div>
+                </div>
+
+                <!-- Charts and Tables Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 dashboard-grid">
+                  <!-- Pipeline Funnel -->
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center justify-between mb-6">
+                      <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+                        <i class="ph-thin ph-funnel text-purple-600" style="font-size: 20px;"></i>
+                        Pipeline Stages
+                      </h4>
+                      <span class="text-xs text-gray-500">479 total</span>
+                    </div>
+                    <div class="space-y-4">
+                      <div>
+                        <div class="flex items-center justify-between mb-2">
+                          <span class="text-sm text-gray-700">Prospecting</span>
+                          <span class="text-sm font-bold">234</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-3 overflow-hidden">
+                          <div class="bg-gradient-to-r from-purple-500 to-purple-600 h-full rounded-full" style="width: 85%"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="flex items-center justify-between mb-2">
+                          <span class="text-sm text-gray-700">Qualification</span>
+                          <span class="text-sm font-bold">156</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-3 overflow-hidden">
+                          <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-full rounded-full" style="width: 60%"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="flex items-center justify-between mb-2">
+                          <span class="text-sm text-gray-700">Negotiation</span>
+                          <span class="text-sm font-bold">89</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-3 overflow-hidden">
+                          <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 h-full rounded-full" style="width: 40%"></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="flex items-center justify-between mb-2">
+                          <span class="text-sm text-gray-700">Closed Won</span>
+                          <span class="text-sm font-bold">147</span>
+                        </div>
+                        <div class="bg-gray-200 rounded-full h-3 overflow-hidden">
+                          <div class="bg-gradient-to-r from-green-500 to-green-600 h-full rounded-full" style="width: 100%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Top Performers -->
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center justify-between mb-6">
+                      <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+                        <i class="ph-thin ph-trophy text-yellow-600" style="font-size: 20px;"></i>
+                        Top Performers
+                      </h4>
+                      <span class="text-xs text-gray-500">Q4 2024</span>
+                    </div>
+                    <div class="space-y-3">
+                      <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                          <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-purple-600 flex items-center justify-center text-white text-sm font-bold">SC</div>
+                          <div>
+                            <p class="text-sm font-medium text-gray-900">Sarah Chen</p>
+                            <p class="text-xs text-gray-500">42 deals</p>
+                          </div>
+                        </div>
+                        <div class="text-right">
+                          <p class="text-sm font-bold text-purple-600">$487K</p>
+                          <p class="text-xs text-gray-500">112%</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                          <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white text-sm font-bold">MP</div>
+                          <div>
+                            <p class="text-sm font-medium text-gray-900">Michael Park</p>
+                            <p class="text-xs text-gray-500">38 deals</p>
+                          </div>
+                        </div>
+                        <div class="text-right">
+                          <p class="text-sm font-bold text-blue-600">$425K</p>
+                          <p class="text-xs text-gray-500">98%</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center gap-3">
+                          <div class="w-10 h-10 rounded-full bg-gradient-to-r from-indigo-400 to-indigo-600 flex items-center justify-center text-white text-sm font-bold">EW</div>
+                          <div>
+                            <p class="text-sm font-medium text-gray-900">Emma Wilson</p>
+                            <p class="text-xs text-gray-500">35 deals</p>
+                          </div>
+                        </div>
+                        <div class="text-right">
+                          <p class="text-sm font-bold text-indigo-600">$392K</p>
+                          <p class="text-xs text-gray-500">91%</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Recent Activity -->
+                  <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <div class="flex items-center justify-between mb-6">
+                      <h4 class="font-semibold text-gray-900 flex items-center gap-2">
+                        <i class="ph-thin ph-activity text-green-600" style="font-size: 20px;"></i>
+                        Recent Activity
+                      </h4>
+                      <span class="text-xs text-gray-500">Live</span>
+                    </div>
+                    <div class="space-y-3">
+                      <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mt-1.5"></div>
+                        <div class="flex-1">
+                          <p class="text-sm text-gray-900">New deal closed</p>
+                          <p class="text-xs text-gray-500">Acme Corp - $125K</p>
+                          <p class="text-xs text-gray-400 mt-1">2 min ago</p>
+                        </div>
+                      </div>
+                      <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-1.5"></div>
+                        <div class="flex-1">
+                          <p class="text-sm text-gray-900">Proposal sent</p>
+                          <p class="text-xs text-gray-500">TechStart Inc - $87K</p>
+                          <p class="text-xs text-gray-400 mt-1">15 min ago</p>
+                        </div>
+                      </div>
+                      <div class="flex items-start gap-3">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-1.5"></div>
+                        <div class="flex-1">
+                          <p class="text-sm text-gray-900">Meeting scheduled</p>
+                          <p class="text-xs text-gray-500">GlobalTech - Demo</p>
+                          <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
+                  <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <i class="ph-thin ph-clock" style="font-size: 16px;"></i>
+                    <span>Last updated: 2 seconds ago</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <button class="text-sm px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+                      <i class="ph-thin ph-pencil" style="font-size: 16px;"></i>
+                      Customize
+                    </button>
+                    <button class="text-sm px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-shadow flex items-center gap-2">
+                      <i class="ph-thin ph-code" style="font-size: 16px;"></i>
+                      View Code
+                    </button>
+                    <button class="text-sm px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+                      <i class="ph-thin ph-cloud-arrow-up" style="font-size: 16px;"></i>
+                      Deploy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bank Transfer Form Example -->
+  <section class="relative px-4 sm:px-6 md:px-8 py-12 md:py-24 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-6 md:mb-12 px-2">
+        <h2 class="text-lg sm:text-xl md:text-3xl font-light mb-2 md:mb-4">Banking Customer Creates a Transfer Form</h2>
+        <p class="text-gray-600 text-xs sm:text-sm md:text-base px-2">Experience how financial services users build custom workflows instantly</p>
+      </div>
+
+      <!-- Mobile Version - Simplified Banking Interface -->
+      <div class="block md:hidden px-3 mb-6">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+          <!-- Mobile Bank Header -->
+          <div class="bg-gradient-to-r from-blue-600 to-green-600 p-3 text-center">
+            <p class="text-white text-xs font-medium">SecureBank Transfer Assistant</p>
+          </div>
+
+          <!-- Simple Mobile Chat -->
+          <div class="p-4 space-y-3 bg-gray-50">
+            <!-- User Message -->
+            <div class="flex justify-end mobile-chat-animate">
+              <div class="bg-gradient-to-r from-blue-600 to-green-600 text-white px-3 py-2 rounded-2xl rounded-br-sm max-w-[80%] shadow-md">
+                <p class="text-xs font-medium">Transfer $5k to savings</p>
+              </div>
+            </div>
+
+            <!-- Typing Dots -->
+            <div class="flex justify-start items-center gap-2 mobile-chat-animate" style="animation-delay: 0.6s;">
+              <div class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
+                <i class="ph-thin ph-robot text-blue-600" style="font-size: 12px;"></i>
+              </div>
+              <div class="bg-gray-200 px-3 py-2 rounded-2xl rounded-bl-sm">
+                <div class="flex items-center gap-1">
+                  <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse"></div>
+                  <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                  <div class="w-1.5 h-1.5 bg-gray-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Response -->
+            <div class="flex justify-start items-start gap-2 mobile-chat-animate" style="animation-delay: 1.8s;">
+              <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="ph-thin ph-sparkle text-white" style="font-size: 12px;"></i>
+              </div>
+              <div class="bg-white px-3 py-2 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm border border-gray-200">
+                <p class="text-xs text-gray-700">Transfer ready! Moving $5k to your savings.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Transfer Form -->
+          <div class="p-4 mobile-result-animate" style="animation-delay: 2s;">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold">Quick Transfer</h3>
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Ready</span>
+              </div>
+
+              <!-- Simplified Form -->
+              <div class="space-y-3">
+                <div class="bg-gray-50 p-2 rounded-lg">
+                  <p class="text-xs text-gray-600">From: Checking</p>
+                  <p class="text-xs font-semibold">$15,234.00</p>
+                </div>
+                <div class="bg-gray-50 p-2 rounded-lg">
+                  <p class="text-xs text-gray-600">To: Savings</p>
+                  <p class="text-xs font-semibold">$30,658.00</p>
+                </div>
+                <div class="bg-gradient-to-r from-blue-50 to-green-50 p-3 rounded-lg text-center">
+                  <p class="text-lg font-bold text-gray-900">$5,000</p>
+                  <p class="text-xs text-gray-600">Transfer Amount</p>
+                </div>
+                <button class="w-full py-2 bg-gradient-to-r from-blue-600 to-green-600 text-white text-sm font-medium rounded-lg">
+                  Confirm Transfer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Browser Frame for Bank Transfer - Hidden on Mobile -->
+      <div class="hidden md:block relative">
+        <!-- Shadow and Glow Effect -->
+        <div class="absolute -inset-4 bg-gradient-to-r from-blue-200 via-green-200 to-blue-200 rounded-2xl blur-2xl opacity-30 hidden md:block"></div>
+
+        <!-- Browser Window -->
+        <div class="relative bg-gray-900 md:rounded-t-xl shadow-2xl rounded-xl">
+          <!-- Browser Chrome - Hidden on mobile -->
+          <div class="flex items-center justify-between px-4 py-3 bg-gray-800 rounded-t-xl hidden md:flex browser-chrome">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="flex-1 mx-4">
+              <div class="bg-gray-700 rounded-md px-3 py-1 text-xs text-gray-300 text-center">
+                banking.yourplatform.com/transfers
+              </div>
+            </div>
+            <div class="flex items-center gap-3 text-gray-400">
+              <i class="ph-thin ph-arrow-counter-clockwise text-sm"></i>
+              <i class="ph-thin ph-house text-sm"></i>
+              <i class="ph-thin ph-dots-three text-sm"></i>
+            </div>
+          </div>
+
+          <!-- Browser Content -->
+          <div class="bg-white md:rounded-b-xl overflow-hidden" style="min-height: auto;">
+            <!-- App Header -->
+            <div class="border-b border-gray-200 bg-white px-4 md:px-8 py-4 rounded-t-xl md:rounded-t-none">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="text-xl font-semibold text-gray-900">SecureBank Dashboard</div>
+                  <div class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">AI Assistant Active</div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <span class="text-sm text-gray-600">Balance: $45,892.00</span>
+                  <button class="text-sm text-gray-600 hover:text-gray-900">Account</button>
+                  <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-green-400"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-4 md:p-8">
+              <!-- Chat Interface -->
+              <div class="mb-8">
+                <!-- User Message Bubble -->
+                <div class="flex justify-end mb-4 chat-animate" data-bank-step="1">
+                  <div class="flex items-end gap-2 md:gap-3 max-w-full md:max-w-2xl chat-bubble">
+                    <div class="bg-gradient-to-r from-blue-600 to-green-600 text-white px-3 md:px-5 py-2 md:py-3 rounded-2xl rounded-br-sm shadow-lg">
+                      <p class="text-sm md:text-base">I want to transfer money from my checking to savings account in USD 5k</p>
+                    </div>
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-400 to-green-400 rounded-full flex items-center justify-center flex-shrink-0">
+                      <i class="ph-thin ph-user text-white" style="font-size: 16px;"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Typing Indicator -->
+              <div class="typing-indicator mb-6" data-bank-step="2">
+                <div class="bg-gray-100 rounded-full px-4 py-2 inline-flex items-center gap-2">
+                  <i class="ph-thin ph-robot text-blue-600" style="font-size: 20px;"></i>
+                  <div class="flex items-center gap-1">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Response Message -->
+              <div class="flex justify-start mb-6 chat-animate" data-bank-step="3">
+                <div class="flex items-end gap-3 max-w-2xl">
+                  <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i class="ph-thin ph-robot text-white" style="font-size: 20px;"></i>
+                  </div>
+                  <div class="bg-gray-100 px-3 md:px-5 py-2 md:py-3 rounded-2xl rounded-bl-sm shadow">
+                    <p class="text-gray-800 text-sm">I've prepared your $5,000 transfer from Checking (balance: $15,234) to Savings. Your accounts are in good standing with no pending holds. Pro tip: You could earn an extra $125/year by scheduling recurring transfers to maximize your high-yield savings rate. The form is ready for your review.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Processing Indicator -->
+              <div class="flex items-center gap-3 mb-6 chat-animate" data-bank-step="4">
+                <div class="relative">
+                  <i class="ph-thin ph-sparkle text-blue-600 animate-pulse" style="font-size: 24px;"></i>
+                  <div class="absolute inset-0 bg-blue-400 blur-xl opacity-20"></div>
+                </div>
+                <span class="text-sm text-gray-600 font-medium">AI Generated Transfer Form</span>
+                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full ml-2">Ready</span>
+              </div>
+
+              <!-- Generated Transfer Form -->
+              <div class="max-w-full md:max-w-2xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden form-animate" data-bank-step="5">
+                  <!-- Form Header -->
+                  <div class="bg-gradient-to-r from-blue-600 to-green-600 px-4 md:px-6 py-3 md:py-4">
+                    <h3 class="text-lg md:text-xl font-semibold text-white">Internal Transfer</h3>
+                    <p class="text-blue-100 text-xs md:text-sm mt-1">Transfer funds between your accounts</p>
+                  </div>
+
+                  <!-- Form Body -->
+                  <div class="p-4 md:p-6 space-y-4 md:space-y-6 form-container">
+                    <!-- From Account -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">From Account</label>
+                      <div class="relative">
+                        <select class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                          <option selected>Checking ****4892 - Balance: $15,234.00</option>
+                          <option>Business ****7821 - Balance: $89,432.00</option>
+                        </select>
+                        <i class="ph-thin ph-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                      </div>
+                    </div>
+
+                    <!-- To Account -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">To Account</label>
+                      <div class="relative">
+                        <select class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                          <option selected>Savings ****9234 - Balance: $30,658.00</option>
+                          <option>Investment ****5672 - Balance: $124,892.00</option>
+                        </select>
+                        <i class="ph-thin ph-caret-down absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                      </div>
+                    </div>
+
+                    <!-- Amount -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Amount</label>
+                      <div class="relative">
+                        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">$</span>
+                        <input type="text" value="5,000.00" class="w-full pl-8 pr-16 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">USD</span>
+                      </div>
+                      <div class="mt-2 flex gap-2">
+                        <button class="px-2 md:px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200">$100</button>
+                        <button class="px-2 md:px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200">$500</button>
+                        <button class="px-2 md:px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200">$1,000</button>
+                        <button class="px-2 md:px-3 py-1 text-xs bg-gray-100 text-gray-600 rounded hover:bg-gray-200">$5,000</button>
+                      </div>
+                    </div>
+
+                    <!-- Transfer Type & Schedule -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Transfer Type</label>
+                        <div class="space-y-2">
+                          <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="type" checked class="text-blue-600">
+                            <span class="text-sm">One-time</span>
+                          </label>
+                          <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="type" class="text-blue-600">
+                            <span class="text-sm">Recurring</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">When</label>
+                        <div class="space-y-2">
+                          <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="when" checked class="text-blue-600">
+                            <span class="text-sm">Now</span>
+                          </label>
+                          <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="when" class="text-blue-600">
+                            <span class="text-sm">Schedule</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Memo -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Memo (Optional)</label>
+                      <input type="text" placeholder="Add a note for your records" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+
+                    <!-- Security Notice -->
+                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <div class="flex items-start gap-2">
+                        <i class="ph-thin ph-shield-check text-blue-600 mt-0.5" style="font-size: 20px;"></i>
+                        <div class="text-xs text-blue-700">
+                          <p class="font-medium mb-1">Secure Transfer</p>
+                          <p>This transfer is protected by 256-bit encryption and will be processed immediately.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col md:flex-row gap-3">
+                      <button class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-green-600 text-white rounded-lg font-medium hover:shadow-lg transition-shadow">
+                        <i class="ph-thin ph-check mr-2"></i>
+                        Review Transfer
+                      </button>
+                      <button class="px-6 py-3 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional Options -->
+              <div class="flex items-center justify-center gap-2 md:gap-4 mt-8 flex-wrap">
+                <button class="text-sm px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+                  <i class="ph-thin ph-pencil" style="font-size: 16px;"></i>
+                  Customize Form
+                </button>
+                <button class="text-sm px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+                  <i class="ph-thin ph-floppy-disk" style="font-size: 16px;"></i>
+                  Save as Template
+                </button>
+                <button class="text-sm px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+                  <i class="ph-thin ph-code" style="font-size: 16px;"></i>
+                  View Code
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold gradient-text mb-2">5 seconds</div>
+          <div class="text-gray-600 text-sm">Form generation time</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold gradient-text mb-2">100%</div>
+          <div class="text-gray-600 text-sm">Compliance ready</div>
+        </div>
+        <div class="text-center">
+          <div class="text-2xl md:text-3xl font-bold gradient-text mb-2">Zero code</div>
+          <div class="text-gray-600 text-sm">For bank customers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light mb-4">How Agentic UI Works in Your SaaS</h2>
+        <p class="text-lg text-gray-600">Embed once, delight forever</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto mb-6 gradient-elegant rounded-full flex items-center justify-center text-white font-light text-2xl">
+            01
+          </div>
+          <h3 class="text-lg font-medium mb-3">You Integrate Agentic UI</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            5-minute SDK integration into your existing SaaS platform
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto mb-6 gradient-elegant rounded-full flex items-center justify-center text-white font-light text-2xl">
+            02
+          </div>
+          <h3 class="text-lg font-medium mb-3">Your Users Describe Needs</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            They use natural language right inside your application
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto mb-6 gradient-elegant rounded-full flex items-center justify-center text-white font-light text-2xl">
+            03
+          </div>
+          <h3 class="text-lg font-medium mb-3">AI Generates Their View</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Custom interface appears instantly, using your data & brand
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pro Features Section -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <div class="badge inline-flex mb-4 gradient-elegant text-white border-0">
+          PRO FEATURES
+        </div>
+        <h2 class="text-4xl font-light mb-4">Advanced Capabilities for Enterprise</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Custom AI Agents -->
+        <div class="card p-6">
+          <i class="ph-thin ph-robot text-purple-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-3">Custom AI Agents</h3>
+          <p class="text-gray-600 text-sm mb-4">Create specialized agents tailored to your business processes. Train them on your data and workflows.</p>
+          <div class="code-elegant text-xs">
+            frabrik.createAgent({<br>
+            &nbsp;&nbsp;name: <span class="code-string">'SalesOptimizer'</span>,<br>
+            &nbsp;&nbsp;training: yourSalesData<br>
+            })
+          </div>
+        </div>
+
+        <!-- Custom Components -->
+        <div class="card p-6">
+          <i class="ph-thin ph-puzzle-piece text-blue-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-3">Custom UI Components</h3>
+          <p class="text-gray-600 text-sm mb-4">Build and register your own components. Agentic UI will use them when generating interfaces.</p>
+          <div class="code-elegant text-xs">
+            frabrik.registerComponent({<br>
+            &nbsp;&nbsp;name: <span class="code-string">'CustomChart'</span>,<br>
+            &nbsp;&nbsp;component: YourChart<br>
+            })
+          </div>
+        </div>
+
+        <!-- Enterprise Security -->
+        <div class="card p-6">
+          <i class="ph-thin ph-shield-check text-green-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-3">Enterprise Security</h3>
+          <p class="text-gray-600 text-sm mb-4">SOC 2 compliant, GDPR ready. On-premise deployment, audit logging, and encryption.</p>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>On-Premise</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>Audit Logs</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>IP Whitelisting</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>Encryption</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="card p-6">
+          <i class="ph-thin ph-chart-line-up text-yellow-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-3">Analytics & Insights</h3>
+          <p class="text-gray-600 text-sm mb-4">Understand how users interact with AI. Track usage patterns and popular queries.</p>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>Usage Analytics</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>Performance Metrics</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>Custom Dashboards</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph-thin ph-check text-green-500"></i>
+              <span>Export Reports</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete Integration Example -->
+      <div class="mt-16 card p-8">
+        <h3 class="text-xl font-medium mb-6">Complete Integration Example</h3>
+        <div class="code-elegant">
+          <span class="code-comment">// Your existing Next.js app</span><br>
+          <span class="code-keyword">import</span> { Agentic UIProvider, Agentic UIChat } <span class="code-keyword">from</span> <span class="code-string">'@agentic/frabrik'</span><br><br>
+
+          <span class="code-keyword">export default function</span> <span class="code-function">App</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;Agentic UIProvider<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apiKey={process.env.FRABRIK_API_KEY}<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tenant={{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id: <span class="code-string">'your-company'</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;branding: yourBrand<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connectors={{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database: { type: <span class="code-string">'postgresql'</span>, url: dbUrl },<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;api: { type: <span class="code-string">'graphql'</span>, endpoint: apiUrl }<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&gt;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">{/* Your existing app */}</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;YourSaaSInterface /&gt;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">{/* Add Agentic UI magic */}</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Agentic UIChat position=<span class="code-string">"bottom-right"</span> /&gt;<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Agentic UIProvider&gt;<br>
+          &nbsp;&nbsp;)<br>
+          }
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="text-gray-600 mb-6">That's it! Your users can now create any interface they need through conversation.</p>
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+          <button class="btn-primary">
+            View Documentation
+            <i class="ph-thin ph-arrow-right"></i>
+          </button>
+          <button class="btn-secondary">
+            See Examples
+            <i class="ph-thin ph-github-logo"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Features -->
+  <section id="features" class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light mb-4">Why SaaS Platforms Choose Agentic UI</h2>
+        <p class="text-lg text-gray-600">Stop losing deals to "missing features" - let users build what they need</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-brain text-purple-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-2">Embedded in Your SaaS</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Runs inside your platform, not as a separate tool. Invisible to users.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-palette text-blue-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-2">White-Label Ready</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Matches your brand perfectly. Users think it's your native feature.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-plug text-green-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-2">Uses Your Data</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Connects to your existing database and respects your permissions
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-chat-circle text-yellow-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-2">No Training Required</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Your users just describe what they want. No learning curve.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-lightning text-orange-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-2">3-Second Generation</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            From request to working interface in seconds, not weeks
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-buildings text-pink-500 mb-4" style="font-size: 32px;"></i>
+          <h3 class="text-lg font-medium mb-2">New Revenue Stream</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Charge $20-50/user for AI features. 90% margin opportunity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section id="use-cases" class="py-24 px-6 bg-gray-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light mb-4">Built for Every SaaS Category</h2>
+        <p class="text-lg text-gray-600">See how Agentic UI transforms different platforms</p>
+      </div>
+
+      <!-- CRM Transformation -->
+      <div class="bg-white rounded-2xl p-8 mb-8 border border-gray-100">
+        <div class="flex items-start gap-4 mb-8">
+          <i class="ph-thin ph-briefcase text-purple-500" style="font-size: 40px;"></i>
+          <div>
+            <h3 class="text-2xl font-medium mb-1">For CRM Platforms</h3>
+            <p class="text-gray-600">Perfect for Salesforce, HubSpot, Pipedrive, Monday</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="p-6 bg-red-50 rounded-xl border border-red-100">
+            <h4 class="font-medium mb-3 flex items-center gap-2">
+              <i class="ph-thin ph-x-circle text-red-500"></i>
+              Today's Reality
+            </h4>
+            <p class="text-sm text-gray-700 mb-3">Your customers see generic dashboards. Customization costs you $200K+.</p>
+            <div class="space-y-1 text-sm text-gray-600">
+              <div>• Generic pipeline views</div>
+              <div>• Fixed reporting templates</div>
+              <div>• One-size-fits-all workflows</div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-green-50 rounded-xl border border-green-100">
+            <h4 class="font-medium mb-3 flex items-center gap-2">
+              <i class="ph-thin ph-check-circle text-green-500"></i>
+              With Agentic UI
+            </h4>
+            <p class="text-sm text-gray-700 mb-3">Your customers create their perfect views instantly, inside your CRM.</p>
+            <div class="space-y-1 text-sm text-gray-600">
+              <div>• "Show deals at risk with no activity"</div>
+              <div>• "Create board deck with MRR growth"</div>
+              <div>• "Build territory optimizer"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Examples -->
+        <div class="space-y-4 mb-6">
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <div class="text-xs font-medium text-purple-600 mb-2">ENTERPRISE SALES DIRECTOR</div>
+            <div class="text-sm text-gray-800 italic mb-2">
+              "Show me all enterprise deals at risk with no activity in 7 days, grouped by account executive, with suggested rescue strategies"
+            </div>
+            <div class="text-sm text-gray-600">→ Custom risk dashboard with AI recommendations generated in 2 seconds</div>
+          </div>
+
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <div class="text-xs font-medium text-purple-600 mb-2">SALES OPS MANAGER</div>
+            <div class="text-sm text-gray-800 italic mb-2">
+              "Build territory optimizer showing rep capacity, travel time, account potential scores, and rebalancing recommendations"
+            </div>
+            <div class="text-sm text-gray-600">→ Interactive territory planning system created instantly</div>
+          </div>
+        </div>
+
+        <div class="flex gap-8 justify-center">
+          <div class="text-center">
+            <div class="text-3xl font-semibold gradient-text">90%</div>
+            <div class="text-xs text-gray-500 uppercase tracking-wider">Less Custom Dev</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-semibold gradient-text">3x</div>
+            <div class="text-xs text-gray-500 uppercase tracking-wider">User Retention</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-semibold gradient-text">$50K</div>
+            <div class="text-xs text-gray-500 uppercase tracking-wider">New Revenue/Customer</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Management Transformation -->
+      <div class="bg-white rounded-2xl p-8 mb-8 border border-gray-100">
+        <div class="flex items-start gap-4 mb-8">
+          <i class="ph-thin ph-clipboard-text text-blue-500" style="font-size: 40px;"></i>
+          <div>
+            <h3 class="text-2xl font-medium mb-1">Project Management</h3>
+            <p class="text-gray-600">Monday.com • Asana • Jira • ClickUp</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="p-6 bg-red-50 rounded-xl border border-red-100">
+            <h4 class="font-medium mb-3 flex items-center gap-2">
+              <i class="ph-thin ph-x-circle text-red-500"></i>
+              Today's Reality
+            </h4>
+            <p class="text-sm text-gray-700 mb-3">Rigid boards and workflows. Teams force their processes into the tool.</p>
+            <div class="space-y-1 text-sm text-gray-600">
+              <div>• Pre-built templates</div>
+              <div>• Limited custom fields</div>
+              <div>• Static reporting</div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-green-50 rounded-xl border border-green-100">
+            <h4 class="font-medium mb-3 flex items-center gap-2">
+              <i class="ph-thin ph-check-circle text-green-500"></i>
+              With Agentic UI
+            </h4>
+            <p class="text-sm text-gray-700 mb-3">Every team gets their ideal workspace tailored to their methodology.</p>
+            <div class="space-y-1 text-sm text-gray-600">
+              <div>• "Generate sprint board by impact"</div>
+              <div>• "Create campaign ROI tracker"</div>
+              <div>• "Build velocity tracker"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Examples -->
+        <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 mb-6">
+          <div class="text-xs font-medium text-blue-600 mb-2">PRODUCT MANAGER AT FINTECH</div>
+          <div class="text-sm text-gray-800 italic mb-2">
+            "Generate sprint board showing features by customer impact score vs engineering effort, with automatic Slack updates for blocked items"
+          </div>
+          <div class="text-sm text-gray-600">→ Custom prioritization matrix with automation</div>
+        </div>
+      </div>
+
+      <!-- More Industries Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- HR Platforms -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-users-three text-green-500 mb-4" style="font-size: 32px;"></i>
+          <h4 class="font-medium mb-2">HR & People Platforms</h4>
+          <p class="text-gray-600 text-sm mb-3">Workday • BambooHR • Rippling</p>
+          <div class="text-xs text-gray-500">
+            "Create retention risk analyzer with intervention playbooks" → Predictive retention system
+          </div>
+        </div>
+
+        <!-- Analytics Tools -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-chart-line text-yellow-500 mb-4" style="font-size: 32px;"></i>
+          <h4 class="font-medium mb-2">Analytics & BI</h4>
+          <p class="text-gray-600 text-sm mb-3">Tableau • Looker • Amplitude</p>
+          <div class="text-xs text-gray-500">
+            "Show cohort retention by channel with LTV predictions" → Advanced analytics with ML
+          </div>
+        </div>
+
+        <!-- E-commerce -->
+        <div class="card p-6 hover-lift">
+          <i class="ph-thin ph-shopping-cart text-pink-500 mb-4" style="font-size: 32px;"></i>
+          <h4 class="font-medium mb-2">E-commerce & Retail</h4>
+          <p class="text-gray-600 text-sm mb-3">Shopify • BigCommerce • Square • Toast</p>
+          <div class="text-xs text-gray-500">
+            "Create inventory optimizer with reorder points and automatic purchase orders" → Intelligent inventory management
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Line Section -->
+      <div class="mt-16 p-8 bg-white rounded-2xl border border-gray-200">
+        <h3 class="text-2xl font-medium text-center mb-8">The Bottom Line for SaaS Companies</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="p-6 bg-red-50 rounded-xl">
+            <h4 class="font-medium mb-4 text-red-900">Before Agentic UI</h4>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li>• 70% of feature requests never built</li>
+              <li>• $500K+ annual custom development</li>
+              <li>• 18-month roadmap backlogs</li>
+              <li>• Users leave for more flexible alternatives</li>
+              <li>• Support overwhelmed with customization requests</li>
+            </ul>
+          </div>
+          <div class="p-6 bg-green-50 rounded-xl">
+            <h4 class="font-medium mb-4 text-green-900">After Agentic UI</h4>
+            <ul class="space-y-2 text-sm text-gray-700">
+              <li>• Every user gets their perfect interface</li>
+              <li>• 90% reduction in development costs</li>
+              <li>• Instant feature "delivery"</li>
+              <li>• 3x improvement in user retention</li>
+              <li>• New revenue: Premium AI features ($50-500/user/month)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration -->
+  <section class="py-24 px-6" id="integration">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light mb-4">Integrate in 5 Minutes</h2>
+        <p class="text-lg text-gray-600">Add Agentic UI to your SaaS and watch retention soar</p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- Step 1: Install -->
+        <div class="card p-4 md:p-6">
+          <div class="flex flex-col md:flex-row gap-3 md:gap-6">
+            <div class="text-xl md:text-2xl font-light gradient-text">01</div>
+            <div class="flex-1 overflow-hidden">
+              <h3 class="font-medium mb-3 text-sm md:text-base">Install Agentic UI SDK</h3>
+              <div class="code-elegant">
+                <span class="code-keyword">npm install</span> <span class="code-string">@frabrik/sdk</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Connect Data -->
+        <div class="card p-4 md:p-6">
+          <div class="flex flex-col md:flex-row gap-3 md:gap-6">
+            <div class="text-xl md:text-2xl font-light gradient-text">02</div>
+            <div class="flex-1 overflow-hidden">
+              <h3 class="font-medium mb-3 text-sm md:text-base">Connect to Your SaaS Data</h3>
+              <div class="code-elegant mb-4">
+                <span class="code-keyword">const</span> frabrik = <span class="code-keyword">new</span> <span class="code-function">Agentic UI</span>({<br>
+                &nbsp;&nbsp;<span class="code-comment">// Connect your existing database</span><br>
+                &nbsp;&nbsp;connectors: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;database: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="code-string">'postgresql'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;connection: process.env.DATABASE_URL,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;schema: <span class="code-string">'public'</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Or connect your APIs</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;api: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: <span class="code-string">'rest'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;baseUrl: <span class="code-string">'https://api.yourapp.com'</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;}<br>
+                })
+              </div>
+              <div class="grid grid-cols-4 gap-3">
+                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                  <i class="ph-thin ph-database text-blue-500 mb-2" style="font-size: 24px;"></i>
+                  <div class="text-xs">PostgreSQL</div>
+                </div>
+                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                  <i class="ph-thin ph-database text-green-500 mb-2" style="font-size: 24px;"></i>
+                  <div class="text-xs">MySQL</div>
+                </div>
+                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                  <i class="ph-thin ph-leaf text-green-600 mb-2" style="font-size: 24px;"></i>
+                  <div class="text-xs">MongoDB</div>
+                </div>
+                <div class="text-center p-3 bg-gray-50 rounded-lg">
+                  <i class="ph-thin ph-globe text-purple-500 mb-2" style="font-size: 24px;"></i>
+                  <div class="text-xs">REST/GraphQL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Configure Tenant -->
+        <div class="card p-4 md:p-6">
+          <div class="flex flex-col md:flex-row gap-3 md:gap-6">
+            <div class="text-xl md:text-2xl font-light gradient-text">03</div>
+            <div class="flex-1 overflow-hidden">
+              <h3 class="font-medium mb-3 text-sm md:text-base">Enable for Your Customers</h3>
+              <div class="code-elegant overflow-x-auto">
+                frabrik.configure({<br>
+                &nbsp;&nbsp;<span class="code-comment">// Each of YOUR customers gets their own space</span><br>
+                &nbsp;&nbsp;tenant: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;id: <span class="code-string">'customer-uuid'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;name: <span class="code-string">'Acme Corp'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// White-label branding per tenant</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;branding: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logo: <span class="code-string">'customer.com/logo.png'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;primaryColor: <span class="code-string">'#FF6B00'</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Data access permissions</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;permissions: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tables: [<span class="code-string">'customers'</span>, <span class="code-string">'orders'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operations: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'read'</span>, <span class="code-string">'write'</span>, <span class="code-string">'create'</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;}<br>
+                })
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Add Auth -->
+        <div class="card p-4 md:p-6">
+          <div class="flex flex-col md:flex-row gap-3 md:gap-6">
+            <div class="text-xl md:text-2xl font-light gradient-text">04</div>
+            <div class="flex-1 overflow-hidden">
+              <h3 class="font-medium mb-3 text-sm md:text-base">Setup Authentication</h3>
+              <div class="code-elegant mb-4">
+                frabrik.auth({<br>
+                &nbsp;&nbsp;<span class="code-comment">// Use your existing auth system</span><br>
+                &nbsp;&nbsp;provider: <span class="code-string">'oauth2'</span>,<br>
+                &nbsp;&nbsp;issuer: <span class="code-string">'https://auth.yourapp.com'</span>,<br>
+                &nbsp;&nbsp;<span class="code-comment">// Map user roles to Agentic UI permissions</span><br>
+                &nbsp;&nbsp;roleMapping: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;admin: [<span class="code-string">'create'</span>, <span class="code-string">'edit'</span>, <span class="code-string">'delete'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;user: [<span class="code-string">'create'</span>, <span class="code-string">'edit'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;viewer: [<span class="code-string">'view'</span>]<br>
+                &nbsp;&nbsp;}<br>
+                })
+              </div>
+              <div class="flex gap-4 text-xs text-gray-600">
+                <span class="flex items-center gap-1"><i class="ph-thin ph-check text-green-500"></i> JWT Auth</span>
+                <span class="flex items-center gap-1"><i class="ph-thin ph-check text-green-500"></i> OAuth 2.0</span>
+                <span class="flex items-center gap-1"><i class="ph-thin ph-check text-green-500"></i> SAML</span>
+                <span class="flex items-center gap-1"><i class="ph-thin ph-check text-green-500"></i> RBAC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Add Interface -->
+        <div class="card p-4 md:p-6">
+          <div class="flex flex-col md:flex-row gap-3 md:gap-6">
+            <div class="text-xl md:text-2xl font-light gradient-text">05</div>
+            <div class="flex-1 overflow-hidden">
+              <h3 class="font-medium mb-3 text-sm md:text-base">Add Agentic UI Interface</h3>
+              <div class="code-elegant">
+                <span class="code-comment">// Add to your React app</span><br>
+                &lt;<span class="code-function">Agentic UIChat</span><br>
+                &nbsp;&nbsp;<span class="code-keyword">user</span>={currentUser}<br>
+                &nbsp;&nbsp;<span class="code-keyword">permissions</span>={userPermissions}<br>
+                &nbsp;&nbsp;<span class="code-keyword">theme</span>={yourBrandTheme}<br>
+                /&gt;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-24 px-6 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light mb-4">Pricing for SaaS Platforms</h2>
+        <p class="text-lg text-gray-600">Pay based on your platform size. Your users pay you for AI features.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Starter -->
+        <div class="card bg-white flex flex-col" style="min-height: auto;">
+          <div class="p-8 pb-4">
+            <h3 class="text-xl font-medium mb-2">Startup</h3>
+            <div class="text-4xl font-light mb-1">$999</div>
+            <div class="text-sm text-gray-500 mb-8">per month</div>
+          </div>
+          <div class="px-8 flex-grow">
+            <ul class="space-y-3">
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                Up to 1,000 users
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                5,000 generations/mo
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                White-label ready
+              </li>
+            </ul>
+          </div>
+          <div class="p-8 pt-4 mt-auto">
+            <button class="w-full btn-secondary">Start Free Trial</button>
+          </div>
+        </div>
+
+        <!-- Professional -->
+        <div class="relative">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+            <div class="px-4 py-1 gradient-elegant text-white text-xs font-semibold rounded-full">
+              MOST POPULAR
+            </div>
+          </div>
+          <div class="card bg-white border-purple-200 border-2 flex flex-col" style="min-height: auto;">
+            <div class="p-8 pb-4">
+              <h3 class="text-xl font-medium mb-2">Growth</h3>
+              <div class="text-4xl font-light mb-1">$4,999</div>
+              <div class="text-sm text-gray-500 mb-8">per month</div>
+            </div>
+            <div class="px-8 flex-grow">
+              <ul class="space-y-3">
+                <li class="flex items-center gap-2 text-sm">
+                  <i class="ph-thin ph-check text-green-500"></i>
+                  Up to 10,000 users
+                </li>
+                <li class="flex items-center gap-2 text-sm">
+                  <i class="ph-thin ph-check text-green-500"></i>
+                  50,000 generations/mo
+                </li>
+                <li class="flex items-center gap-2 text-sm">
+                  <i class="ph-thin ph-check text-green-500"></i>
+                  Priority support
+                </li>
+                <li class="flex items-center gap-2 text-sm">
+                  <i class="ph-thin ph-check text-green-500"></i>
+                  Custom branding
+                </li>
+              </ul>
+            </div>
+            <div class="p-8 pt-4 mt-auto">
+              <button class="w-full btn-primary">Start Free Trial</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="card bg-white flex flex-col" style="min-height: auto;">
+          <div class="p-8 pb-4">
+            <h3 class="text-xl font-medium mb-2">Enterprise</h3>
+            <div class="text-4xl font-light mb-1">Custom</div>
+            <div class="text-sm text-gray-500 mb-8">contact sales</div>
+          </div>
+          <div class="px-8 flex-grow">
+            <ul class="space-y-3">
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                Unlimited generations
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                Custom AI training
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                Dedicated support
+              </li>
+              <li class="flex items-center gap-2 text-sm">
+                <i class="ph-thin ph-check text-green-500"></i>
+                On-premise deploy
+              </li>
+            </ul>
+          </div>
+          <div class="p-8 pt-4 mt-auto">
+            <button class="w-full btn-secondary">Contact Sales</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-light mb-6">
+        Stop Losing Deals to "Missing Features"
+      </h2>
+      <p class="text-lg text-gray-600 mb-10">
+        Give your SaaS platform the superpower of infinite customization.
+        Your users get exactly what they need. You get 3x retention and new revenue streams.
+        Integration takes 5 minutes.
+      </p>
+      <div class="flex gap-4 justify-center">
+        <button class="btn-primary">
+          See Agentic UI In Your SaaS
+          <i class="ph-thin ph-arrow-right"></i>
+        </button>
+        <button class="btn-secondary">
+          Talk to Our Team
+          <i class="ph-thin ph-calendar-blank"></i>
+        </button>
+      </div>
+      <p class="text-sm text-gray-500 mt-8">
+        90-day pilot program • See 3x retention improvement • Risk-free trial
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-50 border-t border-gray-200 py-12 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h4 class="font-medium mb-4 text-sm">Product</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Features</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Pricing</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Documentation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4 text-sm">Use Cases</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">CRM Platforms</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Project Management</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Analytics Tools</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4 text-sm">Company</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">About</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Blog</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-medium mb-4 text-sm">Resources</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Support</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Community</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Status</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-gray-200 text-center">
+        <p class="text-sm text-gray-600">© 2025 Agentic UI. Empowering SaaS platforms with embedded AI.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Chat Animation on Scroll
+    function animateChatSequence(entries, observer) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const section = entry.target;
+          const chatSteps = section.querySelectorAll('[data-chat-step], [data-bank-step]');
+          const typingIndicator = section.querySelector('.typing-indicator');
+
+          // Reset animations if re-entering viewport
+          if (!section.hasAttribute('data-animated')) {
+            chatSteps.forEach(step => {
+              step.classList.remove('show');
+              if (step.classList.contains('form-animate') || step.classList.contains('chat-animate')) {
+                step.style.opacity = '0';
+              }
+            });
+
+            // Animate sequence
+            let delay = 500;
+
+            // Step 1: User message
+            setTimeout(() => {
+              const userMsg = section.querySelector('[data-chat-step="1"], [data-bank-step="1"]');
+              if (userMsg) {
+                userMsg.classList.add('show');
+              }
+            }, delay);
+
+            // Step 2: Typing indicator
+            setTimeout(() => {
+              if (typingIndicator) {
+                typingIndicator.classList.add('show');
+              }
+            }, delay + 800);
+
+            // Step 3: Hide typing, show AI response message
+            setTimeout(() => {
+              if (typingIndicator) {
+                typingIndicator.classList.remove('show');
+              }
+              const aiResponse = section.querySelector('[data-chat-step="3"], [data-bank-step="3"]');
+              if (aiResponse) {
+                aiResponse.classList.add('show');
+              }
+            }, delay + 2000);
+
+            // Step 4: Show AI processing indicator
+            setTimeout(() => {
+              const aiIndicator = section.querySelector('[data-chat-step="4"], [data-bank-step="4"]');
+              if (aiIndicator) {
+                aiIndicator.classList.add('show');
+              }
+            }, delay + 3000);
+
+            // Step 5: Show generated form/dashboard
+            setTimeout(() => {
+              const generatedContent = section.querySelector('[data-chat-step="5"], [data-bank-step="5"]');
+              if (generatedContent) {
+                generatedContent.classList.add('show');
+              }
+            }, delay + 3800);
+
+            section.setAttribute('data-animated', 'true');
+          }
+        }
+      });
+    }
+
+    // Create intersection observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3
+    };
+
+    const chatObserver = new IntersectionObserver(animateChatSequence, observerOptions);
+
+    // Observe both demo sections
+    document.querySelectorAll('.relative .bg-white').forEach(section => {
+      const hasAnimations = section.querySelector('[data-chat-step], [data-bank-step]');
+      if (hasAnimations) {
+        chatObserver.observe(section.parentElement);
+      }
+    });
+
+    // Re-trigger animation on scroll up then down
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop < lastScrollTop) {
+        // Scrolling up - remove animated attribute to allow re-animation
+        document.querySelectorAll('[data-animated]').forEach(section => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top > window.innerHeight || rect.bottom < 0) {
+            section.removeAttribute('data-animated');
+          }
+        });
+      }
+      lastScrollTop = scrollTop;
+    }, false);
+  </script>
+</body>
+</html>
