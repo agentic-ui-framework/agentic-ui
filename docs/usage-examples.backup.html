@@ -1,0 +1,3257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic UI - Transform Any SaaS Into an AI-Powered Operating System</title>
+  <meta name="description" content="See how Agentic UI's embedded AI transforms traditional SaaS applications into intelligent operating systems. Real-world examples from insurance, banking, and enterprise software.">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Sidebar Toggle Styles */
+    .sidebar-collapsed {
+      width: 64px !important;
+      transition: width 0.3s ease;
+    }
+
+    .sidebar-collapsed .sidebar-text {
+      display: none;
+    }
+
+    .sidebar-collapsed .sidebar-section-title {
+      display: none;
+    }
+
+    .sidebar-collapsed .sidebar-logo-text {
+      display: none;
+    }
+
+    .sidebar-collapsed .sidebar-item {
+      justify-content: center;
+      padding: 0.75rem;
+    }
+
+    .sidebar-collapsed .sidebar-badge {
+      display: none;
+    }
+
+    .sidebar-toggle {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-collapsed .sidebar-toggle {
+      transform: rotate(180deg);
+    }
+
+    .sidebar-transition {
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+
+    :root {
+      --primary: #6366F1;
+      --primary-dark: #4F46E5;
+      --gray-50: #FAFAFA;
+      --gray-100: #F4F4F5;
+      --gray-200: #E4E4E7;
+      --gray-300: #D4D4D8;
+      --gray-400: #A1A1AA;
+      --gray-500: #71717A;
+      --gray-600: #52525B;
+      --gray-700: #3F3F46;
+      --gray-800: #27272A;
+      --gray-900: #18181B;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FFFFFF;
+      color: var(--gray-900);
+      overflow-x: hidden;
+      font-weight: 400;
+      letter-spacing: -0.011em;
+      line-height: 1.5;
+    }
+
+    /* Gradient styles */
+    .gradient-elegant {
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-banking {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+
+    .gradient-insurance {
+      background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+    }
+
+    /* Card styles */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Navigation */
+    nav {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gray-100);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    /* Code block styling */
+    .code-block {
+      background: var(--gray-900);
+      color: #E4E4E7;
+      border-radius: 12px;
+      padding: 20px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 14px;
+    }
+
+    /* Browser chrome styles */
+    .browser-chrome {
+      background: #1F2937;
+      border-radius: 12px 12px 0 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .browser-url-bar {
+      flex: 1;
+      background: #374151;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #9CA3AF;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .browser-wrapper {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* SaaS mockup styles */
+    .saas-container {
+      background: var(--gray-50);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .saas-header {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .saas-sidebar {
+      background: white;
+      border-right: 1px solid var(--gray-200);
+      width: 240px;
+      padding: 20px;
+    }
+
+    .saas-content {
+      flex: 1;
+      padding: 24px;
+      background: var(--gray-50);
+    }
+
+    /* macOS Dock style */
+    .dock-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .dock-item {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      background: white;
+      border: 1px solid var(--gray-200);
+    }
+
+    .dock-item:hover {
+      transform: scale(1.1) translateY(-4px);
+      background: var(--primary);
+      color: white;
+    }
+
+    .dock-input {
+      width: 400px;
+      padding: 12px 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      background: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    /* Dark mode chat embed styles */
+    .chat-embed {
+      background: #1A1B26;
+      border: 1px solid #2D2E3F;
+      border-radius: 16px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    .chat-embed.dark {
+      background: #0F0F14;
+      border: 1px solid #1A1B26;
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #2D2E3F;
+      background: #0F0F14;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #1A1B26;
+    }
+
+    .chat-input-area {
+      padding: 16px 20px;
+      border-top: 1px solid #2D2E3F;
+      background: #0F0F14;
+    }
+
+    /* Animation classes */
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-in {
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    /* Interactive demo styles */
+    .demo-message {
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      max-width: 70%;
+    }
+
+    .demo-message.user {
+      background: var(--primary);
+      color: white;
+      margin-left: auto;
+    }
+
+    .demo-message.ai {
+      background: var(--gray-100);
+      color: var(--gray-900);
+    }
+
+    /* Feature tag */
+    .feature-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--gray-100);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-700);
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 gradient-elegant rounded-lg"></div>
+        <span class="text-xl font-semibold">Agentic UI</span>
+      </div>
+      <div class="flex items-center gap-8">
+        <a href="#basic-examples" class="text-gray-600 hover:text-gray-900">Basic Examples</a>
+        <a href="#saas-integration" class="text-gray-600 hover:text-gray-900">SaaS Integration</a>
+        <a href="#insurance" class="text-gray-600 hover:text-gray-900">Insurance</a>
+        <a href="#banking" class="text-gray-600 hover:text-gray-900">Banking</a>
+        <a href="#dock-interface" class="text-gray-600 hover:text-gray-900">OS Interface</a>
+        <button class="btn-primary">Get Started</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="px-6 py-20 text-center">
+    <div class="max-w-4xl mx-auto fade-in">
+      <h1 class="text-5xl font-bold mb-6">
+        Transform Your SaaS Into an
+        <span class="gradient-text">AI-Powered Operating System</span>
+      </h1>
+      <p class="text-xl text-gray-600 mb-8">
+        See how leading companies use Agentic UI to create intelligent interfaces that understand context,
+        execute actions, and revolutionize user experience.
+      </p>
+      <div class="flex justify-center gap-4">
+        <button class="btn-primary">
+          <i class="ph ph-play"></i>
+          Watch Demo
+        </button>
+        <button class="btn-primary" style="background: transparent; color: var(--primary); border: 1px solid var(--primary);">
+          View Documentation
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Basic Examples Section -->
+  <section id="basic-examples" class="px-6 py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Basic Integration Examples</h2>
+      <p class="text-gray-600 mb-12">See how AI chat on the left drives real actions and results on the right</p>
+
+      <!-- Example 1: E-commerce Product Search -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-semibold mb-6">E-commerce: Natural Language Shopping</h3>
+        <div class="browser-wrapper">
+          <!-- Browser Chrome -->
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>shop.fashionstore.com/browse</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <!-- E-commerce Content -->
+          <div class="bg-gray-50 p-6" style="height: 400px;">
+            <div class="grid grid-cols-2 gap-6 h-full">
+              <!-- AI Chat (LEFT) -->
+              <div class="bg-white rounded-lg p-4 flex flex-col">
+                <div class="flex items-center gap-2 mb-4">
+                  <div class="w-8 h-8 gradient-elegant rounded-lg flex items-center justify-center">
+                    <i class="ph ph-sparkle text-white text-sm"></i>
+                  </div>
+                  <span class="font-semibold text-sm">Shopping Assistant</span>
+                </div>
+                <div class="flex-1 overflow-y-auto mb-3">
+                  <div class="space-y-3">
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                      <p class="text-sm">How can I help you shop today?</p>
+                    </div>
+                    <div class="bg-primary text-white rounded-lg p-3 max-w-[80%] ml-auto">
+                      <p class="text-sm">Show me red dresses under $100 for a wedding</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                      <p class="text-sm">I found 12 perfect options! I've filtered by:</p>
+                      <ul class="text-xs mt-1 space-y-1">
+                        <li>• Color: Red & Burgundy</li>
+                        <li>• Price: Under $100</li>
+                        <li>• Style: Formal/Wedding Guest</li>
+                        <li>• In stock in your size (M)</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-2">
+                  <input type="text" placeholder="Ask about products, sizes, or styles..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm">
+                  <button class="px-4 py-2 bg-primary text-white rounded-lg text-sm">Send</button>
+                </div>
+              </div>
+
+              <!-- Product Results (RIGHT) -->
+              <div class="bg-white rounded-lg p-4 overflow-y-auto">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">AI-Filtered Results</h3>
+                  <span class="text-xs text-gray-500">12 items</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="border border-gray-200 rounded-lg p-3 hover:border-primary hover:shadow-lg transition-all cursor-pointer">
+                    <div class="bg-gradient-to-br from-red-100 to-pink-100 h-24 rounded mb-2"></div>
+                    <p class="text-xs font-medium">Satin Midi Dress</p>
+                    <p class="text-sm font-bold text-primary">$89</p>
+                    <p class="text-xs text-gray-500">Perfect for weddings</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-3 hover:border-primary hover:shadow-lg transition-all cursor-pointer">
+                    <div class="bg-gradient-to-br from-red-200 to-rose-100 h-24 rounded mb-2"></div>
+                    <p class="text-xs font-medium">Wrap Cocktail Dress</p>
+                    <p class="text-sm font-bold text-primary">$75</p>
+                    <p class="text-xs text-gray-500">Bestseller • 5 left</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-3 hover:border-primary hover:shadow-lg transition-all cursor-pointer">
+                    <div class="bg-gradient-to-br from-rose-100 to-red-100 h-24 rounded mb-2"></div>
+                    <p class="text-xs font-medium">Lace A-Line Dress</p>
+                    <p class="text-sm font-bold text-primary">$95</p>
+                    <p class="text-xs text-gray-500">Elegant choice</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-3 hover:border-primary hover:shadow-lg transition-all cursor-pointer">
+                    <div class="bg-gradient-to-br from-pink-100 to-red-100 h-24 rounded mb-2"></div>
+                    <p class="text-xs font-medium">Off-Shoulder Gown</p>
+                    <p class="text-sm font-bold text-primary">$99</p>
+                    <p class="text-xs text-gray-500">New arrival</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 2: SaaS Dashboard Commands -->
+      <div class="mb-12">
+        <h3 class="text-2xl font-semibold mb-6">SaaS Analytics: Voice-to-Dashboard</h3>
+        <div class="browser-wrapper">
+          <!-- Browser Chrome -->
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>analytics.dataplatform.io/dashboard</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <!-- Analytics Dashboard Content -->
+          <div class="bg-gray-50 p-6" style="height: 400px;">
+            <div class="grid grid-cols-2 gap-6 h-full">
+              <!-- AI Command Center (LEFT) -->
+              <div class="bg-white rounded-lg p-4 flex flex-col">
+                <div class="flex items-center gap-2 mb-4">
+                  <div class="w-8 h-8 gradient-elegant rounded-lg flex items-center justify-center">
+                    <i class="ph ph-chart-line text-white text-sm"></i>
+                  </div>
+                  <span class="font-semibold text-sm">Analytics AI</span>
+                </div>
+                <div class="flex-1 overflow-y-auto mb-3">
+                  <div class="space-y-3">
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                      <p class="text-sm">What insights do you need?</p>
+                    </div>
+                    <div class="bg-primary text-white rounded-lg p-3 max-w-[80%] ml-auto">
+                      <p class="text-sm">Compare this month's revenue to last year same period</p>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                      <p class="text-sm">Generating comparison report...</p>
+                      <div class="mt-2 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <i class="ph ph-trend-up text-green-500 text-xs"></i>
+                          <span class="text-xs">Revenue up 34% YoY</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <i class="ph ph-users text-blue-500 text-xs"></i>
+                          <span class="text-xs">Customer base grew 22%</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <i class="ph ph-chart-bar text-purple-500 text-xs"></i>
+                          <span class="text-xs">Best performing: Enterprise tier</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-2">
+                  <input type="text" placeholder="Ask about metrics, trends, or forecasts..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm">
+                  <button class="px-4 py-2 bg-primary text-white rounded-lg text-sm">Analyze</button>
+                </div>
+              </div>
+
+              <!-- Dashboard Visualization (RIGHT) -->
+              <div class="bg-white rounded-lg p-4">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">AI-Generated Dashboard</h3>
+                  <div class="flex gap-2">
+                    <button class="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200">Export</button>
+                    <button class="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200">Share</button>
+                  </div>
+                </div>
+
+                <!-- Revenue Comparison Chart -->
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 mb-3">
+                  <p class="text-xs font-medium text-gray-700 mb-2">Revenue Comparison</p>
+                  <div class="flex items-end gap-2 h-20">
+                    <div class="flex-1 bg-gray-300 rounded-t" style="height: 60%;">
+                      <div class="text-center text-xs mt-1">Last Year</div>
+                    </div>
+                    <div class="flex-1 bg-green-500 rounded-t" style="height: 94%;">
+                      <div class="text-center text-xs text-white mt-1">This Year</div>
+                    </div>
+                  </div>
+                  <div class="flex justify-between mt-2">
+                    <span class="text-xs text-gray-600">$1.24M</span>
+                    <span class="text-xs font-bold text-green-600">$1.66M (+34%)</span>
+                  </div>
+                </div>
+
+                <!-- Key Metrics Grid -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="border border-gray-200 rounded-lg p-2">
+                    <p class="text-xs text-gray-500">MRR Growth</p>
+                    <p class="text-lg font-bold text-green-600">+22%</p>
+                    <p class="text-xs text-gray-600">$142K → $173K</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-2">
+                    <p class="text-xs text-gray-500">Churn Rate</p>
+                    <p class="text-lg font-bold text-blue-600">2.1%</p>
+                    <p class="text-xs text-green-600">↓ 0.8% improved</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-2">
+                    <p class="text-xs text-gray-500">CAC Payback</p>
+                    <p class="text-lg font-bold text-purple-600">8mo</p>
+                    <p class="text-xs text-gray-600">Industry avg: 12mo</p>
+                  </div>
+                  <div class="border border-gray-200 rounded-lg p-2">
+                    <p class="text-xs text-gray-500">LTV/CAC</p>
+                    <p class="text-lg font-bold text-orange-600">3.4x</p>
+                    <p class="text-xs text-green-600">↑ Healthy ratio</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Examples -->
+      <div class="grid md:grid-cols-2 gap-6 mt-12">
+        <div class="card p-6">
+          <h4 class="text-lg font-semibold mb-3">Simple Integration Code</h4>
+          <div class="code-block mb-4 text-xs">
+<pre>&lt;!-- Add to any page --&gt;
+&lt;script src="https://cdn.agentic-ui.com/v2/embed.js"&gt;&lt;/script&gt;
+&lt;div id="agentic-chat"&gt;&lt;/div&gt;
+&lt;script&gt;
+  AgenticUI.init({
+    apiKey: 'your-key',
+    position: 'left',  // Chat on left
+    results: 'right'    // Actions on right
+  });
+&lt;/script&gt;</pre>
+          </div>
+          <div class="flex gap-2">
+            <span class="feature-tag">3 Lines of Code</span>
+            <span class="feature-tag">No Backend</span>
+            <span class="feature-tag">Instant Setup</span>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <h4 class="text-lg font-semibold mb-3">Advanced Custom Tools</h4>
+          <div class="code-block mb-4 text-xs">
+<pre>const agentic = new AgenticUI({
+  apiKey: 'your-key',
+  tools: [{
+    name: 'updateDashboard',
+    execute: (params) => {
+      // Your custom logic
+      updateCharts(params.data);
+      return { success: true };
+    }
+  }],
+  onMessage: (msg) => console.log(msg)
+});</pre>
+          </div>
+          <div class="flex gap-2">
+            <span class="feature-tag">Custom Tools</span>
+            <span class="feature-tag">Full Control</span>
+            <span class="feature-tag">Event System</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SaaS Integration Patterns -->
+  <section id="saas-integration" class="px-6 py-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Real-World SaaS Integration Patterns</h2>
+      <p class="text-gray-600 mb-12">See how AI transforms daily business workflows in accounting, ERP, healthcare, and HR systems</p>
+
+      <!-- Layout 1: Accounting Platform Transformation -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 1: Accounting Platform Transformation - AI-Powered Financial Intelligence</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>app.quickfinance.com/reconciliation</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="flex bg-gray-50" style="height: 700px;">
+            <!-- AI Assistant Panel (LEFT - Dark Mode) -->
+            <div class="w-96 bg-gray-900 border-r border-gray-800 flex flex-col">
+              <div class="p-4 bg-black border-b border-gray-800">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 gradient-elegant rounded-lg flex items-center justify-center">
+                    <i class="ph ph-calculator text-white"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-white">AI Bookkeeper</div>
+                    <div class="text-xs text-gray-400">Smart expense categorization</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-1 overflow-y-auto p-4 bg-gray-900">
+                <div class="space-y-3">
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200">I've found 47 uncategorized transactions from this month. Should I auto-categorize them based on your rules?</p>
+                  </div>
+                  <div class="bg-indigo-600 rounded-lg p-3 ml-12">
+                    <p class="text-sm text-white">Yes, and show me any that need review</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200">Categorizing transactions...</p>
+                    <div class="mt-3 space-y-2">
+                      <div class="flex items-center justify-between text-xs">
+                        <span class="text-green-400">✓ 42 auto-categorized</span>
+                        <span class="text-gray-400">High confidence</span>
+                      </div>
+                      <div class="flex items-center justify-between text-xs">
+                        <span class="text-yellow-400">⚠ 5 need review</span>
+                        <span class="text-gray-400">Ambiguous vendors</span>
+                      </div>
+                    </div>
+                    <div class="mt-3 p-2 bg-yellow-900/20 border border-yellow-600/30 rounded">
+                      <p class="text-xs text-yellow-300 font-medium mb-2">Review Required:</p>
+                      <div class="space-y-1 text-xs text-gray-300">
+                        <div>• Amazon $2,847 - Office or Inventory?</div>
+                        <div>• Best Buy $1,299 - Equipment or Resale?</div>
+                        <div>• Delta Airlines $890 - Sales or Training?</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-indigo-600 rounded-lg p-3 ml-12">
+                    <p class="text-sm text-white">Amazon is inventory, Best Buy equipment, Delta is sales travel</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200">Updated! Also, I noticed you could save $12,450 in taxes by reclassifying some expenses. Want details?</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 bg-black border-t border-gray-800">
+                <div class="flex gap-2">
+                  <input type="text" placeholder="Ask about expenses, taxes, or cash flow..."
+                         class="flex-1 px-3 py-2 bg-gray-800 text-white rounded-lg text-sm placeholder-gray-500 border border-gray-700">
+                  <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700">Send</button>
+                </div>
+                <div class="flex gap-2 mt-2">
+                  <button class="flex-1 text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">📊 P&L Report</button>
+                  <button class="flex-1 text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">💰 Cash Flow</button>
+                  <button class="flex-1 text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">📋 Tax Prep</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Accounting Interface (RIGHT) -->
+            <div class="flex-1 p-6 overflow-y-auto">
+              <div class="mb-6">
+                <h1 class="text-2xl font-bold">Expense Management</h1>
+                <p class="text-gray-600">Q4 2024 - Tax Year End Preparation</p>
+              </div>
+
+              <!-- Key Metrics -->
+              <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Total Expenses</p>
+                  <p class="text-xl font-bold">$487,293</p>
+                  <p class="text-xs text-red-600">↑ 12% vs Q3</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Tax Deductible</p>
+                  <p class="text-xl font-bold">$412,847</p>
+                  <p class="text-xs text-green-600">84.7% optimized</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Pending Receipts</p>
+                  <p class="text-xl font-bold">23</p>
+                  <p class="text-xs text-yellow-600">$4,892 unverified</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Est. Tax Savings</p>
+                  <p class="text-xl font-bold text-green-600">$67,420</p>
+                  <p class="text-xs text-gray-600">With AI optimization</p>
+                </div>
+              </div>
+
+              <!-- Recent Transactions -->
+              <div class="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Recent Transactions</h3>
+                  <div class="flex gap-2">
+                    <select class="text-xs px-2 py-1 border border-gray-200 rounded">
+                      <option>All Categories</option>
+                      <option>Office Supplies</option>
+                      <option>Travel</option>
+                      <option>Software</option>
+                    </select>
+                    <button class="text-xs px-3 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200">Sync Bank</button>
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="ph ph-desktop text-blue-600 text-sm"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium">Adobe Creative Cloud</p>
+                        <p class="text-xs text-gray-500">Software Subscription</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-semibold">-$599.88</p>
+                      <p class="text-xs text-green-600">Tax Deductible</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded transition-colors bg-yellow-50 border border-yellow-200">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                        <i class="ph ph-shopping-cart text-yellow-600 text-sm"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium">Amazon Purchase</p>
+                        <p class="text-xs text-yellow-600 font-medium">⚠ Needs categorization</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-semibold">-$2,847.00</p>
+                      <button class="text-xs text-blue-600 hover:underline">Categorize</button>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded transition-colors">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <i class="ph ph-airplane text-green-600 text-sm"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium">Delta Airlines</p>
+                        <p class="text-xs text-gray-500">Business Travel - Client Meeting</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-semibold">-$890.00</p>
+                      <p class="text-xs text-green-600">100% Deductible</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tax Optimization Alert -->
+              <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                  <i class="ph ph-lightbulb text-green-600 text-xl"></i>
+                  <div class="flex-1">
+                    <h4 class="font-semibold text-green-900 mb-1">AI Tax Optimization Found</h4>
+                    <p class="text-sm text-gray-700 mb-2">Reclassifying 23 expenses could save you $12,450 in taxes this quarter</p>
+                    <div class="flex gap-2">
+                      <button class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">Apply Optimization</button>
+                      <button class="px-3 py-1 bg-white text-green-600 border border-green-600 text-sm rounded hover:bg-green-50">View Details</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout 2: ERP Platform Revolution -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 2: ERP Platform Revolution - Intelligent Supply Chain Automation</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>erp.manufacturing.com/inventory</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="flex bg-gray-50" style="height: 700px;">
+            <!-- Main ERP Content (LEFT) -->
+            <div class="flex-1 p-6 overflow-y-auto">
+              <div class="mb-6">
+                <h1 class="text-2xl font-bold">Inventory Control Center</h1>
+                <p class="text-gray-600">Real-time stock levels and supply chain management</p>
+              </div>
+
+              <!-- Critical Alerts -->
+              <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <div class="flex items-start gap-3">
+                  <i class="ph ph-warning-circle text-red-600 text-xl"></i>
+                  <div class="flex-1">
+                    <h4 class="font-semibold text-red-900">Critical Stock Alerts</h4>
+                    <div class="mt-2 space-y-1 text-sm">
+                      <div class="flex justify-between">
+                        <span class="text-red-700">SKU-A4521 (Steel Bearings)</span>
+                        <span class="font-medium">12 units left - 2 days supply</span>
+                      </div>
+                      <div class="flex justify-between">
+                        <span class="text-red-700">SKU-C8932 (Circuit Boards)</span>
+                        <span class="font-medium">45 units left - 5 days supply</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inventory Overview -->
+              <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <p class="text-xs text-gray-500">Total SKUs</p>
+                    <i class="ph ph-package text-gray-400"></i>
+                  </div>
+                  <p class="text-2xl font-bold">3,847</p>
+                  <p class="text-xs text-gray-600">$4.2M value</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <p class="text-xs text-gray-500">Low Stock Items</p>
+                    <i class="ph ph-warning text-yellow-500"></i>
+                  </div>
+                  <p class="text-2xl font-bold text-yellow-600">23</p>
+                  <p class="text-xs text-gray-600">Need reorder</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <p class="text-xs text-gray-500">In Transit</p>
+                    <i class="ph ph-truck text-blue-500"></i>
+                  </div>
+                  <p class="text-2xl font-bold">147</p>
+                  <p class="text-xs text-gray-600">$823K value</p>
+                </div>
+              </div>
+
+              <!-- Purchase Orders Table -->
+              <div class="bg-white rounded-lg border border-gray-200 p-4">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Active Purchase Orders</h3>
+                  <button class="text-xs px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Create PO</button>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead>
+                      <tr class="border-b text-left">
+                        <th class="pb-2 font-medium text-gray-700">PO Number</th>
+                        <th class="pb-2 font-medium text-gray-700">Supplier</th>
+                        <th class="pb-2 font-medium text-gray-700">Items</th>
+                        <th class="pb-2 font-medium text-gray-700">Value</th>
+                        <th class="pb-2 font-medium text-gray-700">ETA</th>
+                        <th class="pb-2 font-medium text-gray-700">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b hover:bg-gray-50">
+                        <td class="py-2 font-medium">PO-2024-8934</td>
+                        <td class="py-2">Shanghai Manufacturing</td>
+                        <td class="py-2">450 units</td>
+                        <td class="py-2">$127,500</td>
+                        <td class="py-2">Dec 28</td>
+                        <td class="py-2"><span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">In Transit</span></td>
+                      </tr>
+                      <tr class="border-b hover:bg-gray-50 bg-yellow-50">
+                        <td class="py-2 font-medium">PO-2024-8935</td>
+                        <td class="py-2">TechParts Inc</td>
+                        <td class="py-2">1,200 units</td>
+                        <td class="py-2">$89,400</td>
+                        <td class="py-2 text-red-600 font-medium">Delayed</td>
+                        <td class="py-2"><span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Customs Hold</span></td>
+                      </tr>
+                      <tr class="border-b hover:bg-gray-50">
+                        <td class="py-2 font-medium">PO-2024-8936</td>
+                        <td class="py-2">Local Supplies Co</td>
+                        <td class="py-2">200 units</td>
+                        <td class="py-2">$34,200</td>
+                        <td class="py-2">Tomorrow</td>
+                        <td class="py-2"><span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Arriving</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Supply Chain Assistant (RIGHT - Dark Mode) -->
+            <div class="w-96 bg-gray-900 border-l border-gray-800 flex flex-col">
+              <div class="p-4 bg-black border-b border-gray-800">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
+                    <i class="ph ph-cpu text-white"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-white">Supply Chain AI</div>
+                    <div class="text-xs text-gray-400">Predictive inventory optimization</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-1 overflow-y-auto p-4 bg-gray-900">
+                <div class="space-y-3">
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200">⚠️ Critical: Steel bearings will stockout in 2 days. I've found 3 suppliers who can expedite delivery.</p>
+                  </div>
+                  <div class="bg-purple-600 rounded-lg p-3 ml-12">
+                    <p class="text-sm text-white">Show me the options and pricing</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200 mb-3">Here are your expedited options:</p>
+                    <div class="space-y-2">
+                      <div class="bg-gray-700 rounded p-2">
+                        <div class="flex justify-between text-xs text-gray-300">
+                          <span class="font-medium">FastParts Express</span>
+                          <span class="text-green-400">Tomorrow</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                          <span>500 units @ $47/unit</span>
+                          <span class="text-yellow-400">+15% premium</span>
+                        </div>
+                      </div>
+                      <div class="bg-gray-700 rounded p-2">
+                        <div class="flex justify-between text-xs text-gray-300">
+                          <span class="font-medium">Regional Supply Co</span>
+                          <span class="text-yellow-400">2 days</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 mt-1">
+                          <span>500 units @ $42/unit</span>
+                          <span class="text-green-400">+3% premium</span>
+                        </div>
+                      </div>
+                      <div class="bg-gray-700 rounded p-2 border border-green-600/30">
+                        <div class="flex justify-between text-xs text-gray-300">
+                          <span class="font-medium">✨ AI Recommendation</span>
+                          <span class="text-blue-400">Split order</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">
+                          200 units expedited + 300 regular = Save $1,850
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-purple-600 rounded-lg p-3 ml-12">
+                    <p class="text-sm text-white">Do the split order and alert production</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200">✅ Done! POs created and production notified. Also, I've identified $47K in savings by consolidating next month's orders from 3 suppliers.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 bg-black border-t border-gray-800">
+                <div class="flex gap-2 mb-2">
+                  <input type="text" placeholder="Ask about inventory, suppliers, or forecasts..."
+                         class="flex-1 px-3 py-2 bg-gray-800 text-white rounded-lg text-sm placeholder-gray-500 border border-gray-700">
+                  <button class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm hover:bg-purple-700">Ask</button>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <button class="text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">📦 Reorder</button>
+                  <button class="text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">📊 Forecast</button>
+                  <button class="text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">🚚 Track</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout 3: Healthcare Patient Management -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 3: Healthcare Platform Transformation - Clinical AI Revolution</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>ehr.medicalcenter.com/patients</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="flex bg-gray-50" style="height: 700px;">
+            <!-- AI Clinical Assistant (LEFT - Dark Mode) -->
+            <div class="w-96 bg-gray-900 border-r border-gray-800 flex flex-col">
+              <div class="p-4 bg-black border-b border-gray-800">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg flex items-center justify-center">
+                    <i class="ph ph-heartbeat text-white"></i>
+                  </div>
+                  <div>
+                    <div class="font-semibold text-white">Clinical AI Assistant</div>
+                    <div class="text-xs text-gray-400">HIPAA-compliant medical support</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-1 overflow-y-auto p-4 bg-gray-900">
+                <div class="space-y-3">
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200">🔔 3 patients need immediate attention based on today's lab results.</p>
+                  </div>
+                  <div class="bg-cyan-600 rounded-lg p-3 ml-12">
+                    <p class="text-sm text-white">Show me the critical results</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200 mb-3">Critical lab results requiring action:</p>
+                    <div class="space-y-2">
+                      <div class="bg-red-900/30 border border-red-600/30 rounded p-2">
+                        <div class="flex justify-between text-xs mb-1">
+                          <span class="text-red-400 font-medium">Sarah Johnson #P-4892</span>
+                          <span class="text-red-300">URGENT</span>
+                        </div>
+                        <p class="text-xs text-gray-300">HbA1c: 12.4% (Critical high)</p>
+                        <p class="text-xs text-yellow-400 mt-1">📞 Contact patient immediately</p>
+                      </div>
+                      <div class="bg-yellow-900/30 border border-yellow-600/30 rounded p-2">
+                        <div class="flex justify-between text-xs mb-1">
+                          <span class="text-yellow-400 font-medium">Robert Chen #P-3421</span>
+                          <span class="text-yellow-300">HIGH</span>
+                        </div>
+                        <p class="text-xs text-gray-300">Creatinine: 2.8 mg/dL (↑ 40%)</p>
+                        <p class="text-xs text-gray-400 mt-1">Schedule nephrology consult</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-cyan-600 rounded-lg p-3 ml-12">
+                    <p class="text-sm text-white">Draft consultation request for Robert Chen</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3">
+                    <p class="text-sm text-gray-200 mb-2">Consultation request drafted:</p>
+                    <div class="bg-gray-700 rounded p-2 text-xs text-gray-300">
+                      <p class="font-medium mb-1">To: Nephrology Dept</p>
+                      <p>Patient shows 40% increase in creatinine over 3 months. eGFR declining. Urgent evaluation requested for possible CKD progression...</p>
+                      <button class="mt-2 text-cyan-400 hover:underline">Edit & Send</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 bg-black border-t border-gray-800">
+                <div class="flex gap-2 mb-2">
+                  <input type="text" placeholder="Ask about patients, medications, or protocols..."
+                         class="flex-1 px-3 py-2 bg-gray-800 text-white rounded-lg text-sm placeholder-gray-500 border border-gray-700">
+                  <button class="px-4 py-2 bg-cyan-600 text-white rounded-lg text-sm hover:bg-cyan-700">Ask</button>
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                  <button class="text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">💊 Meds</button>
+                  <button class="text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">🔬 Labs</button>
+                  <button class="text-xs py-1.5 bg-gray-800 text-gray-300 rounded hover:bg-gray-700">📋 Orders</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Healthcare Interface (RIGHT) -->
+            <div class="flex-1 p-6 overflow-y-auto">
+              <div class="mb-6">
+                <h1 class="text-2xl font-bold">Patient Management Dashboard</h1>
+                <p class="text-gray-600">Thursday, December 21 - 18 scheduled appointments</p>
+              </div>
+
+              <!-- Today's Schedule -->
+              <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Today's Patients</p>
+                  <p class="text-2xl font-bold">18</p>
+                  <p class="text-xs text-green-600">3 completed</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Pending Labs</p>
+                  <p class="text-2xl font-bold text-yellow-600">7</p>
+                  <p class="text-xs text-gray-600">3 critical</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Prescriptions</p>
+                  <p class="text-2xl font-bold">24</p>
+                  <p class="text-xs text-blue-600">5 refills pending</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                  <p class="text-xs text-gray-500 mb-1">Insurance Auth</p>
+                  <p class="text-2xl font-bold text-red-600">4</p>
+                  <p class="text-xs text-gray-600">Pending approval</p>
+                </div>
+              </div>
+
+              <!-- Patient List with Integrated Information -->
+              <div class="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Today's Appointments</h3>
+                  <div class="flex gap-2">
+                    <select class="text-xs px-2 py-1 border border-gray-200 rounded">
+                      <option>All Patients</option>
+                      <option>Urgent Only</option>
+                      <option>Follow-ups</option>
+                    </select>
+                    <button class="text-xs px-3 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Add Patient</button>
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                        <i class="ph ph-warning text-red-600"></i>
+                      </div>
+                      <div>
+                        <p class="font-medium">Sarah Johnson</p>
+                        <p class="text-xs text-gray-600">Female, 52y • Diabetes Type 2</p>
+                        <p class="text-xs text-red-600 font-medium mt-1">⚠ Critical HbA1c: 12.4%</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">9:00 AM</p>
+                      <p class="text-xs text-gray-500">Room 204</p>
+                      <button class="text-xs text-blue-600 hover:underline mt-1">View Chart</button>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-3 hover:bg-gray-50 border border-gray-200 rounded-lg">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <span class="text-sm font-medium text-blue-600">RC</span>
+                      </div>
+                      <div>
+                        <p class="font-medium">Robert Chen</p>
+                        <p class="text-xs text-gray-600">Male, 67y • Hypertension, CKD</p>
+                        <p class="text-xs text-yellow-600 mt-1">Lab review needed</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">9:30 AM</p>
+                      <p class="text-xs text-gray-500">Room 205</p>
+                      <button class="text-xs text-blue-600 hover:underline mt-1">View Chart</button>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-3 hover:bg-gray-50 border border-gray-200 rounded-lg">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                        <span class="text-sm font-medium text-green-600">MG</span>
+                      </div>
+                      <div>
+                        <p class="font-medium">Maria Garcia</p>
+                        <p class="text-xs text-gray-600">Female, 34y • Annual Checkup</p>
+                        <p class="text-xs text-green-600 mt-1">✓ All labs normal</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">10:00 AM</p>
+                      <p class="text-xs text-gray-500">Room 201</p>
+                      <button class="text-xs text-blue-600 hover:underline mt-1">View Chart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Clinical Insights -->
+              <div class="bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-200 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                  <i class="ph ph-brain text-cyan-600 text-xl"></i>
+                  <div class="flex-1">
+                    <h4 class="font-semibold text-gray-900 mb-1">AI Clinical Insights</h4>
+                    <p class="text-sm text-gray-700 mb-2">Pattern detected: 3 diabetic patients showing poor control this month. Consider group education session.</p>
+                    <div class="flex gap-2">
+                      <button class="px-3 py-1 bg-cyan-600 text-white text-sm rounded hover:bg-cyan-700">Schedule Session</button>
+                      <button class="px-3 py-1 bg-white text-cyan-600 border border-cyan-600 text-sm rounded hover:bg-cyan-50">View Analysis</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout 4: HR Platform Revolution -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 4: HR Platform Revolution - Intelligent Workforce Management</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>hr.worksync.com/payroll</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="flex bg-white" style="height: 700px;">
+            <!-- AI HR Assistant (Left - Dark Mode) -->
+            <div class="w-96 chat-embed flex flex-col">
+              <div class="p-4 border-b border-gray-700">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                      <i class="ph ph-users-three text-white"></i>
+                    </div>
+                    <div>
+                      <div class="text-white font-semibold">HR Assistant</div>
+                      <div class="text-xs text-green-400 flex items-center gap-1">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span> Online
+                      </div>
+                    </div>
+                  </div>
+                  <button class="text-gray-400 hover:text-white">
+                    <i class="ph ph-gear"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex-1 overflow-y-auto p-4 space-y-4">
+                <!-- User message -->
+                <div class="flex justify-end">
+                  <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                    Process payroll for December 2024
+                  </div>
+                </div>
+
+                <!-- AI response -->
+                <div class="flex gap-3">
+                  <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex-shrink-0"></div>
+                  <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                    <p class="text-gray-200 text-sm mb-2">Processing December payroll...</p>
+                    <div class="space-y-2">
+                      <div class="flex items-center gap-2 text-xs">
+                        <i class="ph ph-check-circle text-green-400"></i>
+                        <span class="text-gray-300">Calculating regular hours: 4,523</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-xs">
+                        <i class="ph ph-check-circle text-green-400"></i>
+                        <span class="text-gray-300">Calculating overtime: 238 hours</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-xs">
+                        <i class="ph ph-check-circle text-green-400"></i>
+                        <span class="text-gray-300">Applying holiday bonuses</span>
+                      </div>
+                      <div class="flex items-center gap-2 text-xs">
+                        <i class="ph ph-warning text-yellow-400"></i>
+                        <span class="text-gray-300">3 employees missing tax forms</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- User follow-up -->
+                <div class="flex justify-end">
+                  <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                    Show me the employees with missing tax forms
+                  </div>
+                </div>
+
+                <!-- AI response with details -->
+                <div class="flex gap-3">
+                  <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex-shrink-0"></div>
+                  <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                    <p class="text-gray-200 text-sm mb-2">Found 3 employees:</p>
+                    <div class="space-y-2 text-xs">
+                      <div class="bg-gray-800 rounded p-2">
+                        <p class="text-white font-medium">Sarah Chen (ID: 2847)</p>
+                        <p class="text-gray-400">Missing: W-4 2024</p>
+                      </div>
+                      <div class="bg-gray-800 rounded p-2">
+                        <p class="text-white font-medium">Mark Johnson (ID: 3921)</p>
+                        <p class="text-gray-400">Missing: State tax withholding</p>
+                      </div>
+                      <div class="bg-gray-800 rounded p-2">
+                        <p class="text-white font-medium">Lisa Park (ID: 1456)</p>
+                        <p class="text-gray-400">Missing: Direct deposit form</p>
+                      </div>
+                    </div>
+                    <button class="mt-2 w-full bg-purple-600 text-white text-xs py-2 rounded hover:bg-purple-700">
+                      Send Reminders to All
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input Area -->
+              <div class="p-4 border-t border-gray-700">
+                <div class="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Ask about payroll, benefits, or policies..."
+                    class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                  <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700">
+                    <i class="ph ph-paper-plane-tilt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Payroll Dashboard (Right) -->
+            <div class="flex-1 bg-gray-50">
+              <!-- Header -->
+              <div class="bg-white border-b border-gray-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Payroll Processing</h1>
+                    <p class="text-sm text-gray-600">December 2024 - Pay Period 12/1 - 12/31</p>
+                  </div>
+                  <div class="flex gap-3">
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                      <i class="ph ph-download-simple mr-2"></i>Export
+                    </button>
+                    <button class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                      <i class="ph ph-check-circle mr-2"></i>Approve Payroll
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payroll Summary Cards -->
+              <div class="p-6">
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-gray-600 text-sm">Total Payroll</span>
+                      <i class="ph ph-currency-dollar text-green-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">$487,293</p>
+                    <p class="text-xs text-gray-500">245 employees</p>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-gray-600 text-sm">Overtime</span>
+                      <i class="ph ph-clock text-orange-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">$18,472</p>
+                    <p class="text-xs text-gray-500">238 hours</p>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-gray-600 text-sm">Bonuses</span>
+                      <i class="ph ph-gift text-purple-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">$62,500</p>
+                    <p class="text-xs text-gray-500">Holiday bonus</p>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-gray-600 text-sm">Tax Withholding</span>
+                      <i class="ph ph-receipt text-blue-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">$142,387</p>
+                    <p class="text-xs text-gray-500">Fed + State</p>
+                  </div>
+                </div>
+
+                <!-- Employee List with Issues -->
+                <div class="bg-white rounded-lg border border-gray-200">
+                  <div class="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-900">Payroll Issues Requiring Attention</h3>
+                    <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">3 Issues</span>
+                  </div>
+                  <div class="divide-y divide-gray-200">
+                    <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                          <span class="text-sm font-medium text-gray-600">SC</span>
+                        </div>
+                        <div>
+                          <p class="font-medium text-gray-900">Sarah Chen</p>
+                          <p class="text-sm text-gray-600">Engineering • ID: 2847</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-4">
+                        <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">Missing W-4</span>
+                        <button class="text-purple-600 hover:text-purple-700 text-sm">
+                          Send Reminder
+                        </button>
+                      </div>
+                    </div>
+                    <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                          <span class="text-sm font-medium text-gray-600">MJ</span>
+                        </div>
+                        <div>
+                          <p class="font-medium text-gray-900">Mark Johnson</p>
+                          <p class="text-sm text-gray-600">Sales • ID: 3921</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-4">
+                        <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">Missing State Tax</span>
+                        <button class="text-purple-600 hover:text-purple-700 text-sm">
+                          Send Reminder
+                        </button>
+                      </div>
+                    </div>
+                    <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                          <span class="text-sm font-medium text-gray-600">LP</span>
+                        </div>
+                        <div>
+                          <p class="font-medium text-gray-900">Lisa Park</p>
+                          <p class="text-sm text-gray-600">Marketing • ID: 1456</p>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-4">
+                        <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">Missing Direct Deposit</span>
+                        <button class="text-purple-600 hover:text-purple-700 text-sm">
+                          Send Reminder
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Layout 5: Project Management Revolution -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 5: Project Management Revolution - AI Command Center</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>projects.nexthub.io/workspace</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="relative bg-gray-50" style="height: 700px; overflow: hidden;">
+            <!-- Main Project Management Interface -->
+            <div class="p-6 pb-24">
+              <!-- Header -->
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <h1 class="text-2xl font-bold text-gray-900">Sprint Dashboard</h1>
+                  <p class="text-sm text-gray-600">Q1 2024 - Sprint 3 (Jan 15-29)</p>
+                </div>
+                <div class="flex gap-3">
+                  <button class="px-4 py-2 bg-white text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50">
+                    <i class="ph ph-funnel mr-2"></i>Filter
+                  </button>
+                  <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    <i class="ph ph-plus mr-2"></i>New Task
+                  </button>
+                </div>
+              </div>
+
+              <!-- Sprint Metrics -->
+              <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-600 text-sm">Sprint Progress</span>
+                    <i class="ph ph-trend-up text-green-500"></i>
+                  </div>
+                  <p class="text-2xl font-bold text-gray-900">67%</p>
+                  <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                    <div class="bg-green-500 h-2 rounded-full" style="width: 67%"></div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-600 text-sm">Tasks Complete</span>
+                    <i class="ph ph-check-circle text-blue-500"></i>
+                  </div>
+                  <p class="text-2xl font-bold text-gray-900">24/36</p>
+                  <p class="text-xs text-gray-500">12 remaining</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-600 text-sm">Team Velocity</span>
+                    <i class="ph ph-lightning text-yellow-500"></i>
+                  </div>
+                  <p class="text-2xl font-bold text-gray-900">42</p>
+                  <p class="text-xs text-gray-500">Story points/sprint</p>
+                </div>
+                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-gray-600 text-sm">Blockers</span>
+                    <i class="ph ph-warning text-red-500"></i>
+                  </div>
+                  <p class="text-2xl font-bold text-gray-900">3</p>
+                  <p class="text-xs text-red-600">Needs attention</p>
+                </div>
+              </div>
+
+              <!-- Kanban Board -->
+              <div class="grid grid-cols-4 gap-4">
+                <!-- To Do Column -->
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-gray-700">To Do</h3>
+                    <span class="bg-gray-300 text-gray-700 px-2 py-0.5 rounded-full text-xs">8</span>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="bg-white p-3 rounded border border-gray-200">
+                      <p class="text-sm font-medium text-gray-900">Implement user authentication</p>
+                      <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">Backend</span>
+                        <span class="text-xs text-gray-500">3 points</span>
+                      </div>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-gray-200">
+                      <p class="text-sm font-medium text-gray-900">Design dashboard mockups</p>
+                      <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs">Design</span>
+                        <span class="text-xs text-gray-500">2 points</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- In Progress Column -->
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-gray-700">In Progress</h3>
+                    <span class="bg-blue-300 text-blue-800 px-2 py-0.5 rounded-full text-xs">4</span>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="bg-white p-3 rounded border-l-4 border-l-blue-500 border-gray-200">
+                      <p class="text-sm font-medium text-gray-900">API integration</p>
+                      <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">Frontend</span>
+                        <span class="text-xs text-gray-500">5 points</span>
+                      </div>
+                    </div>
+                    <div class="bg-white p-3 rounded border-l-4 border-l-yellow-500 border-gray-200">
+                      <p class="text-sm font-medium text-gray-900">Database optimization</p>
+                      <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs">Critical</span>
+                        <span class="text-xs text-gray-500">8 points</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Review Column -->
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-gray-700">Review</h3>
+                    <span class="bg-yellow-300 text-yellow-800 px-2 py-0.5 rounded-full text-xs">6</span>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="bg-white p-3 rounded border border-gray-200">
+                      <p class="text-sm font-medium text-gray-900">Mobile responsive updates</p>
+                      <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">Frontend</span>
+                        <span class="text-xs text-gray-500">3 points</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Done Column -->
+                <div class="bg-gray-100 rounded-lg p-3">
+                  <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-semibold text-gray-700">Done</h3>
+                    <span class="bg-green-300 text-green-800 px-2 py-0.5 rounded-full text-xs">18</span>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="bg-white p-3 rounded border border-gray-200 opacity-75">
+                      <p class="text-sm font-medium text-gray-900">Setup CI/CD pipeline</p>
+                      <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">DevOps</span>
+                        <span class="text-xs text-gray-500">5 points</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- macOS-Style Dock with AI (Fixed at bottom) -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-100 to-transparent">
+              <div class="dock-container">
+                <!-- Left Quick Actions -->
+                <div class="dock-item" title="Dashboard">
+                  <i class="ph ph-squares-four text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="Analytics">
+                  <i class="ph ph-chart-bar text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="Projects">
+                  <i class="ph ph-folder text-gray-600"></i>
+                </div>
+
+                <!-- Separator -->
+                <div class="w-px h-8 bg-gray-300"></div>
+
+                <!-- Central AI Input -->
+                <input type="text" class="dock-input" placeholder="Ask AI: Create sprint report, find blockers, assign tasks..." value="Show me all critical tasks blocking the sprint">
+
+                <!-- Separator -->
+                <div class="w-px h-8 bg-gray-300"></div>
+
+                <!-- Right Quick Actions -->
+                <div class="dock-item" title="AI History">
+                  <i class="ph ph-clock-counter-clockwise text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="Automations">
+                  <i class="ph ph-lightning text-gray-600"></i>
+                </div>
+                <div class="dock-item active" title="AI Assistant">
+                  <i class="ph ph-sparkle text-white"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout 6: Insurance Platform Transformation -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 6: Insurance Platform Transformation - Intelligent Claims Revolution</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>claims.securepro.insurance/dashboard</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="relative bg-white" style="height: 700px; overflow: hidden;">
+            <!-- Insurance SaaS Interface -->
+            <div class="flex h-full">
+              <!-- Sidebar -->
+              <div id="sidebar-insurance" class="sidebar-transition bg-white border-r border-gray-200 flex flex-col" style="width: 256px;">
+                <div class="p-4 border-b border-gray-200">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <i class="ph ph-shield-check text-white text-xl"></i>
+                      </div>
+                      <span class="sidebar-logo-text font-bold text-gray-900">SecurePro</span>
+                    </div>
+                    <button onclick="toggleSidebar('sidebar-insurance')" class="sidebar-toggle text-gray-400 hover:text-gray-600">
+                      <i class="ph ph-caret-left text-xl"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="flex-1 p-4 overflow-y-auto">
+                  <div class="mb-6">
+                    <h3 class="sidebar-section-title text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Claims</h3>
+                    <div class="space-y-1">
+                      <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm bg-blue-600 text-white">
+                        <i class="ph ph-clipboard-text flex-shrink-0"></i>
+                        <span class="sidebar-text">Active Claims</span>
+                        <span class="sidebar-badge ml-auto bg-blue-500 text-white px-2 py-0.5 rounded-full text-xs">147</span>
+                      </a>
+                      <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="ph ph-clock flex-shrink-0"></i>
+                        <span class="sidebar-text">Pending Review</span>
+                        <span class="sidebar-badge ml-auto text-gray-400 text-xs">82</span>
+                      </a>
+                      <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="ph ph-check-circle flex-shrink-0"></i>
+                        <span class="sidebar-text">Approved</span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="mb-6">
+                    <h3 class="sidebar-section-title text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Analytics</h3>
+                    <div class="space-y-1">
+                      <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="ph ph-chart-bar flex-shrink-0"></i>
+                        <span class="sidebar-text">Reports</span>
+                      </a>
+                      <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-700 hover:bg-gray-100">
+                        <i class="ph ph-trend-up flex-shrink-0"></i>
+                        <span class="sidebar-text">Trends</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Content Area -->
+              <div class="flex-1 flex flex-col">
+                <!-- Top Bar -->
+                <div class="bg-white border-b border-gray-200 px-6 py-3">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-6">
+                      <h1 class="text-xl font-semibold text-gray-900">Claims Dashboard</h1>
+                      <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <i class="ph ph-funnel"></i>
+                        <span>Filter: This Week</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <button class="text-gray-400 hover:text-gray-600">
+                        <i class="ph ph-magnifying-glass text-xl"></i>
+                      </button>
+                      <button class="text-gray-400 hover:text-gray-600 relative">
+                        <i class="ph ph-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Main Dashboard Content -->
+                <div class="flex-1 bg-gray-50 p-6 pb-24 overflow-y-auto">
+                  <!-- Metrics Cards -->
+                  <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-gray-600">New Claims</span>
+                        <i class="ph ph-file-plus text-blue-500"></i>
+                      </div>
+                      <p class="text-2xl font-bold text-gray-900">23</p>
+                      <p class="text-xs text-gray-500">Today</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-gray-600">Processing</span>
+                        <i class="ph ph-hourglass text-yellow-500"></i>
+                      </div>
+                      <p class="text-2xl font-bold text-gray-900">82</p>
+                      <p class="text-xs text-yellow-600">12 urgent</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-gray-600">Approved</span>
+                        <i class="ph ph-check-circle text-green-500"></i>
+                      </div>
+                      <p class="text-2xl font-bold text-gray-900">$485K</p>
+                      <p class="text-xs text-green-600">This month</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-gray-200">
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-gray-600">Avg Time</span>
+                        <i class="ph ph-timer text-purple-500"></i>
+                      </div>
+                      <p class="text-2xl font-bold text-gray-900">2.3d</p>
+                      <p class="text-xs text-green-600">-18% faster</p>
+                    </div>
+                  </div>
+
+                  <!-- Claims Table -->
+                  <div class="bg-white rounded-lg border border-gray-200">
+                    <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                      <h3 class="font-semibold text-gray-900">Recent Claims</h3>
+                      <div class="flex items-center gap-2">
+                        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">12 Urgent</span>
+                        <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">View All →</button>
+                      </div>
+                    </div>
+                    <table class="w-full">
+                      <thead>
+                        <tr class="text-left text-sm text-gray-600 border-b">
+                          <th class="p-4">Claim ID</th>
+                          <th class="p-4">Policy Holder</th>
+                          <th class="p-4">Type</th>
+                          <th class="p-4">Amount</th>
+                          <th class="p-4">Status</th>
+                          <th class="p-4">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-sm">
+                        <tr class="border-b hover:bg-gray-50">
+                          <td class="p-4 font-medium">CLM-2024-3847</td>
+                          <td class="p-4">John Smith</td>
+                          <td class="p-4">Auto Collision</td>
+                          <td class="p-4 font-semibold">$12,450</td>
+                          <td class="p-4">
+                            <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">Under Review</span>
+                          </td>
+                          <td class="p-4">
+                            <button class="text-blue-600 hover:text-blue-700 text-sm">Process</button>
+                          </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                          <td class="p-4 font-medium">CLM-2024-3846</td>
+                          <td class="p-4">Sarah Johnson</td>
+                          <td class="p-4">Property Damage</td>
+                          <td class="p-4 font-semibold">$28,200</td>
+                          <td class="p-4">
+                            <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">Urgent</span>
+                          </td>
+                          <td class="p-4">
+                            <button class="text-blue-600 hover:text-blue-700 text-sm">Process</button>
+                          </td>
+                        </tr>
+                        <tr class="border-b hover:bg-gray-50">
+                          <td class="p-4 font-medium">CLM-2024-3845</td>
+                          <td class="p-4">Michael Chen</td>
+                          <td class="p-4">Medical</td>
+                          <td class="p-4 font-semibold">$5,670</td>
+                          <td class="p-4">
+                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Processing</span>
+                          </td>
+                          <td class="p-4">
+                            <button class="text-blue-600 hover:text-blue-700 text-sm">View</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- macOS-Style AI Dock (Fixed at bottom) -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white/95 to-transparent">
+              <div class="dock-container">
+                <!-- Left Quick Actions -->
+                <div class="dock-item" title="Dashboard">
+                  <i class="ph ph-house text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="Claims">
+                  <i class="ph ph-clipboard-text text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="Policies">
+                  <i class="ph ph-file-text text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="Customers">
+                  <i class="ph ph-users text-gray-600"></i>
+                </div>
+
+                <!-- Separator -->
+                <div class="w-px h-8 bg-gray-300"></div>
+
+                <!-- Central AI Input with active query -->
+                <input type="text" class="dock-input" placeholder="Ask AI: Process claim, check policy, calculate risk..." value="Find all claims over $10,000 pending review">
+
+                <!-- Separator -->
+                <div class="w-px h-8 bg-gray-300"></div>
+
+                <!-- Right AI Actions -->
+                <div class="dock-item" title="AI History">
+                  <i class="ph ph-clock-counter-clockwise text-gray-600"></i>
+                </div>
+                <div class="dock-item" title="AI Automations">
+                  <i class="ph ph-robot text-gray-600"></i>
+                </div>
+                <div class="dock-item active" title="Claims AI Assistant" style="background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);">
+                  <i class="ph ph-sparkle text-white"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout 7: Banking Platform Revolution -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold mb-6">Layout 7: Banking Platform Revolution - Financial AI Transformation</h3>
+        <div class="browser-wrapper">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot" style="background: #EF4444;"></div>
+              <div class="browser-dot" style="background: #F59E0B;"></div>
+              <div class="browser-dot" style="background: #10B981;"></div>
+            </div>
+            <div class="browser-url-bar">
+              <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+              <span>portal.digitalbank.com/dashboard</span>
+            </div>
+            <div class="flex gap-2">
+              <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+              <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            </div>
+          </div>
+
+          <div class="flex bg-white" style="height: 700px;">
+            <!-- Collapsible Sidebar -->
+            <div id="sidebar-banking" class="sidebar-transition bg-gradient-to-b from-green-600 to-green-700 text-white flex flex-col" style="width: 256px;">
+              <div class="p-4 border-b border-green-500/30">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                      <i class="ph ph-bank text-white text-xl"></i>
+                    </div>
+                    <span class="sidebar-logo-text font-bold">DigitalBank</span>
+                  </div>
+                  <button onclick="toggleSidebar('sidebar-banking')" class="sidebar-toggle text-white/70 hover:text-white">
+                    <i class="ph ph-caret-left text-xl"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex-1 p-4 overflow-y-auto">
+                <!-- Accounts Section -->
+                <div class="mb-6">
+                  <h3 class="sidebar-section-title text-xs font-semibold text-green-200 uppercase tracking-wider mb-3">Accounts</h3>
+                  <div class="space-y-1">
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm bg-white/20 text-white">
+                      <i class="ph ph-wallet flex-shrink-0"></i>
+                      <span class="sidebar-text">Overview</span>
+                      <span class="sidebar-badge ml-auto bg-white/30 text-white px-2 py-0.5 rounded-full text-xs">$125,420</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-credit-card flex-shrink-0"></i>
+                      <span class="sidebar-text">Cards</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-piggy-bank flex-shrink-0"></i>
+                      <span class="sidebar-text">Savings</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Transactions Section -->
+                <div class="mb-6">
+                  <h3 class="sidebar-section-title text-xs font-semibold text-green-200 uppercase tracking-wider mb-3">Transactions</h3>
+                  <div class="space-y-1">
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-arrows-left-right flex-shrink-0"></i>
+                      <span class="sidebar-text">All Transactions</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-arrow-up flex-shrink-0"></i>
+                      <span class="sidebar-text">Transfers</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-receipt flex-shrink-0"></i>
+                      <span class="sidebar-text">Bills & Payments</span>
+                      <span class="sidebar-badge ml-auto bg-red-500 text-white px-2 py-0.5 rounded-full text-xs">3</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div class="mb-6">
+                  <h3 class="sidebar-section-title text-xs font-semibold text-green-200 uppercase tracking-wider mb-3">Tools</h3>
+                  <div class="space-y-1">
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-chart-line flex-shrink-0"></i>
+                      <span class="sidebar-text">Analytics</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-white/80 hover:bg-white/10">
+                      <i class="ph ph-target flex-shrink-0"></i>
+                      <span class="sidebar-text">Goals</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- User Section -->
+              <div class="p-4 border-t border-green-500/30">
+                <div class="sidebar-item flex items-center gap-3">
+                  <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                    <span class="text-xs font-medium">JD</span>
+                  </div>
+                  <div class="sidebar-text flex-1 min-w-0">
+                    <p class="text-sm font-medium truncate">John Doe</p>
+                    <p class="text-xs text-green-200 truncate">Premium Account</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Content with Chat -->
+            <div class="flex-1 flex">
+              <!-- Main Dashboard -->
+              <div class="flex-1 bg-gray-50 p-6 overflow-y-auto">
+                <h1 class="text-2xl font-bold text-gray-900 mb-6">Financial Dashboard</h1>
+
+                <!-- Account Cards -->
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm text-gray-600">Checking Account</span>
+                      <i class="ph ph-wallet text-green-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">$45,230</p>
+                    <p class="text-xs text-gray-500">****4532</p>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm text-gray-600">Savings</span>
+                      <i class="ph ph-piggy-bank text-blue-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">$80,190</p>
+                    <p class="text-xs text-green-600">+2.5% APY</p>
+                  </div>
+                  <div class="bg-white rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm text-gray-600">Credit Card</span>
+                      <i class="ph ph-credit-card text-purple-500"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900">-$2,450</p>
+                    <p class="text-xs text-gray-500">$10,000 limit</p>
+                  </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="bg-white rounded-lg border border-gray-200">
+                  <div class="p-4 border-b border-gray-200">
+                    <h3 class="font-semibold text-gray-900">Recent Transactions</h3>
+                  </div>
+                  <div class="divide-y divide-gray-200">
+                    <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                          <i class="ph ph-arrow-down text-green-600"></i>
+                        </div>
+                        <div>
+                          <p class="font-medium text-gray-900">Salary Deposit</p>
+                          <p class="text-sm text-gray-600">Direct Deposit</p>
+                        </div>
+                      </div>
+                      <span class="font-semibold text-green-600">+$5,200.00</span>
+                    </div>
+                    <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                          <i class="ph ph-shopping-cart text-red-600"></i>
+                        </div>
+                        <div>
+                          <p class="font-medium text-gray-900">Whole Foods Market</p>
+                          <p class="text-sm text-gray-600">Groceries</p>
+                        </div>
+                      </div>
+                      <span class="font-semibold text-red-600">-$156.42</span>
+                    </div>
+                    <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                      <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                          <i class="ph ph-house text-red-600"></i>
+                        </div>
+                        <div>
+                          <p class="font-medium text-gray-900">Mortgage Payment</p>
+                          <p class="text-sm text-gray-600">Auto-payment</p>
+                        </div>
+                      </div>
+                      <span class="font-semibold text-red-600">-$2,340.00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Financial Advisor Chat (Right) -->
+              <div class="w-96 chat-panel flex flex-col">
+                <div class="p-4 border-b border-gray-700">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                        <i class="ph ph-currency-dollar text-white"></i>
+                      </div>
+                      <div>
+                        <div class="text-white font-semibold">Financial AI Advisor</div>
+                        <div class="text-xs text-green-400 flex items-center gap-1">
+                          <span class="w-2 h-2 bg-green-400 rounded-full"></span> Analyzing your finances
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4">
+                  <div class="space-y-4">
+                    <!-- AI Message -->
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex-shrink-0"></div>
+                      <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                        <p class="text-gray-200 text-sm mb-2">I've analyzed your spending patterns. You could save $340/month:</p>
+                        <div class="bg-gray-800 rounded p-2 space-y-1 text-xs">
+                          <div class="flex justify-between">
+                            <span class="text-gray-400">Subscriptions:</span>
+                            <span class="text-green-400">-$120</span>
+                          </div>
+                          <div class="flex justify-between">
+                            <span class="text-gray-400">Dining out:</span>
+                            <span class="text-green-400">-$180</span>
+                          </div>
+                          <div class="flex justify-between">
+                            <span class="text-gray-400">Entertainment:</span>
+                            <span class="text-green-400">-$40</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- User Message -->
+                    <div class="flex justify-end">
+                      <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                        Can you help me create a budget plan?
+                      </div>
+                    </div>
+
+                    <!-- AI Response -->
+                    <div class="flex gap-3">
+                      <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex-shrink-0"></div>
+                      <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                        <p class="text-gray-200 text-sm">Absolutely! Based on your income and expenses, here's a personalized budget:</p>
+                        <button class="mt-2 w-full bg-green-600 text-white text-xs py-2 rounded hover:bg-green-700">
+                          View Budget Plan →
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-4 border-t border-gray-700">
+                  <div class="flex gap-2">
+                    <input type="text" placeholder="Ask about savings, investments, budgeting..."
+                      class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <button class="bg-green-600 text-white p-2 rounded-lg hover:bg-green-700">
+                      <i class="ph ph-paper-plane-tilt"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout Comparison Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
+        <div class="card p-4">
+          <h4 class="font-semibold mb-2">Bottom Dock</h4>
+          <p class="text-xs text-gray-600 mb-3">Best for power users who want quick access without leaving their workflow</p>
+          <div class="text-xs space-y-1">
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Non-intrusive</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Always accessible</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Keyboard shortcuts</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-4">
+          <h4 class="font-semibold mb-2">Side Panel</h4>
+          <p class="text-xs text-gray-600 mb-3">Perfect for continuous conversations while working</p>
+          <div class="text-xs space-y-1">
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Always visible</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Context retained</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Multi-tasking</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-4">
+          <h4 class="font-semibold mb-2">Command Mode</h4>
+          <p class="text-xs text-gray-600 mb-3">Ideal for focused AI interactions and complex queries</p>
+          <div class="text-xs space-y-1">
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Full focus</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Rich previews</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Quick actions</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-4">
+          <h4 class="font-semibold mb-2">Split View</h4>
+          <p class="text-xs text-gray-600 mb-3">Great for side-by-side work and real-time assistance</p>
+          <div class="text-xs space-y-1">
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Equal focus</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Live feedback</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <i class="ph ph-check text-green-500"></i>
+              <span>Collaborative</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurance Company Example -->
+  <section id="insurance" class="px-6 py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">
+        <span class="gradient-insurance" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Insurance Platform
+        </span>
+        Transformation
+      </h2>
+      <p class="text-gray-600 mb-12">See how PolicyPro uses Agentic UI to revolutionize claims processing and customer service</p>
+
+      <!-- Insurance SaaS Mockup -->
+      <div class="browser-wrapper">
+        <!-- Browser Chrome -->
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot" style="background: #EF4444;"></div>
+            <div class="browser-dot" style="background: #F59E0B;"></div>
+            <div class="browser-dot" style="background: #10B981;"></div>
+          </div>
+          <div class="browser-url-bar">
+            <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+            <span>app.policypro.com/dashboard/claims</span>
+          </div>
+          <div class="flex gap-2">
+            <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+          </div>
+        </div>
+
+        <!-- SaaS Content -->
+        <div class="saas-container" style="height: 600px;">
+          <div class="saas-header">
+          <div class="flex items-center gap-4">
+            <div class="w-8 h-8 gradient-insurance rounded-lg"></div>
+            <span class="font-semibold">PolicyPro Dashboard</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-sm text-gray-500">Agent: Sarah Miller</span>
+            <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+          </div>
+        </div>
+
+        <div class="flex" style="height: calc(100% - 65px);">
+          <!-- Sidebar -->
+          <div class="saas-sidebar">
+            <div class="space-y-4">
+              <div class="text-xs font-semibold text-gray-500 uppercase mb-2">Navigation</div>
+              <div class="space-y-2">
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-house text-gray-600"></i>
+                  <span class="text-sm">Dashboard</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg bg-blue-50 text-blue-600 cursor-pointer">
+                  <i class="ph ph-clipboard-text"></i>
+                  <span class="text-sm">Claims</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-users"></i>
+                  <span class="text-sm">Customers</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-file-text"></i>
+                  <span class="text-sm">Policies</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Content Area -->
+          <div class="saas-content">
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- AI Assistant Panel (LEFT) -->
+              <div class="chat-embed">
+                <div class="chat-header">
+                  <div class="w-8 h-8 gradient-elegant rounded-lg flex items-center justify-center">
+                    <i class="ph ph-robot text-white"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-semibold text-gray-100">AI Claims Assistant</div>
+                    <div class="text-xs text-gray-400">Powered by Agentic UI</div>
+                  </div>
+                </div>
+                <div class="chat-messages">
+                  <div class="bg-gray-800 rounded-lg p-3 max-w-[80%] mb-3">
+                    <p class="text-sm text-gray-200">I've analyzed claim #CLM-2024-0892. The damage assessment matches similar cases with an average payout of $2,850. Would you like me to:</p>
+                    <div class="mt-2 space-y-1">
+                      <div class="text-xs text-gray-400">• Auto-approve with standard payout</div>
+                      <div class="text-xs text-gray-400">• Request additional photos</div>
+                      <div class="text-xs text-gray-400">• Schedule adjuster visit</div>
+                    </div>
+                  </div>
+                  <div class="bg-indigo-600 rounded-lg p-3 max-w-[80%] ml-auto mb-3">
+                    <p class="text-sm text-white">Check for any fraud indicators first</p>
+                  </div>
+                  <div class="bg-gray-800 rounded-lg p-3 max-w-[80%]">
+                    <p class="text-sm text-gray-200">Running fraud detection analysis...</p>
+                    <div class="mt-2 p-2 bg-green-900/30 border border-green-600/30 rounded text-xs">
+                      <div class="text-green-400 font-medium mb-1">✓ Low Risk Score: 12/100</div>
+                      <div class="text-green-300">• Customer history: 8 years, no previous claims</div>
+                      <div class="text-green-300">• Location verified via GPS</div>
+                      <div class="text-green-300">• Photos match damage description</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chat-input-area">
+                  <div class="flex gap-2">
+                    <input type="text" placeholder="Ask about claims, policies, or customers..." class="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm text-gray-200 placeholder-gray-500">
+                    <button class="px-3 py-2 bg-indigo-600 text-white rounded-lg text-sm">Send</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Results Panel (RIGHT) -->
+              <div>
+                <div class="bg-white rounded-lg p-4 mb-4">
+                  <h3 class="font-semibold mb-3">Active Claims</h3>
+                  <div class="space-y-3">
+                    <div class="p-3 border border-gray-200 rounded-lg transition-all hover:border-blue-400 hover:shadow-md" id="claim-892">
+                      <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium">#CLM-2024-0892</span>
+                        <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Pending Review</span>
+                      </div>
+                      <p class="text-xs text-gray-600">Auto collision - Front bumper damage</p>
+                      <p class="text-xs text-gray-500 mt-1">John Davidson • Filed 2 hours ago</p>
+                      <div class="mt-2 pt-2 border-t border-gray-100">
+                        <div class="text-xs text-gray-500">AI Analysis: <span class="text-green-600 font-medium">Low fraud risk (12/100)</span></div>
+                      </div>
+                    </div>
+                    <div class="p-3 border border-gray-200 rounded-lg">
+                      <div class="flex justify-between items-start mb-2">
+                        <span class="text-sm font-medium">#CLM-2024-0891</span>
+                        <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Approved</span>
+                      </div>
+                      <p class="text-xs text-gray-600">Property damage - Water leak</p>
+                      <p class="text-xs text-gray-500 mt-1">Mary Chen • Filed yesterday</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Quick Actions Generated by AI -->
+                <div class="bg-white rounded-lg p-4">
+                  <h3 class="font-semibold mb-3">AI-Suggested Actions</h3>
+                  <div class="space-y-2">
+                    <button class="w-full p-3 bg-green-50 border border-green-200 rounded-lg text-left hover:bg-green-100 transition-colors">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm text-green-700">Approve Claim #892</span>
+                        <i class="ph ph-check-circle text-green-600"></i>
+                      </div>
+                      <p class="text-xs text-gray-600 mt-1">Standard payout: $2,850</p>
+                    </button>
+                    <button class="w-full p-3 bg-blue-50 border border-blue-200 rounded-lg text-left hover:bg-blue-100 transition-colors">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm text-blue-700">Request Additional Info</span>
+                        <i class="ph ph-camera text-blue-600"></i>
+                      </div>
+                      <p class="text-xs text-gray-600 mt-1">Photos of damage from multiple angles</p>
+                    </button>
+                    <button class="w-full p-3 bg-purple-50 border border-purple-200 rounded-lg text-left hover:bg-purple-100 transition-colors">
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm text-purple-700">Schedule Adjuster</span>
+                        <i class="ph ph-calendar text-purple-600"></i>
+                      </div>
+                      <p class="text-xs text-gray-600 mt-1">Next available: Tomorrow 2:00 PM</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Capabilities for Insurance -->
+            <div class="mt-6 grid grid-cols-4 gap-4">
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-magnifying-glass text-2xl text-blue-600 mb-2"></i>
+                <div class="text-xs font-medium">Fraud Detection</div>
+                <div class="text-xs text-gray-500 mt-1">AI-powered analysis</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-calculator text-2xl text-blue-600 mb-2"></i>
+                <div class="text-xs font-medium">Instant Quotes</div>
+                <div class="text-xs text-gray-500 mt-1">Real-time pricing</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-files text-2xl text-blue-600 mb-2"></i>
+                <div class="text-xs font-medium">Document Analysis</div>
+                <div class="text-xs text-gray-500 mt-1">OCR & extraction</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-chart-line text-2xl text-blue-600 mb-2"></i>
+                <div class="text-xs font-medium">Risk Assessment</div>
+                <div class="text-xs text-gray-500 mt-1">Predictive modeling</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Insurance Use Cases -->
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <h4 class="font-semibold mb-3">Claims Processing</h4>
+          <p class="text-sm text-gray-600 mb-3">Reduce processing time from days to minutes</p>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li>• Automatic damage assessment</li>
+            <li>• Fraud pattern detection</li>
+            <li>• Instant payout calculations</li>
+            <li>• Document verification</li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h4 class="font-semibold mb-3">Customer Service</h4>
+          <p class="text-sm text-gray-600 mb-3">24/7 intelligent support for policyholders</p>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li>• Policy explanations</li>
+            <li>• Coverage recommendations</li>
+            <li>• Claim status updates</li>
+            <li>• Premium calculations</li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h4 class="font-semibold mb-3">Underwriting</h4>
+          <p class="text-sm text-gray-600 mb-3">Accelerate risk assessment and pricing</p>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li>• Risk profile analysis</li>
+            <li>• Competitive pricing</li>
+            <li>• Application review</li>
+            <li>• Compliance checks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banking Example -->
+  <section id="banking" class="px-6 py-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">
+        <span class="gradient-banking" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Banking Platform
+        </span>
+        Revolution
+      </h2>
+      <p class="text-gray-600 mb-12">How SecureBank transforms financial management with embedded AI</p>
+
+      <!-- Banking SaaS Mockup -->
+      <div class="browser-wrapper">
+        <!-- Browser Chrome -->
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot" style="background: #EF4444;"></div>
+            <div class="browser-dot" style="background: #F59E0B;"></div>
+            <div class="browser-dot" style="background: #10B981;"></div>
+          </div>
+          <div class="browser-url-bar">
+            <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+            <span>business.securebank.com/portal</span>
+          </div>
+          <div class="flex gap-2">
+            <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+          </div>
+        </div>
+
+        <!-- SaaS Content -->
+        <div class="saas-container" style="height: 600px;">
+          <div class="saas-header">
+          <div class="flex items-center gap-4">
+            <div class="w-8 h-8 gradient-banking rounded-lg"></div>
+            <span class="font-semibold">SecureBank Business Portal</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-sm text-gray-500">Balance: $482,391.82</span>
+            <span class="text-sm text-gray-500">TechCorp Inc.</span>
+            <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
+          </div>
+        </div>
+
+        <div class="flex" style="height: calc(100% - 65px);">
+          <!-- Banking Sidebar -->
+          <div class="saas-sidebar">
+            <div class="space-y-4">
+              <div class="text-xs font-semibold text-gray-500 uppercase mb-2">Banking</div>
+              <div class="space-y-2">
+                <div class="flex items-center gap-3 p-2 rounded-lg bg-green-50 text-green-600 cursor-pointer">
+                  <i class="ph ph-wallet"></i>
+                  <span class="text-sm">Accounts</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-arrows-left-right"></i>
+                  <span class="text-sm">Transfers</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-credit-card"></i>
+                  <span class="text-sm">Cards</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-chart-line-up"></i>
+                  <span class="text-sm">Investments</span>
+                </div>
+                <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer">
+                  <i class="ph ph-receipt"></i>
+                  <span class="text-sm">Invoicing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Banking Content -->
+          <div class="saas-content">
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- AI Financial Assistant (LEFT) -->
+              <div class="chat-embed">
+                <div class="chat-header">
+                  <div class="w-8 h-8 gradient-banking rounded-lg flex items-center justify-center">
+                    <i class="ph ph-currency-circle-dollar text-white"></i>
+                  </div>
+                  <div>
+                    <div class="text-sm font-semibold">AI Financial Advisor</div>
+                    <div class="text-xs text-gray-500">Powered by Agentic UI</div>
+                  </div>
+                </div>
+                <div class="chat-messages">
+                  <div class="demo-message ai">
+                    <p class="text-sm">Good morning! I've analyzed your cash flow for this quarter:</p>
+                    <div class="mt-2 p-2 bg-green-50 rounded text-xs">
+                      <div class="font-medium text-green-700 mb-1">📈 Positive trend detected</div>
+                      <div>• Revenue up 23% vs last quarter</div>
+                      <div>• Operating expenses reduced by 8%</div>
+                      <div>• $142K available for investments</div>
+                    </div>
+                  </div>
+                  <div class="demo-message user">
+                    <p class="text-sm">What investment options do you recommend?</p>
+                  </div>
+                  <div class="demo-message ai">
+                    <p class="text-sm">Based on your risk profile and goals, here are 3 options:</p>
+                    <div class="mt-2 space-y-2">
+                      <div class="p-2 bg-white border border-gray-200 rounded">
+                        <div class="text-xs font-medium">1. Treasury Bonds (Low Risk)</div>
+                        <div class="text-xs text-gray-600">4.2% APY • 6-month term • $50K minimum</div>
+                      </div>
+                      <div class="p-2 bg-white border border-gray-200 rounded">
+                        <div class="text-xs font-medium">2. Corporate Bonds (Medium Risk)</div>
+                        <div class="text-xs text-gray-600">5.8% APY • 12-month term • $25K minimum</div>
+                      </div>
+                      <div class="p-2 bg-white border border-gray-200 rounded">
+                        <div class="text-xs font-medium">3. Index Fund Portfolio (Balanced)</div>
+                        <div class="text-xs text-gray-600">Historical 7-12% returns • Liquid • $10K minimum</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chat-input-area">
+                  <div class="flex gap-2">
+                    <input type="text" placeholder="Ask about finances, investments, or transactions..." class="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm">
+                    <button class="px-3 py-2 bg-green-600 text-white rounded-lg text-sm">Send</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Banking Results Panel (RIGHT) -->
+              <div>
+                <div class="bg-white rounded-lg p-4 mb-4">
+                  <h3 class="font-semibold mb-3">Account Activity</h3>
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center pb-2 border-b hover:bg-gray-50 p-2 rounded transition-colors">
+                      <div>
+                        <p class="text-sm font-medium">AWS Services</p>
+                        <p class="text-xs text-gray-500">Cloud Infrastructure</p>
+                      </div>
+                      <span class="text-sm font-semibold text-red-600">-$8,245.00</span>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 border-b hover:bg-gray-50 p-2 rounded transition-colors">
+                      <div>
+                        <p class="text-sm font-medium">Client Payment</p>
+                        <p class="text-xs text-gray-500">Invoice #INV-2024-089</p>
+                      </div>
+                      <span class="text-sm font-semibold text-green-600">+$45,000.00</span>
+                    </div>
+                    <div class="flex justify-between items-center pb-2 hover:bg-gray-50 p-2 rounded transition-colors">
+                      <div>
+                        <p class="text-sm font-medium">Payroll Transfer</p>
+                        <p class="text-xs text-gray-500">Monthly salaries</p>
+                      </div>
+                      <span class="text-sm font-semibold text-red-600">-$125,430.00</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AI-Generated Insights -->
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4 border border-green-200">
+                  <h3 class="font-semibold mb-3 text-green-900">AI Financial Insights</h3>
+                  <div class="space-y-2 text-sm">
+                    <div class="flex items-start gap-2">
+                      <i class="ph ph-trend-up text-green-600 mt-0.5"></i>
+                      <div>
+                        <p class="text-green-900 font-medium">Cash flow improved 23%</p>
+                        <p class="text-xs text-green-700">$142K available for investment</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <i class="ph ph-warning text-yellow-600 mt-0.5"></i>
+                      <div>
+                        <p class="text-gray-700 font-medium">Payroll spike detected</p>
+                        <p class="text-xs text-gray-600">15% above monthly average</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <i class="ph ph-lightbulb text-blue-600 mt-0.5"></i>
+                      <div>
+                        <p class="text-gray-700 font-medium">Tax savings opportunity</p>
+                        <p class="text-xs text-gray-600">Move $50K to retirement account</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-lg p-4">
+                  <h3 class="font-semibold mb-3">AI-Recommended Actions</h3>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button class="p-3 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 text-sm transition-colors">
+                      <i class="ph ph-piggy-bank text-green-600 text-lg mb-1"></i>
+                      <div class="text-green-700">Invest $50K</div>
+                      <p class="text-xs text-gray-600 mt-1">Treasury bonds</p>
+                    </button>
+                    <button class="p-3 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 text-sm transition-colors">
+                      <i class="ph ph-arrows-left-right text-blue-600 text-lg mb-1"></i>
+                      <div class="text-blue-700">Optimize Cash</div>
+                      <p class="text-xs text-gray-600 mt-1">Rebalance accounts</p>
+                    </button>
+                    <button class="p-3 bg-purple-50 border border-purple-200 rounded-lg hover:bg-purple-100 text-sm transition-colors">
+                      <i class="ph ph-file-text text-purple-600 text-lg mb-1"></i>
+                      <div class="text-purple-700">Generate Report</div>
+                      <p class="text-xs text-gray-600 mt-1">Q4 financials</p>
+                    </button>
+                    <button class="p-3 bg-orange-50 border border-orange-200 rounded-lg hover:bg-orange-100 text-sm transition-colors">
+                      <i class="ph ph-calendar-check text-orange-600 text-lg mb-1"></i>
+                      <div class="text-orange-700">Schedule Payment</div>
+                      <p class="text-xs text-gray-600 mt-1">Upcoming bills</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Banking AI Features -->
+            <div class="mt-6 grid grid-cols-4 gap-4">
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-shield-check text-2xl text-green-600 mb-2"></i>
+                <div class="text-xs font-medium">Fraud Detection</div>
+                <div class="text-xs text-gray-500 mt-1">Real-time monitoring</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-trend-up text-2xl text-green-600 mb-2"></i>
+                <div class="text-xs font-medium">Investment Advice</div>
+                <div class="text-xs text-gray-500 mt-1">Personalized strategies</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-file-search text-2xl text-green-600 mb-2"></i>
+                <div class="text-xs font-medium">Tax Optimization</div>
+                <div class="text-xs text-gray-500 mt-1">Automated planning</div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-center">
+                <i class="ph ph-robot text-2xl text-green-600 mb-2"></i>
+                <div class="text-xs font-medium">Auto-Categorization</div>
+                <div class="text-xs text-gray-500 mt-1">Smart bookkeeping</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Banking Benefits -->
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <h4 class="font-semibold mb-3">Intelligent Transactions</h4>
+          <p class="text-sm text-gray-600 mb-3">AI understands context and intent</p>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li>• Natural language payments</li>
+            <li>• Smart recurring transactions</li>
+            <li>• Automated reconciliation</li>
+            <li>• Predictive cash flow</li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h4 class="font-semibold mb-3">Risk Management</h4>
+          <p class="text-sm text-gray-600 mb-3">Proactive protection and compliance</p>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li>• Real-time fraud detection</li>
+            <li>• AML monitoring</li>
+            <li>• Credit risk assessment</li>
+            <li>• Regulatory compliance</li>
+          </ul>
+        </div>
+        <div class="card p-6">
+          <h4 class="font-semibold mb-3">Financial Insights</h4>
+          <p class="text-sm text-gray-600 mb-3">Data-driven decisions and forecasting</p>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li>• Spending analysis</li>
+            <li>• Investment recommendations</li>
+            <li>• Budget optimization</li>
+            <li>• Market intelligence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- macOS Dock-Style Interface -->
+  <section id="dock-interface" class="px-6 py-16 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">The Future: OS-Style Command Center</h2>
+      <p class="text-gray-400 mb-12">Transform your entire SaaS into an intelligent operating system with a central AI command interface</p>
+
+      <!-- Demo Container -->
+      <div class="browser-wrapper" style="position: relative; overflow: hidden;">
+        <!-- Browser Chrome -->
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot" style="background: #EF4444;"></div>
+            <div class="browser-dot" style="background: #F59E0B;"></div>
+            <div class="browser-dot" style="background: #10B981;"></div>
+          </div>
+          <div class="browser-url-bar">
+            <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+            <span>app.enterprise.com/dashboard</span>
+          </div>
+          <div class="flex gap-2">
+            <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+          </div>
+        </div>
+
+        <!-- SaaS Content -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 p-8 relative" style="height: 700px;">
+          <div class="max-w-6xl mx-auto">
+            <!-- Sample Dashboard Content -->
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Enterprise Dashboard</h3>
+            <div class="grid grid-cols-3 gap-4 mb-8">
+              <div class="bg-white p-4 rounded-lg text-gray-900">
+                <p class="text-sm text-gray-500">Total Revenue</p>
+                <p class="text-2xl font-bold">$1.24M</p>
+                <p class="text-xs text-green-600">+12.5% from last month</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-gray-900">
+                <p class="text-sm text-gray-500">Active Projects</p>
+                <p class="text-2xl font-bold">47</p>
+                <p class="text-xs text-blue-600">8 launching this week</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-gray-900">
+                <p class="text-sm text-gray-500">Team Members</p>
+                <p class="text-2xl font-bold">182</p>
+                <p class="text-xs text-purple-600">14 new this month</p>
+              </div>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-lg text-gray-900">
+                <h4 class="font-semibold mb-3">Recent Activity</h4>
+                <div class="space-y-2">
+                  <div class="text-sm text-gray-600">• Project Alpha deployed to production</div>
+                  <div class="text-sm text-gray-600">• 3 new team members onboarded</div>
+                  <div class="text-sm text-gray-600">• Q4 financial report generated</div>
+                </div>
+              </div>
+              <div class="bg-white p-4 rounded-lg text-gray-900">
+                <h4 class="font-semibold mb-3">Upcoming Tasks</h4>
+                <div class="space-y-2">
+                  <div class="text-sm text-gray-600">• Review Q1 budget proposal</div>
+                  <div class="text-sm text-gray-600">• Client meeting at 2:00 PM</div>
+                  <div class="text-sm text-gray-600">• Deploy security updates</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- macOS-Style Dock (Fixed at bottom) -->
+          <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
+            <div class="dock-container">
+            <!-- Left Quick Actions -->
+            <div class="dock-item" title="Dashboard">
+              <i class="ph ph-squares-four text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Analytics">
+              <i class="ph ph-chart-bar text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Projects">
+              <i class="ph ph-folder text-gray-600"></i>
+            </div>
+
+            <!-- Separator -->
+            <div class="w-px h-8 bg-gray-300"></div>
+
+            <!-- Central AI Input -->
+            <input type="text" class="dock-input" placeholder="Ask AI anything... Generate reports, find data, automate tasks">
+
+            <!-- Separator -->
+            <div class="w-px h-8 bg-gray-300"></div>
+
+            <!-- Right Quick Actions -->
+            <div class="dock-item" title="History">
+              <i class="ph ph-clock-counter-clockwise text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Shortcuts">
+              <i class="ph ph-lightning text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Settings">
+              <i class="ph ph-gear text-gray-600"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OS Interface Features -->
+      <div class="mt-12 grid md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="w-16 h-16 gradient-elegant rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="ph ph-command text-white text-2xl"></i>
+          </div>
+          <h4 class="font-semibold mb-2">Universal Commands</h4>
+          <p class="text-sm text-gray-400">Control everything with natural language</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 gradient-elegant rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="ph ph-sparkle text-white text-2xl"></i>
+          </div>
+          <h4 class="font-semibold mb-2">Smart Suggestions</h4>
+          <p class="text-sm text-gray-400">AI predicts your next action</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 gradient-elegant rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="ph ph-keyboard text-white text-2xl"></i>
+          </div>
+          <h4 class="font-semibold mb-2">Keyboard First</h4>
+          <p class="text-sm text-gray-400">Power users never touch the mouse</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 gradient-elegant rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="ph ph-brain text-white text-2xl"></i>
+          </div>
+          <h4 class="font-semibold mb-2">Context Aware</h4>
+          <p class="text-sm text-gray-400">AI understands your workflow</p>
+        </div>
+      </div>
+
+      <!-- Command Examples -->
+      <div class="mt-12 bg-gray-800 rounded-2xl p-8">
+        <h3 class="text-xl font-semibold mb-6">Example Commands Your Users Can Run</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="text-sm font-semibold text-gray-400 mb-3">Data & Analytics</h4>
+            <div class="space-y-2">
+              <div class="bg-gray-700 rounded-lg p-3">
+                <code class="text-sm text-green-400">"Show me revenue trends for Q4"</code>
+              </div>
+              <div class="bg-gray-700 rounded-lg p-3">
+                <code class="text-sm text-green-400">"Compare this month's performance to last year"</code>
+              </div>
+              <div class="bg-gray-700 rounded-lg p-3">
+                <code class="text-sm text-green-400">"Generate executive summary for board meeting"</code>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-sm font-semibold text-gray-400 mb-3">Automation & Workflows</h4>
+            <div class="space-y-2">
+              <div class="bg-gray-700 rounded-lg p-3">
+                <code class="text-sm text-blue-400">"Create invoice for ClientCorp based on last month"</code>
+              </div>
+              <div class="bg-gray-700 rounded-lg p-3">
+                <code class="text-sm text-blue-400">"Schedule follow-up emails for all pending leads"</code>
+              </div>
+              <div class="bg-gray-700 rounded-lg p-3">
+                <code class="text-sm text-blue-400">"Set up automated report every Monday at 9am"</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Implementation Guide -->
+  <section class="px-6 py-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-4">Ready to Transform Your SaaS?</h2>
+      <p class="text-gray-600 mb-12">Choose your integration path and get started in minutes</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Starter -->
+        <div class="card p-6">
+          <div class="text-sm font-semibold text-gray-500 mb-2">STARTER</div>
+          <h3 self="text-2xl font-bold mb-2">Basic Chat</h3>
+          <p class="text-gray-600 mb-6">Perfect for customer support and FAQs</p>
+          <div class="code-block mb-6">
+<pre class="text-xs">&lt;script src="agentic-ui.js"&gt;&lt;/script&gt;
+&lt;div id="agentic"&gt;&lt;/div&gt;</pre>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-600 mb-6">
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              5 minute setup
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              No backend required
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              Pre-trained on your docs
+            </li>
+          </ul>
+          <button class="w-full btn-primary">Get Started Free</button>
+        </div>
+
+        <!-- Professional -->
+        <div class="card p-6 border-2 border-primary">
+          <div class="text-sm font-semibold text-primary mb-2">PROFESSIONAL</div>
+          <h3 class="text-2xl font-bold mb-2">AI Integration</h3>
+          <p class="text-gray-600 mb-6">Full API access with custom tools</p>
+          <div class="code-block mb-6">
+<pre class="text-xs">const agentic = new AgenticSDK({
+  tools: customTools,
+  actions: customActions
+});</pre>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-600 mb-6">
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              Custom tool execution
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              API integration
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              Workflow automation
+            </li>
+          </ul>
+          <button class="w-full btn-primary">Start Free Trial</button>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="card p-6">
+          <div class="text-sm font-semibold text-gray-500 mb-2">ENTERPRISE</div>
+          <h3 class="text-2xl font-bold mb-2">OS Transform</h3>
+          <p class="text-gray-600 mb-6">Complete SaaS transformation package</p>
+          <div class="bg-gray-100 rounded-lg p-4 mb-6 text-center">
+            <p class="text-sm text-gray-600">Full implementation with your team</p>
+            <p class="text-2xl font-bold mt-2">Custom Pricing</p>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-600 mb-6">
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              White-glove setup
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              Custom AI training
+            </li>
+            <li class="flex items-center gap-2">
+              <i class="ph ph-check text-green-500"></i>
+              Dedicated support
+            </li>
+          </ul>
+          <button class="w-full btn-primary" style="background: transparent; color: var(--primary); border: 1px solid var(--primary);">
+            Contact Sales
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="px-6 py-12 bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 gradient-elegant rounded-lg"></div>
+            <span class="text-xl font-semibold">Agentic UI</span>
+          </div>
+          <p class="text-sm text-gray-400">Transform your SaaS into an intelligent operating system</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Product</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white">Features</a></li>
+            <li><a href="#" class="hover:text-white">Pricing</a></li>
+            <li><a href="#" class="hover:text-white">Documentation</a></li>
+            <li><a href="#" class="hover:text-white">API Reference</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Use Cases</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white">Insurance</a></li>
+            <li><a href="#" class="hover:text-white">Banking</a></li>
+            <li><a href="#" class="hover:text-white">Healthcare</a></li>
+            <li><a href="#" class="hover:text-white">E-commerce</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Company</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-white">About</a></li>
+            <li><a href="#" class="hover:text-white">Blog</a></li>
+            <li><a href="#" class="hover:text-white">Careers</a></li>
+            <li><a href="#" class="hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 flex items-center justify-between">
+        <p class="text-sm text-gray-400">© 2024 Talka AI. All rights reserved.</p>
+        <div class="flex gap-4">
+          <a href="#" class="text-gray-400 hover:text-white">
+            <i class="ph ph-twitter-logo text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white">
+            <i class="ph ph-github-logo text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white">
+            <i class="ph ph-linkedin-logo text-xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Add interactive animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate dock items on hover
+      const dockItems = document.querySelectorAll('.dock-item');
+      dockItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.2) translateY(-8px)';
+        });
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1) translateY(0)';
+        });
+      });
+
+      // Simulate typing in dock input
+      const dockInput = document.querySelector('.dock-input');
+      const commands = [
+        "Generate monthly financial report",
+        "Show me all pending claims",
+        "Transfer $50K to savings account",
+        "Schedule meeting with team leads",
+        "Analyze customer churn rate",
+        "Create invoice for last project"
+      ];
+
+      let commandIndex = 0;
+      if (dockInput) {
+        setInterval(() => {
+          dockInput.placeholder = commands[commandIndex];
+          commandIndex = (commandIndex + 1) % commands.length;
+        }, 3000);
+      }
+
+      // Add scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.card').forEach(card => {
+        observer.observe(card);
+      });
+    });
+    // Sidebar toggle function
+    function toggleSidebar(sidebarId) {
+      const sidebar = document.getElementById(sidebarId);
+      if (sidebar) {
+        sidebar.classList.toggle('sidebar-collapsed');
+      }
+    }
+  </script>
+</body>
+</html>

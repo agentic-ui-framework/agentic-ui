@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic UI - SaaS Integration Examples</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            'primary-dark': '#4F46E5',
+            secondary: '#8B5CF6'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    body { font-family: 'Inter', system-ui, sans-serif; }
+
+    /* Browser Chrome */
+    .browser-chrome {
+      background: #1F2937;
+      border-radius: 12px 12px 0 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .browser-url-bar {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 16px;
+      background: #374151;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #9CA3AF;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .browser-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: #1F2937;
+    }
+
+    /* Dark Chat Panel */
+    .chat-panel {
+      background: #1A1B26;
+      border: 1px solid #2D2E3F;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Dock Styles */
+    .dock-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 8px 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      margin: 0 auto;
+      width: fit-content;
+    }
+
+    .dock-item {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dock-item:hover {
+      background: rgba(99, 102, 241, 0.1);
+      transform: scale(1.1) translateY(-2px);
+    }
+
+    .dock-input {
+      min-width: 400px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      background: white;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="border-b bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <nav class="flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <a href="./index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-xl">A</span>
+            </div>
+            <span class="text-xl font-bold text-gray-900">Agentic UI</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-4">SaaS Integration Examples</h1>
+    <p class="text-gray-600 mb-12">See how Talka AI transforms real B2B/B2C SaaS applications</p>
+
+    <div id="examples-container"></div>
+  </main>
+
+  <script>
+    // Unified SaaS Template
+    class SaaSApp {
+      constructor(config) {
+        this.config = {
+          // Basic Info
+          name: 'SaaS App',
+          domain: 'app.example.com',
+          logo: { type: 'text', content: 'SA' },
+          primaryColor: '#6366F1',
+
+          // Navigation
+          sidebar: [],
+          topNav: [],
+
+          // User
+          user: { name: 'John Doe', email: 'john@company.com', avatar: 'JD' },
+
+          // Layout
+          layout: 'chat-right', // 'chat-left', 'chat-right', 'chat-bottom'
+
+          // Main Content
+          pageTitle: 'Dashboard',
+          metrics: [],
+          mainContent: '',
+
+          // Chat Config
+          chat: {
+            title: 'AI Assistant',
+            icon: 'ph-sparkle',
+            gradient: 'from-indigo-500 to-purple-500',
+            messages: []
+          },
+
+          ...config
+        };
+      }
+
+      render() {
+        const container = document.createElement('div');
+        container.className = 'flex h-full bg-white';
+        container.style.height = '700px';
+
+        // Add custom color styles
+        const styles = document.createElement('style');
+        styles.textContent = `
+          .app-primary { color: ${this.config.primaryColor}; }
+          .app-primary-bg { background-color: ${this.config.primaryColor}; }
+        `;
+        document.head.appendChild(styles);
+
+        // Sidebar
+        const sidebar = this.createSidebar();
+        container.appendChild(sidebar);
+
+        // Main Area
+        const mainArea = document.createElement('div');
+        mainArea.className = 'flex-1 flex flex-col';
+
+        // Top Nav
+        const topNav = this.createTopNav();
+        mainArea.appendChild(topNav);
+
+        // Content Area
+        const contentArea = document.createElement('div');
+        contentArea.className = 'flex-1 flex overflow-hidden';
+
+        if (this.config.layout === 'chat-left') {
+          contentArea.appendChild(this.createChat());
+          contentArea.appendChild(this.createMainContent());
+        } else if (this.config.layout === 'chat-right') {
+          contentArea.appendChild(this.createMainContent());
+          contentArea.appendChild(this.createChat());
+        } else if (this.config.layout === 'chat-bottom') {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'flex-1 relative overflow-hidden';
+          wrapper.appendChild(this.createMainContent());
+          wrapper.appendChild(this.createDock());
+          contentArea.appendChild(wrapper);
+        }
+
+        mainArea.appendChild(contentArea);
+        container.appendChild(mainArea);
+
+        return container;
+      }
+
+      createSidebar() {
+        const sidebar = document.createElement('div');
+        sidebar.className = 'w-64 bg-white border-r border-gray-200 flex flex-col';
+
+        sidebar.innerHTML = `
+          <div class="p-4 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 app-primary-bg rounded-lg flex items-center justify-center">
+                ${this.config.logo.type === 'icon'
+                  ? `<i class="ph ${this.config.logo.content} text-white text-xl"></i>`
+                  : `<span class="text-white font-bold">${this.config.logo.content}</span>`}
+              </div>
+              <span class="font-bold text-gray-900">${this.config.name}</span>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4">
+            ${this.config.sidebar.map(section => `
+              <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">${section.title}</h3>
+                <div class="space-y-1">
+                  ${section.items.map(item => `
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm ${
+                      item.active ? 'app-primary-bg text-white' : 'text-gray-700 hover:bg-gray-100'
+                    }">
+                      <i class="ph ${item.icon}"></i>
+                      <span>${item.label}</span>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="p-4 border-t border-gray-200">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                <span class="text-xs font-medium text-gray-700">${this.config.user.avatar}</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate">${this.config.user.name}</p>
+                <p class="text-xs text-gray-500 truncate">${this.config.user.email}</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+        return sidebar;
+      }
+
+      createTopNav() {
+        const nav = document.createElement('div');
+        nav.className = 'bg-white border-b border-gray-200 px-6 py-3';
+
+        nav.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-6">
+              ${this.config.topNav.map(item => `
+                <a href="#" class="flex items-center gap-2 px-3 py-2 text-sm ${
+                  item.active ? 'app-primary font-medium' : 'text-gray-600 hover:text-gray-900'
+                }">
+                  <i class="ph ${item.icon}"></i>
+                  <span>${item.label}</span>
+                </a>
+              `).join('')}
+            </div>
+            <div class="flex items-center gap-4">
+              <button class="text-gray-400 hover:text-gray-600">
+                <i class="ph ph-magnifying-glass text-xl"></i>
+              </button>
+              <button class="text-gray-400 hover:text-gray-600 relative">
+                <i class="ph ph-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+            </div>
+          </div>
+        `;
+
+        return nav;
+      }
+
+      createMainContent() {
+        const content = document.createElement('div');
+        content.className = this.config.layout === 'chat-bottom'
+          ? 'flex-1 bg-gray-50 p-6 pb-24 overflow-y-auto'
+          : 'flex-1 bg-gray-50 p-6 overflow-y-auto';
+
+        content.innerHTML = `
+          <h1 class="text-2xl font-bold text-gray-900 mb-6">${this.config.pageTitle}</h1>
+
+          ${this.config.metrics.length > 0 ? `
+            <div class="grid grid-cols-${Math.min(4, this.config.metrics.length)} gap-4 mb-6">
+              ${this.config.metrics.map(metric => `
+                <div class="bg-white rounded-lg p-4 border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600">${metric.label}</span>
+                    ${metric.icon ? `<i class="ph ${metric.icon} text-${metric.color || 'gray'}-500"></i>` : ''}
+                  </div>
+                  <p class="text-2xl font-bold text-gray-900">${metric.value}</p>
+                  ${metric.subtext ? `<p class="text-xs text-${metric.color || 'gray'}-600">${metric.subtext}</p>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          <div>${this.config.mainContent}</div>
+        `;
+
+        return content;
+      }
+
+      createChat() {
+        const chat = document.createElement('div');
+        chat.className = 'chat-panel flex flex-col w-96';
+
+        chat.innerHTML = `
+          <div class="p-4 border-b border-gray-700">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br ${this.config.chat.gradient} rounded-lg flex items-center justify-center">
+                  <i class="ph ${this.config.chat.icon} text-white"></i>
+                </div>
+                <div>
+                  <div class="text-white font-semibold">${this.config.chat.title}</div>
+                  <div class="text-xs text-green-400 flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-400 rounded-full"></span> Online
+                  </div>
+                </div>
+              </div>
+              <button class="text-gray-400 hover:text-white">
+                <i class="ph ph-gear"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-y-auto p-4">
+            <div class="space-y-4">
+              ${this.config.chat.messages.map(msg =>
+                msg.type === 'user'
+                  ? `<div class="flex justify-end"><div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">${msg.text}</div></div>`
+                  : `<div class="flex gap-3">
+                      <div class="w-8 h-8 bg-gradient-to-br ${this.config.chat.gradient} rounded-lg flex-shrink-0"></div>
+                      <div class="bg-gray-700 rounded-lg p-3 max-w-xs text-gray-200 text-sm">${msg.text}</div>
+                    </div>`
+              ).join('')}
+            </div>
+          </div>
+
+          <div class="p-4 border-t border-gray-700">
+            <div class="flex gap-2">
+              <input type="text" placeholder="${this.config.chat.placeholder || 'Ask me anything...'}"
+                class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <button class="app-primary-bg text-white p-2 rounded-lg hover:opacity-90">
+                <i class="ph ph-paper-plane-tilt"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        return chat;
+      }
+
+      createDock() {
+        const dock = document.createElement('div');
+        dock.className = 'absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-100 to-transparent z-10';
+
+        dock.innerHTML = `
+          <div class="dock-container">
+            <div class="dock-item" title="Dashboard">
+              <i class="ph ph-squares-four text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Analytics">
+              <i class="ph ph-chart-bar text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Projects">
+              <i class="ph ph-folder text-gray-600"></i>
+            </div>
+            <div class="w-px h-8 bg-gray-300"></div>
+            <input type="text" class="dock-input" placeholder="Ask AI: Create sprint report, find blockers..." value="Show me all critical tasks blocking the sprint">
+            <div class="w-px h-8 bg-gray-300"></div>
+            <div class="dock-item" title="AI History">
+              <i class="ph ph-clock-counter-clockwise text-gray-600"></i>
+            </div>
+            <div class="dock-item" title="Automations">
+              <i class="ph ph-lightning text-gray-600"></i>
+            </div>
+            <div class="dock-item active" title="AI Assistant" style="background: ${this.config.primaryColor};">
+              <i class="ph ph-sparkle text-white"></i>
+            </div>
+          </div>
+        `;
+
+        return dock;
+      }
+    }
+
+    // Browser Wrapper
+    function createBrowserWrapper(url, content) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'browser-wrapper mb-16';
+
+      wrapper.innerHTML = `
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <div class="browser-dot" style="background: #EF4444;"></div>
+            <div class="browser-dot" style="background: #F59E0B;"></div>
+            <div class="browser-dot" style="background: #10B981;"></div>
+          </div>
+          <div class="browser-url-bar">
+            <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+            <span>${url}</span>
+          </div>
+          <div class="flex gap-2">
+            <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white"></i>
+            <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white"></i>
+          </div>
+        </div>
+      `;
+
+      wrapper.appendChild(content);
+      return wrapper;
+    }
+
+    // Create Examples
+    function createExamples() {
+      const container = document.getElementById('examples-container');
+
+      // Example 1: Accounting Software
+      const accounting = new SaaSApp({
+        name: 'FinanceFlow',
+        domain: 'accounting.financeflow.com/dashboard',
+        logo: { type: 'icon', content: 'ph-calculator' },
+        primaryColor: '#10B981',
+
+        sidebar: [
+          { title: 'Finance', items: [
+            { label: 'Overview', icon: 'ph-squares-four', active: true },
+            { label: 'Transactions', icon: 'ph-arrows-left-right' },
+            { label: 'Accounts', icon: 'ph-wallet' },
+            { label: 'Expenses', icon: 'ph-money' }
+          ]},
+          { title: 'Reports', items: [
+            { label: 'P&L Statement', icon: 'ph-chart-line' },
+            { label: 'Balance Sheet', icon: 'ph-chart-bar' }
+          ]}
+        ],
+
+        topNav: [
+          { label: 'Dashboard', icon: 'ph-house', active: true },
+          { label: 'Transactions', icon: 'ph-receipt' },
+          { label: 'Reports', icon: 'ph-file-text' }
+        ],
+
+        pageTitle: 'Financial Dashboard',
+        metrics: [
+          { label: 'Revenue', value: '$124,563', subtext: '+12.5%', icon: 'ph-currency-dollar', color: 'green' },
+          { label: 'Expenses', value: '$48,294', subtext: '+3.2%', icon: 'ph-money', color: 'red' },
+          { label: 'Profit', value: '$76,269', subtext: '61.2% margin', icon: 'ph-trend-up', color: 'green' }
+        ],
+
+        mainContent: `
+          <div class="bg-white rounded-lg border border-gray-200">
+            <div class="p-4 border-b border-gray-200">
+              <h3 class="font-semibold text-gray-900">Recent Transactions</h3>
+            </div>
+            <table class="w-full">
+              <thead>
+                <tr class="text-left text-sm text-gray-600 border-b">
+                  <th class="p-4">Date</th>
+                  <th class="p-4">Description</th>
+                  <th class="p-4">Category</th>
+                  <th class="p-4">Amount</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="p-4">Dec 15</td>
+                  <td class="p-4">Office Supplies Inc</td>
+                  <td class="p-4"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Supplies</span></td>
+                  <td class="p-4 font-medium">$234.50</td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="p-4">Dec 14</td>
+                  <td class="p-4">Cloud Services Monthly</td>
+                  <td class="p-4"><span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Software</span></td>
+                  <td class="p-4 font-medium">$1,299.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `,
+
+        layout: 'chat-right',
+        chat: {
+          title: 'AI Bookkeeper',
+          icon: 'ph-calculator',
+          gradient: 'from-green-500 to-emerald-500',
+          messages: [
+            { type: 'user', text: 'Categorize last month\'s expenses' },
+            { type: 'ai', text: 'I\'ve analyzed 47 transactions from November. Office Supplies: $1,234.50, Software: $3,456.00, Travel: $2,891.25' }
+          ]
+        }
+      });
+
+      const section1 = document.createElement('div');
+      section1.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-2">Example 1: Accounting Software with AI Bookkeeper</h3>
+        <p class="text-gray-600 mb-6">AI assistant helps categorize expenses and manage finances</p>
+      `;
+      section1.appendChild(createBrowserWrapper(accounting.config.domain, accounting.render()));
+      container.appendChild(section1);
+
+      // Example 2: ERP System
+      const erp = new SaaSApp({
+        name: 'SupplyChain Pro',
+        domain: 'erp.supplychainpro.io/inventory',
+        logo: { type: 'icon', content: 'ph-package' },
+        primaryColor: '#F97316',
+
+        sidebar: [
+          { title: 'Inventory', items: [
+            { label: 'Stock Levels', icon: 'ph-archive', active: true },
+            { label: 'Warehouses', icon: 'ph-warehouse' },
+            { label: 'Reorder Points', icon: 'ph-warning' }
+          ]},
+          { title: 'Operations', items: [
+            { label: 'Purchase Orders', icon: 'ph-file-plus' },
+            { label: 'Shipments', icon: 'ph-truck' }
+          ]}
+        ],
+
+        topNav: [
+          { label: 'Inventory', icon: 'ph-package', active: true },
+          { label: 'Orders', icon: 'ph-shopping-cart' },
+          { label: 'Analytics', icon: 'ph-chart-line' }
+        ],
+
+        pageTitle: 'Inventory Management',
+        metrics: [
+          { label: 'Total SKUs', value: '1,247', subtext: '+12 this week', icon: 'ph-package', color: 'gray' },
+          { label: 'Low Stock Alerts', value: '23', subtext: 'Needs attention', icon: 'ph-warning', color: 'red' },
+          { label: 'Pending Orders', value: '47', subtext: '$234,567', icon: 'ph-shopping-cart', color: 'blue' }
+        ],
+
+        mainContent: `
+          <div class="bg-white rounded-lg border border-gray-200">
+            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+              <h3 class="font-semibold text-gray-900">Critical Stock Alerts</h3>
+              <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">23 Items</span>
+            </div>
+            <div class="p-4 space-y-3">
+              <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                <div>
+                  <p class="font-medium text-gray-900">SKU-1247: Widget Assembly A</p>
+                  <p class="text-sm text-gray-600">Current: 12 units | Min: 100 units</p>
+                </div>
+                <button class="bg-orange-600 text-white px-3 py-1 rounded text-sm hover:bg-orange-700">
+                  Reorder Now
+                </button>
+              </div>
+            </div>
+          </div>
+        `,
+
+        layout: 'chat-right',
+        chat: {
+          title: 'Supply Chain AI',
+          icon: 'ph-package',
+          gradient: 'from-orange-500 to-red-500',
+          messages: [
+            { type: 'user', text: 'What items need immediate reordering?' },
+            { type: 'ai', text: 'Critical reorder needed for 3 items: SKU-1247 Widget Assembly (88% below minimum), SKU-892 Circuit Board (90% below), SKU-445 Power Supply (95% below)' }
+          ]
+        }
+      });
+
+      const section2 = document.createElement('div');
+      section2.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-2">Example 2: ERP Inventory Management</h3>
+        <p class="text-gray-600 mb-6">AI monitors stock levels and predicts supply chain needs</p>
+      `;
+      section2.appendChild(createBrowserWrapper(erp.config.domain, erp.render()));
+      container.appendChild(section2);
+
+      // Example 3: Healthcare System
+      const healthcare = new SaaSApp({
+        name: 'MediCare Pro',
+        domain: 'health.medicarepro.com/patients',
+        logo: { type: 'icon', content: 'ph-heartbeat' },
+        primaryColor: '#3B82F6',
+
+        sidebar: [
+          { title: 'Patient Care', items: [
+            { label: 'Active Patients', icon: 'ph-user-check', active: true },
+            { label: 'Admissions', icon: 'ph-door-open' },
+            { label: 'Emergency', icon: 'ph-siren' }
+          ]},
+          { title: 'Clinical', items: [
+            { label: 'Medications', icon: 'ph-pill' },
+            { label: 'Lab Orders', icon: 'ph-test-tube' }
+          ]}
+        ],
+
+        topNav: [
+          { label: 'Patients', icon: 'ph-users', active: true },
+          { label: 'Appointments', icon: 'ph-calendar' },
+          { label: 'Lab Results', icon: 'ph-test-tube' }
+        ],
+
+        pageTitle: 'Patient Management',
+        metrics: [
+          { label: 'Active Patients', value: '142', icon: 'ph-users', color: 'blue' },
+          { label: 'Critical', value: '8', icon: 'ph-warning', color: 'red' },
+          { label: 'Pending Labs', value: '23', icon: 'ph-test-tube', color: 'yellow' }
+        ],
+
+        mainContent: `
+          <div class="bg-white rounded-lg border border-gray-200">
+            <div class="p-4 border-b border-gray-200">
+              <h3 class="font-semibold text-gray-900">Critical Patients</h3>
+            </div>
+            <div class="p-4 space-y-3">
+              <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                <div>
+                  <p class="font-medium text-gray-900">John Doe - Room 302</p>
+                  <p class="text-sm text-gray-600">Post-cardiac surgery, elevated vitals</p>
+                </div>
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-medium">Critical</span>
+              </div>
+            </div>
+          </div>
+        `,
+
+        layout: 'chat-left',
+        chat: {
+          title: 'Clinical AI',
+          icon: 'ph-heartbeat',
+          gradient: 'from-blue-500 to-cyan-500',
+          messages: [
+            { type: 'user', text: 'Show critical patients requiring immediate attention' },
+            { type: 'ai', text: '2 critical patients identified: Room 302 John Doe - elevated vitals, requires immediate review. Room 215 Jane Smith - post-op anomaly detected.' }
+          ]
+        }
+      });
+
+      const section3 = document.createElement('div');
+      section3.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-2">Example 3: Healthcare Patient Management</h3>
+        <p class="text-gray-600 mb-6">Clinical AI assists with patient monitoring and care protocols</p>
+      `;
+      section3.appendChild(createBrowserWrapper(healthcare.config.domain, healthcare.render()));
+      container.appendChild(section3);
+
+      // Example 4: HR/Payroll System
+      const hrPayroll = new SaaSApp({
+        name: 'WorkSync HR',
+        domain: 'hr.worksync.com/payroll',
+        logo: { type: 'icon', content: 'ph-users-three' },
+        primaryColor: '#8B5CF6',
+
+        sidebar: [
+          { title: 'HR Management', items: [
+            { label: 'Employees', icon: 'ph-users' },
+            { label: 'Payroll', icon: 'ph-money', active: true },
+            { label: 'Benefits', icon: 'ph-heart' }
+          ]},
+          { title: 'Operations', items: [
+            { label: 'Time Tracking', icon: 'ph-clock' },
+            { label: 'Reports', icon: 'ph-file-text' }
+          ]}
+        ],
+
+        topNav: [
+          { label: 'Payroll', icon: 'ph-money', active: true },
+          { label: 'Employees', icon: 'ph-users' },
+          { label: 'Reports', icon: 'ph-chart-bar' }
+        ],
+
+        pageTitle: 'Payroll Processing - December 2024',
+        metrics: [
+          { label: 'Total Payroll', value: '$487,293', subtext: '245 employees', icon: 'ph-currency-dollar', color: 'green' },
+          { label: 'Overtime', value: '$18,472', subtext: '238 hours', icon: 'ph-clock', color: 'orange' },
+          { label: 'Tax Withholding', value: '$142,387', subtext: 'Fed + State', icon: 'ph-receipt', color: 'blue' }
+        ],
+
+        mainContent: `
+          <div class="bg-white rounded-lg border border-gray-200">
+            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+              <h3 class="font-semibold text-gray-900">Payroll Issues</h3>
+              <span class="bg-red-100 text-red-700 px-2 py-1 rounded-full text-xs font-medium">3 Issues</span>
+            </div>
+            <div class="divide-y divide-gray-200">
+              <div class="px-4 py-3 flex items-center justify-between hover:bg-gray-50">
+                <div>
+                  <p class="font-medium text-gray-900">Sarah Chen</p>
+                  <p class="text-sm text-gray-600">Engineering • Missing W-4</p>
+                </div>
+                <button class="text-purple-600 hover:text-purple-700 text-sm">Send Reminder</button>
+              </div>
+            </div>
+          </div>
+        `,
+
+        layout: 'chat-right',
+        chat: {
+          title: 'HR Assistant',
+          icon: 'ph-users-three',
+          gradient: 'from-purple-500 to-pink-500',
+          messages: [
+            { type: 'user', text: 'Process payroll for December 2024' },
+            { type: 'ai', text: 'Processing December payroll... ✓ Calculated 4,523 regular hours ✓ Calculated 238 overtime hours ⚠ 3 employees missing tax forms' }
+          ]
+        }
+      });
+
+      const section4 = document.createElement('div');
+      section4.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-2">Example 4: HR/Payroll System</h3>
+        <p class="text-gray-600 mb-6">AI assistant handles payroll processing and compliance</p>
+      `;
+      section4.appendChild(createBrowserWrapper(hrPayroll.config.domain, hrPayroll.render()));
+      container.appendChild(section4);
+
+      // Example 5: Project Management with Dock
+      const projectMgmt = new SaaSApp({
+        name: 'ProjectHub',
+        domain: 'projects.projecthub.io/workspace',
+        logo: { type: 'text', content: 'PH' },
+        primaryColor: '#6366F1',
+
+        sidebar: [],
+
+        topNav: [
+          { label: 'Sprint', icon: 'ph-rocket', active: true },
+          { label: 'Backlog', icon: 'ph-list' },
+          { label: 'Teams', icon: 'ph-users-three' },
+          { label: 'Reports', icon: 'ph-chart-bar' }
+        ],
+
+        pageTitle: 'Sprint Dashboard',
+        metrics: [
+          { label: 'Sprint Progress', value: '67%', icon: 'ph-trend-up', color: 'green' },
+          { label: 'Tasks Complete', value: '24/36', icon: 'ph-check-circle', color: 'blue' },
+          { label: 'Blockers', value: '3', icon: 'ph-warning', color: 'red' }
+        ],
+
+        mainContent: `
+          <div class="grid grid-cols-4 gap-4">
+            <div class="bg-gray-100 rounded-lg p-3">
+              <h3 class="font-semibold text-gray-700 mb-2">To Do (8)</h3>
+              <div class="space-y-2">
+                <div class="bg-white p-2 rounded border border-gray-200">
+                  <p class="text-sm font-medium text-gray-900">Implement auth</p>
+                  <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">Backend</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-100 rounded-lg p-3">
+              <h3 class="font-semibold text-gray-700 mb-2">In Progress (4)</h3>
+              <div class="space-y-2">
+                <div class="bg-white p-2 rounded border-l-4 border-l-blue-500 border-gray-200">
+                  <p class="text-sm font-medium text-gray-900">API integration</p>
+                  <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">Frontend</span>
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-100 rounded-lg p-3">
+              <h3 class="font-semibold text-gray-700 mb-2">Review (6)</h3>
+            </div>
+            <div class="bg-gray-100 rounded-lg p-3">
+              <h3 class="font-semibold text-gray-700 mb-2">Done (18)</h3>
+            </div>
+          </div>
+        `,
+
+        layout: 'chat-bottom'
+      });
+
+      const section5 = document.createElement('div');
+      section5.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-2">Example 5: Project Management with Bottom Dock</h3>
+        <p class="text-gray-600 mb-6">AI command center at the bottom for quick task management</p>
+      `;
+      section5.appendChild(createBrowserWrapper(projectMgmt.config.domain, projectMgmt.render()));
+      container.appendChild(section5);
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', createExamples);
+  </script>
+</body>
+</html>

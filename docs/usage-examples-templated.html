@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic UI - SaaS Integration Templates</title>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366F1',
+            'primary-dark': '#4F46E5',
+            secondary: '#8B5CF6'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Consolas', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Browser Chrome Styles */
+    .browser-chrome {
+      background: #1F2937;
+      border-radius: 12px 12px 0 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .browser-url-bar {
+      flex: 1;
+      max-width: 500px;
+      margin: 0 16px;
+      background: #374151;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: #9CA3AF;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .browser-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: #1F2937;
+    }
+
+    /* Dark Mode Chat Panel */
+    .chat-panel {
+      background: #1A1B26;
+      border: 1px solid #2D2E3F;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Dock Styles */
+    .dock-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 8px 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15), 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+      width: fit-content;
+    }
+
+    .dock-item {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dock-item:hover {
+      background: rgba(99, 102, 241, 0.1);
+      transform: scale(1.1) translateY(-2px);
+    }
+
+    .dock-item.active {
+      background: #6366F1;
+      color: white;
+    }
+
+    .dock-input {
+      min-width: 400px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      background: white;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .dock-input:focus {
+      border-color: #6366F1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Template Components (Hidden) -->
+  <div id="templates" style="display: none;">
+
+    <!-- Browser Chrome Template -->
+    <template id="browser-chrome-template">
+      <div class="browser-chrome">
+        <div class="browser-dots">
+          <div class="browser-dot" style="background: #EF4444;"></div>
+          <div class="browser-dot" style="background: #F59E0B;"></div>
+          <div class="browser-dot" style="background: #10B981;"></div>
+        </div>
+        <div class="browser-url-bar">
+          <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+          <span class="browser-url">{{url}}</span>
+        </div>
+        <div class="flex gap-2">
+          <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+          <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+        </div>
+      </div>
+    </template>
+
+    <!-- Chat Panel Template -->
+    <template id="chat-panel-template">
+      <div class="chat-panel flex flex-col" style="width: {{width}}px;">
+        <div class="p-4 border-b border-gray-700">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 bg-gradient-to-br {{gradient}} rounded-lg flex items-center justify-center">
+                <i class="ph {{icon}} text-white"></i>
+              </div>
+              <div>
+                <div class="text-white font-semibold">{{title}}</div>
+                <div class="text-xs text-green-400 flex items-center gap-1">
+                  <span class="w-2 h-2 bg-green-400 rounded-full"></span> {{status}}
+                </div>
+              </div>
+            </div>
+            <button class="text-gray-400 hover:text-white">
+              <i class="ph ph-gear"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4">
+          <!-- Chat messages go here -->
+          <div class="chat-messages"></div>
+        </div>
+
+        <div class="p-4 border-t border-gray-700">
+          <div class="flex gap-2">
+            <input type="text" placeholder="{{placeholder}}"
+              class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700">
+              <i class="ph ph-paper-plane-tilt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Dock Template -->
+    <template id="dock-template">
+      <div class="absolute bottom-0 left-0 right-0 p-4 {{background}}">
+        <div class="dock-container">
+          <!-- Left Actions -->
+          <div class="dock-actions-left"></div>
+
+          <!-- Separator -->
+          <div class="w-px h-8 bg-gray-300"></div>
+
+          <!-- Central AI Input -->
+          <input type="text" class="dock-input" placeholder="{{placeholder}}">
+
+          <!-- Separator -->
+          <div class="w-px h-8 bg-gray-300"></div>
+
+          <!-- Right Actions -->
+          <div class="dock-actions-right"></div>
+        </div>
+      </div>
+    </template>
+
+  </div>
+
+  <!-- Header -->
+  <header class="border-b bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <nav class="flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <a href="./index.html" class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-xl">A</span>
+            </div>
+            <span class="text-xl font-bold text-gray-900">Agentic UI</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold mb-4">SaaS Integration Templates</h1>
+    <p class="text-gray-600 mb-12">Reusable components and templates for embedding AI assistants in SaaS applications</p>
+
+    <!-- Example Implementations Using Templates -->
+    <div id="examples-container"></div>
+  </main>
+
+  <script>
+    // Template system for creating browser mockups
+    class BrowserMockup {
+      constructor(config) {
+        this.config = {
+          url: 'app.example.com',
+          height: 700,
+          ...config
+        };
+      }
+
+      render() {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'browser-wrapper mb-16';
+
+        // Create browser chrome
+        const chrome = this.createChrome();
+        wrapper.appendChild(chrome);
+
+        // Create content area
+        const content = document.createElement('div');
+        content.style.height = `${this.config.height}px`;
+        content.className = this.config.contentClass || 'bg-white';
+
+        if (this.config.content) {
+          content.innerHTML = this.config.content;
+        }
+
+        wrapper.appendChild(content);
+        return wrapper;
+      }
+
+      createChrome() {
+        const chrome = document.createElement('div');
+        chrome.className = 'browser-chrome';
+        chrome.innerHTML = `
+          <div class="browser-dots">
+            <div class="browser-dot" style="background: #EF4444;"></div>
+            <div class="browser-dot" style="background: #F59E0B;"></div>
+            <div class="browser-dot" style="background: #10B981;"></div>
+          </div>
+          <div class="browser-url-bar">
+            <i class="ph ph-lock-simple text-green-500" style="font-size: 12px;"></i>
+            <span>${this.config.url}</span>
+          </div>
+          <div class="flex gap-2">
+            <i class="ph ph-arrow-clockwise text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+            <i class="ph ph-dots-three-vertical text-gray-400 cursor-pointer hover:text-white" style="font-size: 16px;"></i>
+          </div>
+        `;
+        return chrome;
+      }
+    }
+
+    // Create chat panel component
+    class ChatPanel {
+      constructor(config) {
+        this.config = {
+          width: 384,
+          title: 'AI Assistant',
+          icon: 'ph-sparkle',
+          gradient: 'from-indigo-500 to-purple-500',
+          status: 'Online',
+          placeholder: 'Ask me anything...',
+          ...config
+        };
+      }
+
+      render() {
+        const panel = document.createElement('div');
+        panel.className = `chat-panel flex flex-col`;
+        panel.style.width = `${this.config.width}px`;
+
+        panel.innerHTML = `
+          <div class="p-4 border-b border-gray-700">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-br ${this.config.gradient} rounded-lg flex items-center justify-center">
+                  <i class="ph ${this.config.icon} text-white"></i>
+                </div>
+                <div>
+                  <div class="text-white font-semibold">${this.config.title}</div>
+                  <div class="text-xs text-green-400 flex items-center gap-1">
+                    <span class="w-2 h-2 bg-green-400 rounded-full"></span> ${this.config.status}
+                  </div>
+                </div>
+              </div>
+              <button class="text-gray-400 hover:text-white">
+                <i class="ph ph-gear"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-y-auto p-4">
+            ${this.config.messages || ''}
+          </div>
+
+          <div class="p-4 border-t border-gray-700">
+            <div class="flex gap-2">
+              <input type="text" placeholder="${this.config.placeholder}"
+                class="flex-1 bg-gray-700 text-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <button class="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700">
+                <i class="ph ph-paper-plane-tilt"></i>
+              </button>
+            </div>
+          </div>
+        `;
+
+        return panel;
+      }
+    }
+
+    // Create dock component
+    class DockBar {
+      constructor(config) {
+        this.config = {
+          placeholder: 'Ask AI anything...',
+          leftActions: [],
+          rightActions: [],
+          background: 'bg-gradient-to-t from-gray-100 to-transparent',
+          ...config
+        };
+      }
+
+      render() {
+        const dock = document.createElement('div');
+        dock.className = `absolute bottom-0 left-0 right-0 p-4 ${this.config.background}`;
+
+        const container = document.createElement('div');
+        container.className = 'dock-container';
+
+        // Add left actions
+        this.config.leftActions.forEach(action => {
+          container.innerHTML += `
+            <div class="dock-item" title="${action.title}">
+              <i class="ph ${action.icon} text-gray-600"></i>
+            </div>
+          `;
+        });
+
+        // Add separator
+        container.innerHTML += '<div class="w-px h-8 bg-gray-300"></div>';
+
+        // Add input
+        container.innerHTML += `
+          <input type="text" class="dock-input" placeholder="${this.config.placeholder}"
+            ${this.config.value ? `value="${this.config.value}"` : ''}>
+        `;
+
+        // Add separator
+        container.innerHTML += '<div class="w-px h-8 bg-gray-300"></div>';
+
+        // Add right actions
+        this.config.rightActions.forEach(action => {
+          container.innerHTML += `
+            <div class="dock-item ${action.active ? 'active' : ''}" title="${action.title}">
+              <i class="ph ${action.icon} ${action.active ? 'text-white' : 'text-gray-600'}"></i>
+            </div>
+          `;
+        });
+
+        dock.appendChild(container);
+        return dock;
+      }
+    }
+
+    // Helper function to create section with title
+    function createSection(title, description) {
+      const section = document.createElement('div');
+      section.className = 'mb-16';
+      section.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-2">${title}</h3>
+        <p class="text-gray-600 mb-6">${description}</p>
+      `;
+      return section;
+    }
+
+    // Create example layouts using the components
+    function createExamples() {
+      const container = document.getElementById('examples-container');
+
+      // Example 1: Accounting Software with Side Panel
+      const section1 = createSection(
+        'Example 1: Accounting Software with AI Bookkeeper',
+        'Dark mode chat panel on the left, transaction management on the right'
+      );
+
+      const example1 = new BrowserMockup({
+        url: 'accounting.financeflow.com/transactions',
+        height: 700,
+        contentClass: 'flex bg-white'
+      });
+
+      // Build content with placeholder for chat panel
+      const content1 = document.createElement('div');
+      content1.className = 'flex';
+      content1.style.height = '700px';
+
+      // Add chat panel
+      const chatPanel1 = new ChatPanel({
+        title: 'AI Bookkeeper',
+        icon: 'ph-calculator',
+        gradient: 'from-green-500 to-emerald-500',
+        placeholder: 'Ask about transactions, expenses, or reports...',
+        messages: `
+          <div class="space-y-4">
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                Categorize last month's expenses
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex-shrink-0"></div>
+              <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                <p class="text-gray-200 text-sm mb-2">I've analyzed 47 transactions from November:</p>
+                <div class="space-y-1 text-xs">
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Office Supplies:</span>
+                    <span class="text-white">$1,234.50</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Software:</span>
+                    <span class="text-white">$3,456.00</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Travel:</span>
+                    <span class="text-white">$2,891.25</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      });
+
+      content1.appendChild(chatPanel1.render());
+
+      // Add main content area
+      const mainContent1 = document.createElement('div');
+      mainContent1.className = 'flex-1 bg-gray-50 p-6';
+      mainContent1.innerHTML = `
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Transaction Management</h1>
+        <div class="bg-white rounded-lg border border-gray-200">
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-sm text-gray-600 border-b">
+                <th class="p-4">Date</th>
+                <th class="p-4">Description</th>
+                <th class="p-4">Category</th>
+                <th class="p-4">Amount</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b hover:bg-gray-50">
+                <td class="p-4">Dec 15</td>
+                <td class="p-4">Office Supplies Inc</td>
+                <td class="p-4"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Office Supplies</span></td>
+                <td class="p-4 font-medium">$234.50</td>
+              </tr>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="p-4">Dec 14</td>
+                <td class="p-4">Cloud Services Monthly</td>
+                <td class="p-4"><span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Software</span></td>
+                <td class="p-4 font-medium">$1,299.00</td>
+              </tr>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="p-4">Dec 13</td>
+                <td class="p-4">Business Travel - Client Meeting</td>
+                <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Travel</span></td>
+                <td class="p-4 font-medium">$456.75</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+      content1.appendChild(mainContent1);
+
+      // Set the content in the browser mockup
+      example1.config.content = content1.outerHTML;
+      section1.appendChild(example1.render());
+      container.appendChild(section1);
+
+      // Example 2: ERP Inventory Management
+      const section2 = createSection(
+        'Example 2: ERP Inventory Management',
+        'Main dashboard with AI supply chain assistant on the right'
+      );
+
+      const example2 = new BrowserMockup({
+        url: 'erp.supplychain.io/inventory',
+        height: 700,
+        contentClass: 'flex bg-white'
+      });
+
+      const content2 = document.createElement('div');
+      content2.className = 'flex';
+      content2.style.height = '700px';
+
+      // Main ERP content
+      const mainContent2 = document.createElement('div');
+      mainContent2.className = 'flex-1 bg-gray-50 p-6';
+      mainContent2.innerHTML = `
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Inventory Management</h1>
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Total SKUs</p>
+            <p class="text-2xl font-bold text-gray-900">1,247</p>
+            <p class="text-xs text-green-600">+12 this week</p>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Low Stock Alerts</p>
+            <p class="text-2xl font-bold text-red-600">23</p>
+            <p class="text-xs text-red-600">Needs attention</p>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Pending Orders</p>
+            <p class="text-2xl font-bold text-gray-900">47</p>
+            <p class="text-xs text-gray-600">$234,567 value</p>
+          </div>
+        </div>
+      `;
+      content2.appendChild(mainContent2);
+
+      // Add chat panel
+      const chatPanel2 = new ChatPanel({
+        width: 400,
+        title: 'Supply Chain AI',
+        icon: 'ph-package',
+        gradient: 'from-orange-500 to-red-500',
+        placeholder: 'Ask about inventory, orders, or forecasting...',
+        messages: `
+          <div class="space-y-4">
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                What items need immediate reordering?
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex-shrink-0"></div>
+              <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                <p class="text-gray-200 text-sm mb-2">Critical reorder needed for 3 items:</p>
+                <div class="space-y-2 text-xs">
+                  <div class="bg-red-900/50 rounded p-2">
+                    <p class="text-white font-medium">SKU-1247: Widget Assembly A</p>
+                    <p class="text-gray-400">Current: 12 units | Min: 100 units</p>
+                  </div>
+                  <div class="bg-red-900/50 rounded p-2">
+                    <p class="text-white font-medium">SKU-892: Circuit Board Type-3</p>
+                    <p class="text-gray-400">Current: 5 units | Min: 50 units</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      });
+      content2.appendChild(chatPanel2.render());
+
+      example2.config.content = content2.outerHTML;
+      section2.appendChild(example2.render());
+      container.appendChild(section2);
+
+      // Example 3: Healthcare with Clinical AI
+      const section3 = createSection(
+        'Example 3: Healthcare Patient Management',
+        'Clinical AI assistant on the left, patient records on the right'
+      );
+
+      const example3 = new BrowserMockup({
+        url: 'health.medicalcenter.org/patients',
+        height: 700,
+        contentClass: 'flex bg-white'
+      });
+
+      const content3 = document.createElement('div');
+      content3.className = 'flex';
+      content3.style.height = '700px';
+
+      // Add chat panel
+      const chatPanel3 = new ChatPanel({
+        title: 'Clinical AI Assistant',
+        icon: 'ph-heartbeat',
+        gradient: 'from-blue-500 to-cyan-500',
+        placeholder: 'Ask about patients, treatments, or protocols...',
+        messages: `
+          <div class="space-y-4">
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                Show critical patients requiring immediate attention
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex-shrink-0"></div>
+              <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                <p class="text-gray-200 text-sm mb-2">2 critical patients identified:</p>
+                <div class="space-y-2 text-xs">
+                  <div class="bg-red-900/50 rounded p-2 border-l-2 border-red-500">
+                    <p class="text-white font-medium">Room 302: John Doe</p>
+                    <p class="text-gray-400">Elevated vitals, requires immediate review</p>
+                  </div>
+                  <div class="bg-yellow-900/50 rounded p-2 border-l-2 border-yellow-500">
+                    <p class="text-white font-medium">Room 215: Jane Smith</p>
+                    <p class="text-gray-400">Post-op monitoring, anomaly detected</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      });
+      content3.appendChild(chatPanel3.render());
+
+      // Main healthcare content
+      const mainContent3 = document.createElement('div');
+      mainContent3.className = 'flex-1 bg-gray-50 p-6';
+      mainContent3.innerHTML = `
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Patient Management Dashboard</h1>
+        <div class="space-y-4">
+          <div class="bg-white rounded-lg border border-gray-200 p-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold text-gray-900">Active Patients</span>
+              <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">42 Total</span>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
+                <div>
+                  <p class="font-medium text-gray-900">John Doe - Room 302</p>
+                  <p class="text-sm text-gray-600">Post-cardiac surgery monitoring</p>
+                </div>
+                <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs">Critical</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      content3.appendChild(mainContent3);
+
+      example3.config.content = content3.outerHTML;
+      section3.appendChild(example3.render());
+      container.appendChild(section3);
+
+      // Example 4: HR/Payroll System
+      const section4 = createSection(
+        'Example 4: HR/Payroll System',
+        'HR AI assistant helping with payroll processing'
+      );
+
+      const example4 = new BrowserMockup({
+        url: 'hr.worksync.com/payroll',
+        height: 700,
+        contentClass: 'flex bg-white'
+      });
+
+      const content4 = document.createElement('div');
+      content4.className = 'flex';
+      content4.style.height = '700px';
+
+      // Add chat panel
+      const chatPanel4 = new ChatPanel({
+        title: 'HR Assistant',
+        icon: 'ph-users-three',
+        gradient: 'from-purple-500 to-pink-500',
+        placeholder: 'Ask about payroll, benefits, or policies...',
+        messages: `
+          <div class="space-y-4">
+            <div class="flex justify-end">
+              <div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-xs">
+                Process payroll for December 2024
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex-shrink-0"></div>
+              <div class="bg-gray-700 rounded-lg p-3 max-w-xs">
+                <p class="text-gray-200 text-sm mb-2">Processing December payroll...</p>
+                <div class="space-y-2">
+                  <div class="flex items-center gap-2 text-xs">
+                    <i class="ph ph-check-circle text-green-400"></i>
+                    <span class="text-gray-300">Calculating regular hours: 4,523</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs">
+                    <i class="ph ph-warning text-yellow-400"></i>
+                    <span class="text-gray-300">3 employees missing tax forms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      });
+      content4.appendChild(chatPanel4.render());
+
+      // Main HR content
+      const mainContent4 = document.createElement('div');
+      mainContent4.className = 'flex-1 bg-gray-50 p-6';
+      mainContent4.innerHTML = `
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Payroll Processing</h1>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Total Payroll</p>
+            <p class="text-2xl font-bold text-gray-900">$487,293</p>
+            <p class="text-xs text-gray-500">245 employees</p>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Overtime</p>
+            <p class="text-2xl font-bold text-gray-900">$18,472</p>
+            <p class="text-xs text-gray-500">238 hours</p>
+          </div>
+        </div>
+      `;
+      content4.appendChild(mainContent4);
+
+      example4.config.content = content4.outerHTML;
+      section4.appendChild(example4.render());
+      container.appendChild(section4);
+
+      // Example 5: Project Management with Bottom Dock
+      const section5 = createSection(
+        'Example 5: Project Management with Bottom Dock',
+        'AI command center at the bottom with macOS-style dock interface'
+      );
+
+      const example5 = new BrowserMockup({
+        url: 'projects.nexthub.io/workspace',
+        height: 700,
+        contentClass: 'relative bg-gray-50'
+      });
+
+      // Create content container
+      const content5 = document.createElement('div');
+      content5.className = 'relative';
+      content5.style.height = '700px';
+      content5.style.overflow = 'hidden';
+
+      // Main content
+      const mainContent5 = document.createElement('div');
+      mainContent5.className = 'p-6 pb-24';
+      mainContent5.innerHTML = `
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Sprint Dashboard</h1>
+        <div class="grid grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Sprint Progress</p>
+            <p class="text-2xl font-bold text-gray-900">67%</p>
+            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+              <div class="bg-green-500 h-2 rounded-full" style="width: 67%"></div>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Tasks Complete</p>
+            <p class="text-2xl font-bold text-gray-900">24/36</p>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Team Velocity</p>
+            <p class="text-2xl font-bold text-gray-900">42</p>
+          </div>
+          <div class="bg-white rounded-lg p-4 border border-gray-200">
+            <p class="text-sm text-gray-600">Blockers</p>
+            <p class="text-2xl font-bold text-red-600">3</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="bg-gray-100 rounded-lg p-3">
+            <h3 class="font-semibold text-gray-700 mb-2">To Do (8)</h3>
+            <div class="space-y-2">
+              <div class="bg-white p-2 rounded border border-gray-200">
+                <p class="text-sm font-medium text-gray-900">Implement auth</p>
+                <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">Backend</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-3">
+            <h3 class="font-semibold text-gray-700 mb-2">In Progress (4)</h3>
+            <div class="space-y-2">
+              <div class="bg-white p-2 rounded border-l-4 border-l-blue-500 border-gray-200">
+                <p class="text-sm font-medium text-gray-900">API integration</p>
+                <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs">Frontend</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-3">
+            <h3 class="font-semibold text-gray-700 mb-2">Review (6)</h3>
+          </div>
+          <div class="bg-gray-100 rounded-lg p-3">
+            <h3 class="font-semibold text-gray-700 mb-2">Done (18)</h3>
+          </div>
+        </div>
+      `;
+      content5.appendChild(mainContent5);
+
+      // Add dock
+      const dock5 = new DockBar({
+        placeholder: 'Ask AI: Create sprint report, find blockers, assign tasks...',
+        value: 'Show me all critical tasks blocking the sprint',
+        leftActions: [
+          { title: 'Dashboard', icon: 'ph-squares-four' },
+          { title: 'Analytics', icon: 'ph-chart-bar' },
+          { title: 'Projects', icon: 'ph-folder' }
+        ],
+        rightActions: [
+          { title: 'AI History', icon: 'ph-clock-counter-clockwise' },
+          { title: 'Automations', icon: 'ph-lightning' },
+          { title: 'AI Assistant', icon: 'ph-sparkle', active: true }
+        ]
+      });
+      content5.appendChild(dock5.render());
+
+      example5.config.content = content5.outerHTML;
+      section5.appendChild(example5.render());
+      container.appendChild(section5);
+    }
+
+    // Initialize examples when DOM is ready
+    document.addEventListener('DOMContentLoaded', createExamples);
+  </script>
+</body>
+</html>
