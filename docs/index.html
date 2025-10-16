@@ -207,6 +207,243 @@
       margin: 80px 0;
     }
 
+    /* Elegant Typography System */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 300;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--gray-900);
+    }
+
+    /* Hero Typography */
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.125rem, 2vw, 1.5rem);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      color: var(--gray-600);
+      max-width: 42rem;
+      margin: 0 auto;
+    }
+
+    /* Section Typography */
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+      color: var(--gray-600);
+      max-width: 32rem;
+      margin: 0 auto 3rem;
+    }
+
+    /* Content Typography */
+    .content-title {
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+      color: var(--gray-600);
+      margin-bottom: 1.5rem;
+    }
+
+    .body-text {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: -0.008em;
+      line-height: 1.6;
+      color: var(--gray-700);
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      line-height: 1.5;
+      color: var(--gray-600);
+    }
+
+    /* Elegant Spacing System */
+    .section-padding {
+      padding: clamp(4rem, 8vw, 8rem) 0;
+    }
+
+    .content-spacing {
+      margin-bottom: clamp(2rem, 4vw, 4rem);
+    }
+
+    /* Enhanced Cards */
+    .elegant-card {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .elegant-card:hover {
+      border-color: var(--gray-300);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+      transform: translateY(-3px);
+    }
+
+    /* Refined Demo Styling */
+    .demo-tabs .demo-tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .demo-tabs .demo-tab.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+    }
+
+    /* Enhanced Browser UI */
+    .browser-chrome {
+      border-radius: 16px 16px 0 0;
+      background: linear-gradient(to bottom, #f8f9fa, #f1f3f4);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 1rem 1.5rem;
+    }
+
+    .browser-url {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      color: var(--gray-600);
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+    }
+
+    /* Elegant Action Buttons */
+    .action-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--gray-200);
+      background: white;
+      color: var(--gray-700);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      background: var(--gray-50);
+      border-color: var(--gray-300);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.success {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .action-btn.success:hover {
+      background: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    /* Enhanced Feature Tags */
+    .feature-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      padding: 0.375rem 0.75rem;
+      border-radius: 8px;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      transition: all 0.2s ease;
+    }
+
+    .feature-tag:hover {
+      background: var(--gray-200);
+    }
+
+    /* Enhanced Readability */
+    .readable-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+      color: var(--gray-700);
+    }
+
+    /* Consistent Icon Sizing */
+    .ph {
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+    }
+
+    .ph:hover {
+      opacity: 1;
+    }
+
+    /* Elegant Input Styling */
+    input, select, textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: -0.008em;
+      border: 1px solid var(--gray-300);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
     /* Icon styles */
     .ph-icon {
       width: 20px;
@@ -1258,6 +1495,9 @@
           <span class="text-lg font-semibold">Agentic UI</span>
         </div>
         <div class="hidden md:flex items-center gap-8">
+          <a href="index-users.html" class="nav-link">SaaS Platforms</a>
+          <a href="index-bo.html" class="nav-link">Back Office</a>
+          <a href="integration-modes.html" class="nav-link">Integration Modes</a>
           <a href="#features" class="nav-link">Why Intent-Driven</a>
           <a href="#how-it-works" class="nav-link">How It Works</a>
           <a href="#use-cases" class="nav-link">See Examples</a>
@@ -1282,13 +1522,13 @@
         </div>
 
         <!-- Main Heading -->
-        <h1 class="text-6xl sm:text-6xl md:text-5xl lg:text-6xl font-light mb-6 md:mb-8 px-2 leading-tight">
+        <h1 class="hero-title">
           No more rigid <span class="font-semibold gradient-text">SaaS</span><br>Just <span class="font-semibold gradient-text">intent-driven</span> software
         </h1>
 
         <!-- Full Description -->
-        <div class="max-w-4xl mx-auto mb-8 md:mb-12 px-2">
-          <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-light leading-relaxed">
+        <div class="mb-8 md:mb-12 px-2">
+          <p class="hero-subtitle">
             Your SaaS becomes <span class="font-semibold text-gray-900">fluid</span>, no more static menus or rigid forms.
             Users simply describe what they need, and our AI builds it instantly.
             Interfaces, workflows, dashboards, all created through <span class="font-semibold text-gray-900">natural interaction</span>.
@@ -1327,20 +1567,20 @@
   </section>
 
   <!-- Use Cases Section -->
-  <section class="py-24 bg-white" id="use-cases">
+  <section class="section-padding bg-white" id="use-cases">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-20">
-        <h2 class="text-4xl font-light mb-6">Watch Intent Become Reality</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Users express what they want to achieve. AI instantly creates the perfect solution. No configuration required.</p>
+        <h2 class="section-title">Watch Intent Become Reality</h2>
+        <p class="section-subtitle">Users express what they want to achieve. AI instantly creates the perfect solution. No configuration required.</p>
       </div>
 
       <!-- Demo Tabs -->
       <div class="demo-tabs-container">
         <div class="demo-tabs">
-          <button class="demo-tab active" data-demo="support">E-Commerce Platform</button>
-          <button class="demo-tab" data-demo="banking">Banking & Payments</button>
-          <button class="demo-tab" data-demo="operations">Project Management</button>
-          <button class="demo-tab" data-demo="legal">Marketing Platform</button>
+          <button class="demo-tab active" data-demo="support"><i class="ph ph-shopping-cart mr-2"></i>E-Commerce Platform</button>
+          <button class="demo-tab" data-demo="banking"><i class="ph ph-bank mr-2"></i>Banking & Payments</button>
+          <button class="demo-tab" data-demo="operations"><i class="ph ph-kanban mr-2"></i>Project Management</button>
+          <button class="demo-tab" data-demo="legal"><i class="ph ph-megaphone mr-2"></i>Marketing Platform</button>
         </div>
       </div>
 
@@ -1585,8 +1825,8 @@
                               <span class="feature-tag">🛡️ Warranty focused</span>
                             </div>
                             <div class="quick-actions">
-                              <div class="quick-action">📊 14 previous purchases analyzed</div>
-                              <div class="quick-action">🎯 HP partnership: 23% higher margin</div>
+                              <div class="quick-action"><i class="ph ph-chart-bar mr-1"></i> 14 previous purchases analyzed</div>
+                              <div class="quick-action"><i class="ph ph-target mr-1"></i> HP partnership: 23% higher margin</div>
                             </div>
                           </div>
 
@@ -1649,7 +1889,7 @@
                               <span class="feature-tag">30% OFF</span>
                             </div>
                             <div class="quick-actions">
-                              <div class="quick-action">📊 4.7★ (2,847 reviews)</div>
+                              <div class="quick-action"><i class="ph ph-chart-bar mr-1"></i> 4.7★ (2,847 reviews)</div>
                               <div class="quick-action">🚚 2-day delivery</div>
                             </div>
                           </div>
@@ -1687,7 +1927,7 @@
 
                           <div class="shopping-suggestion">
                             <div class="suggestion-header">
-                              <span class="suggestion-title">🎯 Revenue-Optimized Upsell Strategy</span>
+                              <span class="suggestion-title"><i class="ph ph-target mr-1"></i> Revenue-Optimized Upsell Strategy</span>
                             </div>
                             <div class="suggestion-actions">
                               <button class="suggestion-btn">🎧 Audio-Technica Stand ($29 vs $49 MSRP)</button>
@@ -1701,7 +1941,7 @@
                               <div class="product-title">💰 Smart Revenue Channeling Engine</div>
                             </div>
                             <div class="product-features">
-                              <span class="feature-tag">🎯 User fits Audio-Technica buyer profile</span>
+                              <span class="feature-tag"><i class="ph ph-target mr-1"></i> User fits Audio-Technica buyer profile</span>
                               <span class="feature-tag">💳 Financing increases $200+ purchase rate</span>
                               <span class="feature-tag">📦 Bundle attachment: 73% success rate</span>
                               <span class="feature-tag">🤝 Partner bonus: $12 per Audio-Technica sale</span>
@@ -2369,19 +2609,19 @@
                             </div>
                             <div class="product-features">
                               <span class="feature-tag">📚 Learning History</span>
-                              <span class="feature-tag">🎯 Pattern Recognition</span>
+                              <span class="feature-tag"><i class="ph ph-target mr-1"></i> Pattern Recognition</span>
                               <span class="feature-tag">⚡ Smart Defaults</span>
                             </div>
                             <div class="quick-actions">
-                              <div class="quick-action">📊 Analyzed 3 previous projects</div>
-                              <div class="quick-action">🎯 85% faster setup with learned preferences</div>
+                              <div class="quick-action"><i class="ph ph-chart-bar mr-1"></i> Analyzed 3 previous projects</div>
+                              <div class="quick-action"><i class="ph ph-target mr-1"></i> 85% faster setup with learned preferences</div>
                             </div>
                           </div>
 
                           <div class="ai-action-buttons">
-                            <button class="action-btn">🚀 Use Your Proven Template</button>
-                            <button class="action-btn secondary">📋 Customize New Approach</button>
-                            <button class="action-btn secondary">📊 Compare Success Patterns</button>
+                            <button class="action-btn"><i class="ph ph-rocket mr-1"></i> Use Your Proven Template</button>
+                            <button class="action-btn secondary"><i class="ph ph-clipboard mr-1"></i> Customize New Approach</button>
+                            <button class="action-btn secondary"><i class="ph ph-chart-bar mr-1"></i> Compare Success Patterns</button>
                           </div>
                         </div>
                       </div>
@@ -2421,7 +2661,7 @@
                       <div class="ai-message success">
                         <div class="message-bubble">
                           ✅ <strong>Sprint "Q1 Launch" Created!</strong>
-                          <br><br>📋 <strong>Sprint Details:</strong>
+                          <br><br><i class="ph ph-clipboard mr-1"></i> <strong>Sprint Details:</strong>
                           <br>• Duration: 2 weeks (Jan 15 - Jan 29, 2024)
                           <br>• Total Tasks: 12 user stories
                           <br>• Story Points: 24 points allocated
@@ -2503,23 +2743,23 @@
 
                       <div class="product-preview-card">
                         <div class="product-header">
-                          <div class="product-title">🎯 Campaign Intelligence Engine</div>
+                          <div class="product-title"><i class="ph ph-target mr-1"></i> Campaign Intelligence Engine</div>
                         </div>
                         <div class="product-features">
-                          <span class="feature-tag">📈 Historical Analysis</span>
-                          <span class="feature-tag">🎯 Audience Adaptation</span>
-                          <span class="feature-tag">🚀 Performance Boost</span>
+                          <span class="feature-tag"><i class="ph ph-trend-up mr-1"></i> Historical Analysis</span>
+                          <span class="feature-tag"><i class="ph ph-target mr-1"></i> Audience Adaptation</span>
+                          <span class="feature-tag"><i class="ph ph-rocket mr-1"></i> Performance Boost</span>
                         </div>
                         <div class="quick-actions">
-                          <div class="quick-action">📊 Analyzed 12 previous campaigns</div>
-                          <div class="quick-action">🎯 B2B patterns: 40% higher conversion</div>
+                          <div class="quick-action"><i class="ph ph-chart-bar mr-1"></i> Analyzed 12 previous campaigns</div>
+                          <div class="quick-action"><i class="ph ph-target mr-1"></i> B2B patterns: 40% higher conversion</div>
                         </div>
                       </div>
 
                       <div class="ai-action-buttons">
                         <button class="action-btn">🏢 Build B2B Enterprise Form</button>
                         <button class="action-btn secondary">👤 Try B2C Consumer Version</button>
-                        <button class="action-btn secondary">📊 A/B Test Both Approaches</button>
+                        <button class="action-btn secondary"><i class="ph ph-chart-bar mr-1"></i> A/B Test Both Approaches</button>
                       </div>
                     </div>
                   </div>
@@ -2572,7 +2812,7 @@
                           <span class="feature-tag">GDPR compliant</span>
                         </div>
                         <div class="quick-actions">
-                          <div class="quick-action">📊 28.4% conversion rate</div>
+                          <div class="quick-action"><i class="ph ph-chart-bar mr-1"></i> 28.4% conversion rate</div>
                           <div class="quick-action">⚡ 2.1s load time</div>
                         </div>
                       </div>
@@ -2583,13 +2823,13 @@
                         </div>
                         <div class="suggestion-actions">
                           <button class="suggestion-btn">👥 8,347 emails sent</button>
-                          <button class="suggestion-btn">📈 Live performance tracking</button>
+                          <button class="suggestion-btn"><i class="ph ph-trend-up mr-1"></i> Live performance tracking</button>
                           <button class="suggestion-btn">💰 $95K-142K projected</button>
                         </div>
                       </div>
 
                       <div class="ai-action-buttons">
-                        <button class="action-btn success">📋 View Form Analytics</button>
+                        <button class="action-btn success"><i class="ph ph-clipboard mr-1"></i> View Form Analytics</button>
                         <button class="action-btn secondary">🎨 Customize Design</button>
                         <button class="action-btn secondary">📧 Create Follow-up</button>
                       </div>
@@ -2602,19 +2842,19 @@
 
                       <div class="shopping-suggestion">
                         <div class="suggestion-header">
-                          <span class="suggestion-title">🚀 Optimize Performance</span>
+                          <span class="suggestion-title"><i class="ph ph-rocket mr-1"></i> Optimize Performance</span>
                         </div>
                         <div class="suggestion-actions">
-                          <button class="suggestion-btn">📊 A/B Test Form Headlines</button>
+                          <button class="suggestion-btn"><i class="ph ph-chart-bar mr-1"></i> A/B Test Form Headlines</button>
                           <button class="suggestion-btn">📱 Create Mobile Landing Page</button>
-                          <button class="suggestion-btn">🎯 Setup Retargeting Ads</button>
+                          <button class="suggestion-btn"><i class="ph ph-target mr-1"></i> Setup Retargeting Ads</button>
                         </div>
                       </div>
 
                       <div class="ai-action-buttons">
                         <button class="action-btn secondary">📧 Schedule Follow-up Sequence</button>
                         <button class="action-btn secondary">📱 Create Social Media Posts</button>
-                        <button class="action-btn secondary">📊 Export Lead Data</button>
+                        <button class="action-btn secondary"><i class="ph ph-chart-bar mr-1"></i> Export Lead Data</button>
                       </div>
                     </div>
                   </div>
@@ -2768,7 +3008,7 @@
                             <div class="flex items-start gap-3">
                               <i class="ph ph-check-circle text-green-600 text-lg"></i>
                               <div>
-                                <p class="font-semibold text-green-800 mb-1">🎯 Subject Line A/B Test</p>
+                                <p class="font-semibold text-green-800 mb-1"><i class="ph ph-target mr-1"></i> Subject Line A/B Test</p>
                                 <p class="text-sm text-green-600">"🔥 Black Friday: 40% OFF Electronics" winning 38.2% vs 29.1%</p>
                                 <p class="text-xs text-green-500 mt-1">4,000 recipients tested • Winner auto-deployed to remaining 4,347</p>
                               </div>
@@ -2796,7 +3036,7 @@
                           </div>
                           <div class="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-300">
                             <div class="text-sm">
-                              <div class="font-semibold text-gray-800 mb-2">📊 Campaign Intelligence Summary</div>
+                              <div class="font-semibold text-gray-800 mb-2"><i class="ph ph-chart-bar mr-1"></i> Campaign Intelligence Summary</div>
                               <div class="grid grid-cols-2 gap-3 text-xs">
                                 <div><strong>Expected Revenue:</strong> $127,500 (95% confidence)</div>
                                 <div><strong>Conversion Prediction:</strong> 12.4% (industry avg: 8.2%)</div>
@@ -2841,11 +3081,11 @@
 
 
   <!-- How It Works -->
-  <section id="how-it-works" class="py-24 px-6 bg-gray-50">
+  <section id="how-it-works" class="section-padding px-6 bg-gray-50">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-20">
-        <h2 class="text-4xl font-light mb-6">From Intent to Production in Minutes</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">One JavaScript tag transforms your platform. Users start expressing intent immediately. No complex setup, no training required.</p>
+        <h2 class="section-title">From Intent to Production in Minutes</h2>
+        <p class="section-subtitle">One JavaScript tag transforms your platform. Users start expressing intent immediately. No complex setup, no training required.</p>
       </div>
 
       <!-- Code Example -->
@@ -2884,28 +3124,28 @@
           <div class="w-14 h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-sm">
             <span class="text-xl font-semibold gradient-text">1</span>
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Get Your API Key</h4>
+          <h4 class="content-title mb-2">Get Your API Key</h4>
           <p class="text-gray-600 leading-relaxed text-sm">Sign up and receive secure API credentials with OAuth 2.0 authentication</p>
         </div>
         <div class="text-center">
           <div class="w-14 h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-sm">
             <span class="text-xl font-semibold gradient-text">2</span>
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Connect & Train Special Agents</h4>
+          <h4 class="content-title mb-2">Connect & Train Special Agents</h4>
           <p class="text-gray-600 leading-relaxed text-sm">Connect any backend API and train specialized agents for your workflows</p>
         </div>
         <div class="text-center">
           <div class="w-14 h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-sm">
             <span class="text-xl font-semibold gradient-text">3</span>
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Add JavaScript Tag</h4>
+          <h4 class="content-title mb-2">Add JavaScript Tag</h4>
           <p class="text-gray-600 leading-relaxed text-sm">Works with any web-based back-office system, browser-layer activation</p>
         </div>
         <div class="text-center">
           <div class="w-14 h-14 bg-white border border-gray-200 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-sm">
             <span class="text-xl font-semibold gradient-text">4</span>
           </div>
-          <h4 class="font-semibold text-gray-900 mb-2">Go Live</h4>
+          <h4 class="content-title mb-2">Go Live</h4>
           <p class="text-gray-600 leading-relaxed text-sm">Monitor performance through dashboard, scale across departments</p>
         </div>
       </div>
@@ -2913,10 +3153,10 @@
   </section>
 
   <!-- Quick Start Integration Section -->
-  <section class="py-24 px-6 bg-gradient-to-br from-gray-900 to-gray-800">
+  <section class="section-padding px-6 bg-gradient-to-br from-gray-900 to-gray-800">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-light mb-6 text-white">Start In Minutes, Not Months</h2>
+        <h2 class="section-title text-white">Start In Minutes, Not Months</h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
           Quick setup like Stripe. Production-ready in under an hour.
         </p>
@@ -2931,7 +3171,7 @@
                 <span class="text-white font-semibold">1</span>
               </div>
               <div class="flex-1">
-                <h4 class="font-semibold text-white mb-2">Sign Up & Get API Key</h4>
+                <h4 class="content-title text-white mb-2">Sign Up & Get API Key</h4>
                 <p class="text-gray-300 text-sm">Create account, verify email, get your unique API key instantly</p>
                 <div class="mt-3 bg-gray-900 rounded-lg p-3 font-mono text-sm text-gray-300">
                   your_api_key_here
@@ -2946,7 +3186,7 @@
                 <span class="text-white font-semibold">2</span>
               </div>
               <div class="flex-1">
-                <h4 class="font-semibold text-white mb-2">Test In Sandbox</h4>
+                <h4 class="content-title text-white mb-2">Test In Sandbox</h4>
                 <p class="text-gray-300 text-sm">Safe testing environment with sample data before going live</p>
                 <div class="mt-3 flex gap-3">
                   <span class="text-xs bg-green-900/50 text-green-400 px-3 py-1 rounded-full">Test mode active</span>
@@ -2959,7 +3199,7 @@
           <!-- Optional Power User Features -->
           <div class="border-2 border-dashed border-indigo-500/50 rounded-xl p-4 bg-indigo-900/10">
             <div class="text-center mb-4">
-              <span class="text-sm font-medium text-indigo-400 bg-indigo-900/50 px-3 py-1 rounded-full">🚀 Optional Power User Features</span>
+              <span class="text-sm font-medium text-indigo-400 bg-indigo-900/50 px-3 py-1 rounded-full"><i class="ph ph-rocket text-indigo-400 mr-1"></i> Optional Power User Features</span>
             </div>
 
             <div class="space-y-4">
@@ -2970,7 +3210,7 @@
                     <span class="text-white font-semibold">3</span>
                   </div>
                   <div class="flex-1">
-                    <h4 class="font-semibold text-white mb-2">Connect Third-Party Backends</h4>
+                    <h4 class="content-title text-white mb-2">Connect Third-Party Backends</h4>
                     <p class="text-gray-300 text-sm">Connect any REST/GraphQL API to extend your agent's capabilities</p>
                     <div class="mt-3">
                       <div class="flex flex-wrap gap-2">
@@ -2991,7 +3231,7 @@
                     <span class="text-white font-semibold">4</span>
                   </div>
                   <div class="flex-1">
-                    <h4 class="font-semibold text-white mb-2">Train Special Agents</h4>
+                    <h4 class="content-title text-white mb-2">Train Special Agents</h4>
                     <p class="text-gray-300 text-sm">Create specialized AI agents for complex workflows and domain expertise</p>
                   </div>
                 </div>
@@ -3005,7 +3245,7 @@
                 <span class="text-white font-semibold">5</span>
               </div>
               <div class="flex-1">
-                <h4 class="font-semibold text-white mb-2">Go Live</h4>
+                <h4 class="content-title text-white mb-2">Go Live</h4>
                 <p class="text-gray-300 text-sm">Switch to production, monitor performance, scale as needed</p>
                 <div class="mt-3 bg-gray-900 rounded-lg p-3">
                   <div class="flex items-center justify-between text-sm">
@@ -3057,18 +3297,18 @@
 
 
   <!-- Features -->
-  <section id="features" class="py-24 px-6">
+  <section id="features" class="section-padding px-6">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-light mb-4">Why SaaS Platforms Choose Intent-Driven Architecture</h2>
-        <p class="text-lg text-gray-600">Users express goals, software delivers results. No feature gaps, no configuration complexity.</p>
+        <h2 class="section-title">Why SaaS Platforms Choose Intent-Driven Architecture</h2>
+        <p class="section-subtitle">Users express goals, software delivers results. No feature gaps, no configuration complexity.</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
         <!-- Feature 1 -->
         <div class="card p-6 hover-lift">
           <i class="ph-thin ph-brain text-purple-500 mb-4" style="font-size: 32px;"></i>
-          <h3 class="text-lg font-medium mb-2">Embedded in Your SaaS</h3>
+          <h3 class="content-title mb-2">Embedded in Your SaaS</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
             Runs inside your platform, not as a separate tool. Invisible to users.
           </p>
@@ -3077,7 +3317,7 @@
         <!-- Feature 2 -->
         <div class="card p-6 hover-lift">
           <i class="ph-thin ph-palette text-blue-500 mb-4" style="font-size: 32px;"></i>
-          <h3 class="text-lg font-medium mb-2">White-Label Ready</h3>
+          <h3 class="content-title mb-2">White-Label Ready</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
             Matches your brand perfectly. Users think it's your native feature.
           </p>
@@ -3086,7 +3326,7 @@
         <!-- Feature 3 -->
         <div class="card p-6 hover-lift">
           <i class="ph-thin ph-plug text-green-500 mb-4" style="font-size: 32px;"></i>
-          <h3 class="text-lg font-medium mb-2">Uses Your Data</h3>
+          <h3 class="content-title mb-2">Uses Your Data</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
             Connects to your existing database and respects your permissions
           </p>
@@ -3095,7 +3335,7 @@
         <!-- Feature 4 -->
         <div class="card p-6 hover-lift">
           <i class="ph-thin ph-chat-circle text-yellow-500 mb-4" style="font-size: 32px;"></i>
-          <h3 class="text-lg font-medium mb-2">No Training Required</h3>
+          <h3 class="content-title mb-2">No Training Required</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
             Your users just describe what they want. No learning curve.
           </p>
@@ -3104,7 +3344,7 @@
         <!-- Feature 5 -->
         <div class="card p-6 hover-lift">
           <i class="ph-thin ph-lightning text-orange-500 mb-4" style="font-size: 32px;"></i>
-          <h3 class="text-lg font-medium mb-2">3-Second Generation</h3>
+          <h3 class="content-title mb-2">3-Second Generation</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
             From request to working interface in seconds, not weeks
           </p>
@@ -3113,7 +3353,7 @@
         <!-- Feature 6 -->
         <div class="card p-6 hover-lift">
           <i class="ph-thin ph-buildings text-pink-500 mb-4" style="font-size: 32px;"></i>
-          <h3 class="text-lg font-medium mb-2">New Revenue Stream</h3>
+          <h3 class="content-title mb-2">New Revenue Stream</h3>
           <p class="text-gray-600 text-sm leading-relaxed">
             Charge $20-50/user for AI features. 90% margin opportunity.
           </p>
@@ -3123,20 +3363,14 @@
   </section>
 
   <!-- Use Cases -->
-  <section id="use-cases" class="py-24 bg-white">
+  <section id="use-cases" class="section-padding bg-white">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-20">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-gray-600 text-sm font-medium mb-6">
-          <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-          Strategic Advantage
-        </div>
-        <h2 class="text-4xl md:text-5xl font-light mb-6 text-gray-900 leading-tight">
-          Turn User Intent Into<br>
-          <span class="font-normal text-gray-700">Competitive Advantage</span>
+        <h2 class="section-title">
+          SaaS Platform Use Cases
         </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          While competitors offer features, you offer <span class="font-medium text-gray-800">understanding</span>.
-          Software that adapts to how users think.
+        <p class="section-subtitle">
+          See how different types of software platforms benefit from intent-driven interfaces.
         </p>
       </div>
 
@@ -3147,7 +3381,7 @@
             <i class="ph-thin ph-briefcase text-gray-600" style="font-size: 24px;"></i>
           </div>
           <div>
-            <h3 class="text-2xl font-medium mb-3 text-gray-900">
+            <h3 class="section-title mb-3">
               SaaS B2B Platforms
             </h3>
             <div class="flex flex-wrap gap-2">
@@ -3161,7 +3395,7 @@
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
           <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
-            <h4 class="font-medium mb-3 flex items-center gap-2 text-gray-700">
+            <h4 class="content-title mb-3 flex items-center gap-2">
               <i class="ph-thin ph-x-circle text-gray-500"></i>
               Today's Reality
             </h4>
@@ -3174,7 +3408,7 @@
           </div>
 
           <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
-            <h4 class="font-medium mb-3 flex items-center gap-2 text-gray-700">
+            <h4 class="content-title mb-3 flex items-center gap-2">
               <i class="ph-thin ph-check-circle text-gray-600"></i>
               With Agentic UI
             </h4>
@@ -3208,19 +3442,29 @@
 
       </div>
 
-      <!-- Project Management Transformation -->
-      <div class="bg-white rounded-2xl p-8 mb-8 border border-gray-100">
-        <div class="flex items-start gap-4 mb-8">
-          <i class="ph-thin ph-clipboard-text text-blue-500" style="font-size: 40px;"></i>
+      <!-- SaaS B2C Platforms -->
+      <div class="bg-white rounded-2xl p-8 mb-12 border border-gray-200 shadow-sm">
+        <div class="flex items-start gap-6 mb-8">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center">
+            <i class="ph-thin ph-users text-gray-600" style="font-size: 24px;"></i>
+          </div>
           <div>
-            <h3 class="text-2xl font-medium mb-1">SaaS B2C Platforms</h3>
-            <p class="text-gray-600">Fintech • E-commerce • EdTech • HealthTech • Creator Tools</p>
+            <h3 class="section-title mb-3">
+              SaaS B2C Platforms
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Fintech</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">E-commerce</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">EdTech</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">HealthTech</span>
+              <span class="px-3 py-1 bg-violet-100 text-violet-700 rounded-full text-sm font-medium">Creator Tools</span>
+            </div>
           </div>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
           <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
-            <h4 class="font-medium mb-3 flex items-center gap-2 text-gray-700">
+            <h4 class="content-title mb-3 flex items-center gap-2">
               <i class="ph-thin ph-x-circle text-gray-500"></i>
               Today's Reality
             </h4>
@@ -3233,7 +3477,7 @@
           </div>
 
           <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
-            <h4 class="font-medium mb-3 flex items-center gap-2 text-gray-700">
+            <h4 class="content-title mb-3 flex items-center gap-2">
               <i class="ph-thin ph-check-circle text-gray-600"></i>
               With Agentic UI
             </h4>
@@ -3266,62 +3510,53 @@
         </div>
       </div>
 
-      <!-- More Industries Grid -->
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- HR Platforms -->
-        <div class="card p-6 hover-lift">
-          <i class="ph-thin ph-users-three text-green-500 mb-4" style="font-size: 32px;"></i>
-          <h4 class="font-medium mb-2">Product-Led Growth</h4>
-          <p class="text-gray-600 text-sm mb-3">Turn every user into a product expert</p>
-          <div class="text-xs text-gray-500">
-            Users discover features naturally through AI guidance → 400% increase in feature adoption
+
+      <!-- The Bottom Line for SaaS Companies -->
+      <div class="bg-white rounded-2xl p-8 mb-12 border border-gray-200 shadow-sm">
+        <div class="flex items-start gap-6 mb-8">
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center">
+            <i class="ph-thin ph-chart-line text-gray-600" style="font-size: 24px;"></i>
+          </div>
+          <div>
+            <h3 class="section-title mb-3">
+              The Bottom Line for Software Companies
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Cost Reduction</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">User Retention</span>
+              <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">Revenue Growth</span>
+              <span class="px-3 py-1 bg-violet-100 text-violet-700 rounded-full text-sm font-medium">Instant ROI</span>
+            </div>
           </div>
         </div>
 
-        <!-- Analytics Tools -->
-        <div class="card p-6 hover-lift">
-          <i class="ph-thin ph-chart-line text-yellow-500 mb-4" style="font-size: 32px;"></i>
-          <h4 class="font-medium mb-2">Competitive Differentiation</h4>
-          <p class="text-gray-600 text-sm mb-3">Stand out in crowded markets</p>
-          <div class="text-xs text-gray-500">
-            "Our AI adapts to you" becomes your core value prop → Win deals against "one-size-fits-all" competitors
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+            <h4 class="content-title mb-3 flex items-center gap-2">
+              <i class="ph-thin ph-x-circle text-gray-500"></i>
+              Before Agentic UI
+            </h4>
+            <div class="space-y-1 text-sm text-gray-600">
+              <div>• 70% of feature requests never built</div>
+              <div>• $500K+ annual custom development</div>
+              <div>• 18-month roadmap backlogs</div>
+              <div>• Users leave for more flexible alternatives</div>
+              <div>• Support overwhelmed with customization requests</div>
+            </div>
           </div>
-        </div>
 
-        <!-- E-commerce -->
-        <div class="card p-6 hover-lift">
-          <i class="ph-thin ph-shopping-cart text-pink-500 mb-4" style="font-size: 32px;"></i>
-          <h4 class="font-medium mb-2">Revenue Acceleration</h4>
-          <p class="text-gray-600 text-sm mb-3">Higher ACVs through personalization</p>
-          <div class="text-xs text-gray-500">
-            Enterprise customers pay 40% more for platforms that adapt to their workflows → Premium pricing justified
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom Line Section -->
-      <div class="mt-16 p-8 bg-white rounded-2xl border border-gray-200">
-        <h3 class="text-2xl font-medium text-center mb-8">The Bottom Line for SaaS Companies</h3>
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="p-6 bg-red-50 rounded-xl">
-            <h4 class="font-medium mb-4 text-red-900">Before Agentic UI</h4>
-            <ul class="space-y-2 text-sm text-gray-700">
-              <li>• 70% of feature requests never built</li>
-              <li>• $500K+ annual custom development</li>
-              <li>• 18-month roadmap backlogs</li>
-              <li>• Users leave for more flexible alternatives</li>
-              <li>• Support overwhelmed with customization requests</li>
-            </ul>
-          </div>
-          <div class="p-6 bg-green-50 rounded-xl">
-            <h4 class="font-medium mb-4 text-green-900">After Agentic UI</h4>
-            <ul class="space-y-2 text-sm text-gray-700">
-              <li>• Every user gets their perfect interface</li>
-              <li>• 90% reduction in development costs</li>
-              <li>• Instant feature "delivery"</li>
-              <li>• 3x improvement in user retention</li>
-              <li>• New revenue: Premium AI features ($50-500/user/month)</li>
-            </ul>
+          <div class="p-6 bg-gray-50 rounded-xl border border-gray-200">
+            <h4 class="content-title mb-3 flex items-center gap-2">
+              <i class="ph-thin ph-check-circle text-gray-600"></i>
+              After Agentic UI
+            </h4>
+            <div class="space-y-1 text-sm text-gray-600">
+              <div>• Every user gets their perfect interface</div>
+              <div>• 90% reduction in development costs</div>
+              <div>• Instant feature "delivery"</div>
+              <div>• 3x improvement in user retention</div>
+              <div>• New revenue: Premium AI features ($50-500/user/month)</div>
+            </div>
           </div>
         </div>
       </div>
@@ -3331,9 +3566,9 @@
 
 
   <!-- CTA -->
-  <section class="py-24 px-6">
+  <section class="section-padding px-6">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-4xl font-light mb-6">
+      <h2 class="section-title">
         Build Software That Understands Intent
       </h2>
       <p class="text-lg text-gray-600 mb-10">
@@ -3362,7 +3597,7 @@
     <div class="max-w-5xl mx-auto">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
         <div>
-          <h4 class="font-medium mb-4 text-sm">Product</h4>
+          <h4 class="content-title mb-4 text-sm">Product</h4>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Features</a></li>
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Pricing</a></li>
@@ -3370,7 +3605,7 @@
           </ul>
         </div>
         <div>
-          <h4 class="font-medium mb-4 text-sm">Use Cases</h4>
+          <h4 class="content-title mb-4 text-sm">Use Cases</h4>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">CRM Platforms</a></li>
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Project Management</a></li>
@@ -3378,7 +3613,7 @@
           </ul>
         </div>
         <div>
-          <h4 class="font-medium mb-4 text-sm">Company</h4>
+          <h4 class="content-title mb-4 text-sm">Company</h4>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">About</a></li>
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Blog</a></li>
@@ -3386,7 +3621,7 @@
           </ul>
         </div>
         <div>
-          <h4 class="font-medium mb-4 text-sm">Resources</h4>
+          <h4 class="content-title mb-4 text-sm">Resources</h4>
           <ul class="space-y-2">
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Support</a></li>
             <li><a href="#" class="text-gray-600 hover:text-gray-900 text-sm">Community</a></li>
