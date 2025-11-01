@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agentic UI - Static → Intent → Conversion | The Power of Suggestion Made Easy</title>
-  <meta name="description" content="Transform static platforms into conversion machines with intelligent suggestions. One SDK delivers perfectly-timed recommendations that turn user intent into measurable business outcomes. 70% conversion improvement guaranteed.">
-  <meta name="keywords" content="conversion optimization, suggestion engine, agentic ui, AI conversion platform, suggestion-to-conversion, intelligent recommendations, SDK integration, conversion intelligence, business growth, revenue optimization">
+  <!-- Iterative update: A2A + Atlas compatibility -->
+  <title>Agentic UI · The SDK and Protocol that Turns Intent into Action</title>
+  <meta name="description" content="Agentic UI lets your product capture intent and act on it. The U2A SDK enables user-to-agent chat and the A2A Protocol connects agents across systems, fully compatible with OpenAI Atlas.">
+  <meta name="keywords" content="conversion optimization, suggestion engine, agentic ui, AI conversion platform, suggestion-to-conversion, intelligent recommendations, SDK integration, conversion intelligence, business growth, revenue optimization, Agentic UI, A2A protocol, OpenAI Atlas compatible, LLM action layer, U2A SDK" />
   <meta name="author" content="Agentic UI">
   <meta name="robots" content="index, follow">
 
@@ -43,6 +44,9 @@
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://www.agentic-ui.ai/">
+
+  <!-- Version Tracking -->
+  <meta name="version" content="1.1 incremental update" />
 
   <!-- Structured Data for SEO -->
   <script type="application/ld+json">
@@ -258,6 +262,51 @@
     .code-string { color: #059669; }
     .code-function { color: #2563EB; }
     .code-comment { color: var(--gray-500); }
+
+    .code {
+      background: #0f172a;
+      color: #e5e7eb;
+      border: 1px solid #1f2937;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      overflow: auto;
+      white-space: pre;
+    }
+    .code .k { color: #93c5fd; }
+    .code .s { color: #86efac; }
+    .code .c { color: #9ca3af; }
+
+    /* Global 90% scaling for font sizes and spacing */
+    html {
+      font-size: 90%;
+    }
+
+    body {
+      font-size: 0.9rem;
+    }
+
+    /* Scale all text elements */
+    h1, h2, h3, h4, h5, h6 {
+      font-size: calc(1em * 0.9);
+    }
+
+    /* Scale spacing utilities */
+    .section-padding {
+      padding: calc(4rem * 0.9) 0;
+    }
+
+    /* Scale common spacing classes */
+    .py-16 { padding-top: calc(4rem * 0.9); padding-bottom: calc(4rem * 0.9); }
+    .py-20 { padding-top: calc(5rem * 0.9); padding-bottom: calc(5rem * 0.9); }
+    .mb-16 { margin-bottom: calc(4rem * 0.9); }
+    .mb-20 { margin-bottom: calc(5rem * 0.9); }
+    .mt-6 { margin-top: calc(1.5rem * 0.9); }
+    .gap-8 { gap: calc(2rem * 0.9); }
+    .gap-10 { gap: calc(2.5rem * 0.9); }
+    .gap-12 { gap: calc(3rem * 0.9); }
 
     /* Refined navigation */
     .nav-link {
@@ -1581,9 +1630,10 @@
           <span class="text-lg font-semibold">Agentic UI</span>
         </div>
         <div class="hidden md:flex items-center gap-8">
-          <a href="#use-cases" class="nav-link">Demo</a>
+          <a href="#use-cases" class="nav-link">Examples</a>
           <a href="#platform" class="nav-link">Platform</a>
           <a href="#how-it-works" class="nav-link">Integration</a>
+          <a href="#a2a" class="nav-link">A2A Protocol</a>
         </div>
       </div>
     </div>
@@ -1601,14 +1651,21 @@
 
         <!-- Main Heading -->
         <h1 class="hero-title">
-          Static → Intent → <span class="font-semibold gradient-text">Conversion</span><br>The <span class="font-semibold gradient-text">Power of Suggestion</span> Made Easy
+          Static to Intent to <span class="font-semibold gradient-text">Conversion</span><br>The <span class="font-semibold gradient-text">Power of Suggestion</span> Made Simple
         </h1>
 
         <!-- Full Description -->
         <div class="mb-8 md:mb-12 px-2">
           <p class="hero-subtitle">
-            <span class="font-semibold text-gray-900">Unlock the true power of suggestion</span> - transform static interfaces into conversion machines. <span class="font-semibold text-gray-900">One SDK = instant transformation.</span> Smart suggestions at the perfect moment turn every interaction into a <span class="font-semibold text-gray-900">conversion opportunity</span>.
+            From clicks to conversations. Agentic UI turns static interfaces into intelligent conversion engines.
+            One SDK captures intent and acts instantly. It delivers suggestions, automations, and results the moment users decide.
           </p>
+          <p class="mt-4 text-gray-600 text-lg">
+            Now with full <strong>A2A Protocol</strong> support. Compatible with <strong>OpenAI Atlas</strong> and any LLM powered system that translates intent into action.
+          </p>
+          <div class="mt-6">
+            <a href="#use-cases" class="text-indigo-600 font-medium hover:text-indigo-800 transition">Explore integration examples using the Agentic SDK and A2A Protocol</a>
+          </div>
         </div>
 
       </div>
@@ -1619,73 +1676,113 @@
   <section class="section-padding bg-white" id="use-cases">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center mb-20">
-        <h2 class="section-title">Watch Suggestions Drive Conversions</h2>
-        <p class="section-subtitle">Users express intent. Our AI provides smart suggestions at the perfect moment. See how suggestions transform into measurable business outcomes.</p>
+        <h2 class="section-title">U2A SDK Integration Example</h2>
+        <p class="section-subtitle">See how a simple chat interaction captures intent and triggers real business actions through the U2A SDK.</p>
       </div>
 
-      <!-- Family Travel Planning Chat Demo -->
-      <div class="demo-windows">
-        <!-- Family Travel Planning Demo -->
-        <div class="demo-window active" id="demo-legal">
-          <div class="grid lg:grid-cols-2 gap-8 items-center">
-            <!-- Conversion Engine Description -->
-            <div class="space-y-6">
-              <div class="bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6">
-                <div class="flex items-center gap-3 mb-4">
-                  <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                    <i class="ph ph-brain text-white text-lg"></i>
-                  </div>
-                  <h3 class="text-lg font-semibold text-gray-900">Conversion Intelligence Engine</h3>
-                </div>
-                <p class="text-sm text-gray-700 mb-4">Watch our AI engine analyze family travel intent and provide perfect-timing suggestions that drive conversions:</p>
-                <div class="space-y-3">
-                  <div class="flex items-start gap-3">
-                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-                    <div class="text-sm">
-                      <span class="font-medium text-gray-900">Intent Recognition:</span>
-                      <span class="text-gray-600"> Family safety concerns, age-appropriate activities, budget constraints</span>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-3">
-                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
-                    <div class="text-sm">
-                      <span class="font-medium text-gray-900">Perfect Timing:</span>
-                      <span class="text-gray-600"> Suggests complete solutions when families are overwhelmed by options</span>
-                    </div>
-                  </div>
-                  <div class="flex items-start gap-3">
-                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                    <div class="text-sm">
-                      <span class="font-medium text-gray-900">Conversion Optimization:</span>
-                      <span class="text-gray-600"> Trust-building elements + urgency + personalization = booking action</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                <div class="flex items-center gap-2 mb-2">
-                  <i class="ph ph-chart-line-up text-green-600"></i>
-                  <span class="text-sm font-medium text-green-800">Business Impact</span>
-                </div>
-                <div class="text-xs text-green-700">
-                  Travel booking conversion: 8% → 67% <br>
-                  Worried families → Excited adventurers<br>
-                  Average booking value: €3,200
-                </div>
-              </div>
+      <!-- U2A SDK Demo -->
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="flex justify-center lg:order-1">
+          <img src="travel-chat-demo.png" alt="U2A SDK Demo - User intent to booking conversion" class="w-3/4 rounded-xl shadow border border-gray-200" />
+        </div>
+        <div class="space-y-4 lg:order-2">
+          <h3 class="text-xl font-semibold">U2A SDK in Action</h3>
+          <p class="text-gray-700 text-sm">The SDK that makes your product conversational and actionable. Users express intent through chat or interface, and the agent interprets it into real outcomes.</p>
+          <p class="text-sm text-gray-500 mt-2">Fully governed by policy and recorded in audit for compliance and reliability.</p>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li>• Intent recognition: family safety, budget, preferences</li>
+            <li>• Perfect timing suggestions when users feel overwhelmed</li>
+            <li>• Trust building elements that drive booking decisions</li>
+          </ul>
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <i class="ph ph-chart-line-up text-green-600"></i>
+              <span class="text-sm font-medium text-green-800">Proven Results</span>
             </div>
-
-            <!-- Chat Demo Image -->
-            <div class="flex justify-center">
-              <img src="travel-chat-demo.png"
-                   alt="Travel Planning Chat Demo"
-                   class="w-3/4 rounded-xl shadow-lg border border-gray-200"
-                   style="box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+            <div class="text-xs text-green-700">
+              Travel booking conversion: 8% to 67% <br>
+              Worried families become excited adventurers<br>
+              Average booking value: €3,200
             </div>
           </div>
         </div>
       </div>
+
+      <p class="text-sm text-gray-500 mt-6 text-center">
+        Continue exploring how the SDK connects agents and systems through the A2A Protocol.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- A2A Protocol Section -->
+  <section id="a2a" class="py-16 border-t border-gray-100 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="section-title">A2A Protocol Integration Example</h2>
+      <p class="section-subtitle">
+        This example shows how an external agent connects to your SaaS product running the Agentic SDK.
+        The SDK exposes capabilities like create_payment or generate_invoice that other trusted agents can call securely.
+        Every request passes through authentication, policy validation, and audit logging automatically.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="lg:order-1">
+          <div class="flex items-center gap-2 mb-3 text-xs text-gray-500 font-medium">
+            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded">External Agent</span>
+            <span>→</span>
+            <span class="bg-green-100 text-green-700 px-2 py-1 rounded">SaaS Product (Agentic SDK)</span>
+          </div>
+          <h4 class="text-sm font-medium text-gray-700 mb-2">
+            Example · External travel agent calling your SaaS product through the Agentic SDK
+          </h4>
+          <div class="code">
+<span class="c">// A2A call from external agent to SaaS agent running Agentic SDK</span>
+{
+  <span class="k">"message_id"</span>: <span class="s">"msg_a2a_457xyz"</span>,
+  <span class="k">"source_agent"</span>: <span class="s">"travel-assistant@booking.example"</span>,
+  <span class="k">"target_agent"</span>: <span class="s">"payments@saas.example"</span>,
+  <span class="k">"intent"</span>: <span class="s">"confirm_booking"</span>,
+  <span class="k">"capability"</span>: <span class="s">"payments.create_payment"</span>,
+  <span class="k">"payload"</span>: {
+    <span class="k">"booking_id"</span>: <span class="s">"bk_milan_2024_456"</span>,
+    <span class="k">"customer_id"</span>: <span class="s">"cust_sarah_family"</span>,
+    <span class="k">"amount"</span>: <span class="s">3200</span>,
+    <span class="k">"currency"</span>: <span class="s">"EUR"</span>
+  },
+  <span class="k">"policy_context"</span>: {
+    <span class="k">"user_consent"</span>: <span class="s">"explicit_booking_approval"</span>,
+    <span class="k">"risk_level"</span>: <span class="s">"low"</span>
+  },
+  <span class="k">"signature"</span>: <span class="s">"ed25519:0xA3F2B8C9E1D4..."</span>,
+  <span class="k">"timestamp"</span>: <span class="s">"2024-11-01T14:32:18Z"</span>
+}
+          </div>
+        </div>
+
+        <div class="lg:order-2">
+          <p class="text-sm text-gray-700 mb-4">
+            When an external agent sends this request, the Agentic SDK within your SaaS product automatically handles everything.
+            It verifies the signature, checks the policy, executes the approved capability, and logs the full trace in your audit system.
+          </p>
+          <p class="text-sm text-gray-500">
+            This turns your SaaS platform into an agent-ready system that other AI agents can call safely.
+            No custom APIs or manual middleware required.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+        <h4 class="text-sm font-medium text-indigo-800 mb-2">Why it matters</h4>
+        <ul class="text-sm text-indigo-700 space-y-1">
+          <li>• Any trusted external agent can safely perform approved actions in your SaaS product.</li>
+          <li>• Policy checks and audit logs are enforced automatically by the Agentic SDK.</li>
+          <li>• Your product becomes interoperable with any agent built on OpenAI Atlas or other LLM frameworks.</li>
+        </ul>
+      </div>
+
+      <p class="text-sm text-gray-500 mt-6 text-center">
+        See how these integrations are governed and monitored inside the Agentic UI Platform.
+      </p>
 
     </div>
   </section>
@@ -1694,19 +1791,21 @@
   <section id="platform" class="section-padding px-6 bg-white">
     <div class="max-w-7xl mx-auto">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <!-- Platform Dashboard Image -->
-        <div class="order-2 lg:order-1">
-          <img src="platform-dashboard.png"
-               alt="Agentic AI Platform Dashboard"
-               class="w-full rounded-xl shadow-lg border border-gray-200"
-               style="box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);" />
-        </div>
-
         <!-- Platform Description -->
-        <div class="space-y-6 order-1 lg:order-2">
+        <div class="space-y-6 lg:order-1">
           <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-4">Complete Agent Management Platform</h2>
-            <p class="text-lg text-gray-600 mb-6">Behind every suggestion-to-conversion success is our comprehensive platform that empowers you to create, train, deploy, and optimize AI agents at scale.</p>
+            <h2 class="section-title">Agent Management Platform</h2>
+            <p class="section-subtitle">
+              Monitor, govern, and optimize all U2A and A2A interactions from one control plane.
+            </p>
+            <p class="text-gray-600 mb-6">
+              After integration, the Agentic UI Platform provides the governance layer that keeps every SDK and Protocol action visible, compliant, and optimized.
+            </p>
+            <p class="text-gray-600 mb-6">
+              Agentic UI unifies User to Agent (U2A) and Agent to Agent (A2A) interactions under one control plane.
+              Policy, audit, and observability ensure every autonomous action stays safe, compliant, and aligned with your rules.
+            </p>
+            <p class="text-lg text-gray-600 mb-6">Behind every suggestion to conversion success is our comprehensive platform that empowers you to create, train, deploy, and optimize AI agents at scale.</p>
           </div>
 
           <!-- Platform Capabilities -->
@@ -1753,6 +1852,15 @@
           </div>
 
         </div>
+
+        <!-- Platform Dashboard Image -->
+        <div class="lg:order-2">
+          <img src="platform-dashboard.png"
+               alt="Agentic AI Platform Dashboard"
+               class="w-full rounded-xl shadow-lg border border-gray-200"
+               style="box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);" />
+        </div>
+
       </div>
     </div>
   </section>
@@ -1761,8 +1869,8 @@
   <section id="how-it-works" class="section-padding px-6 bg-gray-50">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-20">
-        <h2 class="section-title">Multiple Integration Options for Every Tech Stack</h2>
-        <p class="section-subtitle">Choose your integration path: Simple JavaScript SDK for websites, or powerful Python wrapper for existing agent systems. Deploy anywhere in minutes.</p>
+        <h2 class="section-title">Integrate Agentic UI into Any Stack</h2>
+        <p class="section-subtitle">Plug into any stack in minutes. Use our JavaScript SDK to turn your site into an agentic interface, or wrap existing agents with Python for production-grade conversion intelligence.</p>
       </div>
 
       <!-- Integration Options -->
@@ -1878,16 +1986,21 @@
           <p class="text-gray-600 leading-relaxed text-sm">Monitor performance, optimize suggestions, scale across all user touchpoints</p>
         </div>
       </div>
+
+      <p class="text-sm text-gray-500 mt-4">
+        You can now combine both the U2A SDK and the A2A Protocol in the same deployment for end-to-end agentic automation.
+      </p>
     </div>
   </section>
+
 
   <!-- Quick Start Integration Section -->
   <section class="section-padding px-6 bg-gradient-to-br from-gray-900 to-gray-800">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="section-title text-white">Start In Minutes, Not Months</h2>
+        <h2 class="section-title text-white">Start in Minutes, Scale with Confidence</h2>
         <p class="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Quick setup like Stripe. Production-ready in under an hour.
+          From sandbox to production, deploy U2A SDK and A2A Protocol together with full audit and policy control.
         </p>
       </div>
 
@@ -1965,13 +2078,26 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Step 5: Test Atlas Interop -->
+              <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                <div class="flex items-start gap-4">
+                  <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span class="text-white font-semibold">5</span>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="content-title text-white mb-2">Test Atlas interop with signed A2A calls</h4>
+                    <p class="text-gray-300 text-sm">Verify compatibility with OpenAI Atlas service meshes and LLM gateways</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
             <div class="flex items-start gap-4">
               <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span class="text-white font-semibold">5</span>
+                <span class="text-white font-semibold">6</span>
               </div>
               <div class="flex-1">
                 <h4 class="content-title text-white mb-2">Go Live</h4>
@@ -2297,12 +2423,17 @@
   <section class="section-padding px-6">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="section-title">
-        Build Software That Understands Intent
+        Make your product understand and act on user intent.
       </h2>
       <p class="text-lg text-gray-600 mb-10">
-        Transform your SaaS platform into intelligent software that adapts to user thinking.
-        Users express what they want to achieve, your platform delivers instantly.
-        Integration takes 5 minutes.
+        Agentic UI turns any SaaS, ecommerce, or back office platform into software that closes the loop between user goals and business outcomes.
+        One SDK. One protocol. Infinite conversions.
+      </p>
+      <p class="text-gray-500 text-sm mt-2">
+        Your SDK and protocol layer are ready for production use in agentic commerce, SaaS, and back office platforms.
+      </p>
+      <p class="text-gray-500 text-sm mt-2">
+        Now with full A2A and OpenAI Atlas compatibility. The foundation of the agentic web.
       </p>
     </div>
   </section>
@@ -2346,6 +2477,7 @@
       </div>
       <div class="pt-8 border-t border-gray-200 text-center">
         <p class="text-sm text-gray-600">© 2025 Agentic UI. Empowering SaaS platforms with embedded AI.</p>
+        <p class="text-xs text-gray-400">A2A Protocol © 2025 · Fully compatible with OpenAI Atlas</p>
       </div>
     </div>
   </footer>
